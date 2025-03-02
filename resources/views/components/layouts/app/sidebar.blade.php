@@ -1,3 +1,38 @@
+@php
+
+    $groups = [
+        'platform' => [
+            [
+                'name' => 'Dashboard',
+                'icon' => 'home',
+                'route' => 'dashboard',
+            ],
+            [
+                'name' => 'Binario',
+                'icon' => 'network',
+                'route' => 'home',
+            ],
+            [
+                'name' => 'Unilevel',
+                'icon' => 'network',
+                'route' => 'home',
+            ],
+        ],
+
+        'Tienda' => [
+            [
+                'name' => 'Home',
+                'icon' => 'home',
+                'route' => 'home',
+            ],
+            
+        ]
+    ];
+
+    
+@endphp
+
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
     <head>
@@ -12,9 +47,15 @@
             </a>
 
             <flux:navlist variant="outline">
-                <flux:navlist.group heading="Platform" class="grid">
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
-                </flux:navlist.group>
+                 @foreach ($groups as $group => $links)
+                    <flux:navlist.group :heading="$group" class="grid">
+                        @foreach ($links as $link)
+                           <flux:navlist.item :icon="$link['icon']" :href="route($link['route'])" :current="request()->routeIs($link['route'])" wire:navigate>
+                                {{ __($link['name']) }}
+                           </flux:navlist.item>
+                         @endforeach
+                     </flux:navlist.group>
+                @endforeach
             </flux:navlist>
 
             <flux:spacer />

@@ -1,4 +1,5 @@
 @php
+
     // Array de rutas para la barra de navegación
     $navbarRoutes = [
         
@@ -34,8 +35,8 @@
             'type' => 'route',
             'name' => 'Oficina',
             'icon' => 'building-office-2',
-            'route' => 'home',
-            'routeIs'=> 'home'
+            'route' => 'dashboard',
+            'routeIs'=> 'dashboard'
         ],       
     ];
 @endphp

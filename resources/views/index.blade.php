@@ -1,7 +1,7 @@
 <x-layouts.app>
 
     <!-- Hero Section -->
-    <section id="inicio" class="pt-28 pb-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+    <section id="inicio" class="pt-28 pb-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-md ">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
                 <div class="space-y-6">
