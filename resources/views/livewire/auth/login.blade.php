@@ -40,7 +40,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
         RateLimiter::clear($this->throttleKey());
         Session::regenerate();
 
-        $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+        $this->redirectIntended(default: route('home', absolute: false), navigate: true);
     }
 
     /**
@@ -118,11 +118,15 @@ new #[Layout('components.layouts.auth')] class extends Component {
             <flux:button variant="primary" type="submit" class="w-full">{{ __('Log in') }}</flux:button>
         </div>
     </form>
+    <div class="space-x-1 text-center text-sm text-zinc-600 dark:text-zinc-400">
+        Don't have an account?
+        <flux:link href="#" wire:navigate>Sign up</flux:link>
+    </div>
 
-    @if (Route::has('register'))
+    {{-- @if (Route::has('register'))
       <div class="space-x-1 text-center text-sm text-zinc-600 dark:text-zinc-400">
           Don't have an account?
           <flux:link :href="route('register')" wire:navigate>Sign up</flux:link>
       </div>
-    @endif
+    @endif --}}
 </div>
