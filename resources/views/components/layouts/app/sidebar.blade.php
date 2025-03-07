@@ -10,7 +10,7 @@
             [
                 'name' => 'Binario',
                 'icon' => 'network',
-                'route' => 'home',
+                'route' => 'binary-tree',
             ],
             [
                 'name' => 'Unilevel',
@@ -38,8 +38,8 @@
     <head>
         @include('partials.head')
     </head>
-    <body class="min-h-screen bg-white dark:bg-zinc-800">
-        <flux:sidebar sticky stashable class="border-r border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
+    <body class="min-h-screen bg-zinc-50/10">
+        <flux:sidebar sticky stashable class=" shadow-lg bg-zinc-50  shadow-ink">
             <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
             <a href="{{ route('dashboard') }}" class="mr-5 flex items-center space-x-2" wire:navigate>
@@ -117,12 +117,12 @@
         </flux:sidebar>
 
         <!-- Mobile User Menu -->
-        <flux:header class="lg:hidden">
+        <flux:header class="lg:hidden bg-white shadow-md shadow-ink">
             <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
 
             <flux:spacer />
 
-            <flux:dropdown position="top" align="end">
+            <flux:dropdown  position="top" align="end">
                 <flux:profile
                     :initials="auth()->user()->initials()"
                     icon-trailing="chevron-down"

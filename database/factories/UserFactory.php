@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Testing\Fakes\Fake;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -26,6 +27,7 @@ class UserFactory extends Factory
         return [
             'username' => fake()->unique()->userName(),
             'name' => fake()->name(),
+            'last_name' => Fake()->lastName(),
             'dni' => fake()->unique()->numerify('#########'),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),

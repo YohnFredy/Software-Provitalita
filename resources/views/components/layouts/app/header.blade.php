@@ -2,42 +2,43 @@
 
     // Array de rutas para la barra de navegación
     $navbarRoutes = [
-        
         [
             'type' => 'route',
             'name' => 'Home',
             'icon' => 'home',
             'route' => 'home',
-            'routeIs'=> 'home'
+            'routeIs' => 'home',
         ],
         [
             'type' => 'route',
             'name' => 'Productos',
             'icon' => 'shopping-cart',
-            'route' => 'dashboard',
-            'routeIs'=> 'dashboard*'
+            'route' => 'products.index',
+            'routeIs' => 'products*',
         ],
+    
+        
         [
             'type' => 'anchor',
             'name' => 'Nosotros',
             'icon' => 'hand-thumb-up',
             'route' => '#nosotros',
-            'routeIs'=> 'home'
+            'routeIs' => 'home',
         ],
         [
             'type' => 'anchor',
             'name' => 'Contáctanos',
             'icon' => 'contact',
             'route' => '#contacto',
-            'routeIs'=> 'home'
-        ], 
+            'routeIs' => 'home',
+        ],
         [
             'type' => 'route',
             'name' => 'Oficina',
             'icon' => 'building-office-2',
             'route' => 'dashboard',
-            'routeIs'=> 'dashboard'
-        ],       
+            'routeIs' => 'dashboard',
+        ],
     ];
 @endphp
 
@@ -49,7 +50,7 @@
 </head>
 
 <body class="min-h-screen bg-white dark:bg-zinc-800">
-    <flux:header container class="border-b border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
+    <flux:header container class="border-b border-zinc-200 shadow-md shadow-primary/50 dark:border-zinc-700 dark:bg-zinc-900">
         <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
 
         <a href="{{ route('home') }}" class="ml-2 mr-5 flex items-center space-x-2 lg:ml-0" wire:navigate>
@@ -63,18 +64,17 @@
             </flux:navbar.item>
         </flux:navbar> --}}
 
-        <flux:navbar class="-mb-px max-lg:hidden">
+        <flux:navbar  class="-mb-px max-lg:hidden">
             @foreach ($navbarRoutes as $route)
                 @if ($route['type'] === 'route')
-                    <flux:navbar.item icon="{{ $route['icon'] }}" :href="route($route['route'])"
-                       :current="request()->routeIs($route['routeIs'])" wire:navigate>
-                       {{ __($route['name']) }}
+                    <flux:navbar.item  icon="{{ $route['icon'] }}" :href="route($route['route'])"
+                        :current="request()->routeIs($route['routeIs'])" wire:navigate>
+                        {{ __($route['name']) }}
                     </flux:navbar.item>
                 @elseif ($route['type'] === 'anchor')
-                
-                    <a href="{{ $route['route'] }}">
-                        <flux:navbar.item icon="{{ $route['icon'] }}"  class=" cursor-pointer">
-                           {{ __($route['name']) }}
+                    <a href="{{ route($route['routeIs']) }}{{ $route['route'] }}">
+                        <flux:navbar.item icon="{{ $route['icon'] }}" class=" cursor-pointer">
+                            {{ __($route['name']) }}
                         </flux:navbar.item>
                     </a>
                 @endif
@@ -138,7 +138,7 @@
                     </form>
                 </flux:menu>
             @else
-                <flux:link class=" flex " href="{{ route('login') }}" wire:navigate> <span class=" flex items-center">
+                <flux:link class="flex text-primary" href="{{ route('login') }}" wire:navigate> <span class=" flex items-center">
                         Login <flux:icon.arrow-right-start-on-rectangle class="ml-0" /> </span> </flux:link>
             @endauth
         </flux:dropdown>
@@ -147,7 +147,7 @@
     <!-- Mobile Menu -->
     <flux:sidebar stashable sticky
         class="lg:hidden border-r border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
-        <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
+        <flux:sidebar.toggle class="lg:hidden" icon="x-mark"/>
 
         <a href="{{ route('home') }}" class="ml-1 flex items-center space-x-2" wire:navigate>
             <x-app-logo />
@@ -167,11 +167,11 @@
                 @foreach ($navbarRoutes as $route)
                     @if ($route['type'] === 'route')
                         <flux:navlist.item icon="{{ $route['icon'] }}" :href="route($route['route'])"
-                        :current="request()->routeIs($route['routeIs'])" wire:navigate>
+                            :current="request()->routeIs($route['routeIs'])" wire:navigate>
                             {{ __($route['name']) }}
-                         </flux:navlist.item>
+                        </flux:navlist.item>
                     @elseif ($route['type'] === 'anchor')
-                        <a href="{{ $route['route'] }}">
+                        <a href="{{ route($route['routeIs']) }}{{ $route['route'] }}" x-on:click="document.body.removeAttribute('data-show-stashed-sidebar')">
                             <flux:navlist.item icon="{{ $route['icon'] }}" class="cursor-pointer">
                                 {{ __($route['name']) }}
                             </flux:navlist.item>
@@ -200,12 +200,13 @@
     {{ $slot }}
 
     <flux:footer class="p-0 lg:p-0">
-        <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <footer class="bg-ink text-white pt-16 pb-8">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                     <div>
-                        <img class="h-12 w-auto mb-6" src="/api/placeholder/200/80" alt="Network Logo">
-                        <p class="text-gray-400 mb-6">Una compañía en el sector de salud y bienestar que ofrece múltiples
+                        <img class="h-12 w-auto mb-6" src="/api/placeholder/200/80" alt="ActivosNetwork Logo">
+                        <p class="text-gray-400 mb-6">Una compañía en el sector de salud y bienestar que ofrece
+                            múltiples
                             oportunidades financieras a través de un sistema global de asociación.</p>
                         <div class="flex space-x-4">
                             <a href="#" class="text-gray-400 hover:text-white transition duration-300">
@@ -225,12 +226,12 @@
                     <div>
                         <h3 class="text-lg font-bold mb-6">Vehículos Financieros</h3>
                         <ul class="space-y-3">
-                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Network
+                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">ActivosNetwork
                                     Coffee</a></li>
                             <li><a href="#"
                                     class="text-gray-400 hover:text-white transition duration-300">Chelas</a></li>
                             <li><a href="#"
-                                    class="text-gray-400 hover:text-white transition duration-300">Provitalita</a></li>
+                                    class="text-gray-400 hover:text-white transition duration-300">ActivosNetowork</a></li>
                             <li><a href="#"
                                     class="text-gray-400 hover:text-white transition duration-300">Maspro</a></li>
                             <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Net
@@ -248,10 +249,12 @@
                                     class="text-gray-400 hover:text-white transition duration-300">Vehículos
                                     Financieros</a></li>
                             <li><a href="#inversion"
-                                    class="text-gray-400 hover:text-white transition duration-300">Modelos de Inversión</a>
+                                    class="text-gray-400 hover:text-white transition duration-300">Modelos de
+                                    Inversión</a>
                             </li>
-                            <li><a href="#diferencias" class="text-gray-400 hover:text-white transition duration-300">¿Por
-                                    qué Network?</a></li>
+                            <li><a href="#diferencias"
+                                    class="text-gray-400 hover:text-white transition duration-300">¿Por
+                                    qué ActivosNetwork?</a></li>
                             <li><a href="#contacto"
                                     class="text-gray-400 hover:text-white transition duration-300">Contacto</a></li>
                         </ul>
@@ -269,14 +272,15 @@
                             </li>
                             <li class="flex items-start">
                                 <i class="fas fa-envelope mt-1 mr-3"></i>
-                                <span>info@networkcompany.com</span>
+                                <span>info@activosnetwork.com</span>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="border-t border-gray-800 pt-8">
                     <div class="flex flex-col md:flex-row justify-between items-center">
-                        <p class="text-gray-400 text-sm mb-4 md:mb-0">&copy; 2025 Network. Todos los derechos reservados.
+                        <p class="text-gray-400 text-sm mb-4 md:mb-0">&copy; 2025 ActivosNetwork. Todos los derechos
+                            reservados.
                         </p>
                         <div class="flex space-x-6">
                             <a href="#"
@@ -285,7 +289,8 @@
                             <a href="#"
                                 class="text-gray-400 hover:text-white text-sm transition duration-300">Política de
                                 privacidad</a>
-                            <a href="#" class="text-gray-400 hover:text-white text-sm transition duration-300">Aviso
+                            <a href="#"
+                                class="text-gray-400 hover:text-white text-sm transition duration-300">Aviso
                                 legal</a>
                         </div>
                     </div>

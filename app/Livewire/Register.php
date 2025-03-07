@@ -39,8 +39,9 @@ class Register extends Component
         return [
             'sponsor' => ['required', 'string', 'max:20', 'exists:users,username'],
             'side' => ['required', Rule::in(['right', 'left'])],
-            'username' => ['required', 'string', 'min:3', 'max:20', 'regex:/^[a-zA-Z0-9._-]+$/', Rule::unique('users', 'username'),],
-            'name' => 'required|string|max:255',
+            'username' => ['required', 'string', 'min:3', 'max:20', 'regex:/^[a-zA-Z0-9._-]+$/', Rule::unique('users', 'username')],
+            'name' => 'required|string|max:50',
+            'last_name' => 'required|string|max:50',
             'dni' => ['required', 'string', 'max:255', Rule::unique('users', 'dni')],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'sex' => ['nullable', Rule::in(['male', 'female', 'other'])],
@@ -126,6 +127,7 @@ class Register extends Component
         $user = User::create([
             'username' => $this->username,
             'name' => $this->name,
+            'last_name' => $this->last_name,
             'last_name' => $this->last_name,
             'dni' => $this->dni,
             'email' => $this->email,
@@ -227,6 +229,7 @@ class Register extends Component
     {
         $this->reset();
         $this->confirmingRegistration = false;
+        $this->countries = Country::all();
     }
 
     public function redirectToHome()

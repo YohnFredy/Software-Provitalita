@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Brand;
+use App\Models\Product;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -20,7 +22,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]); */
 
-         // Ejecutar el seeder que borra las imágenes
+        //Ejecutar el seeder que borra las imágenes
         /*  $this->call(ClearImagesSeeder::class); */
 
         $this->call([
@@ -29,13 +31,11 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             DepartmentSeeder::class,
             CitySeeder::class,
-            /* RegisterRedSeeder::class,
+            RegisterRedSeeder::class,
             CategorySeeder::class,
-            ImageSeeder::class, */
+            ImageSeeder::class,
         ]);
-
-        /* Brand::factory(2)->create();
-
-        Product::factory(5)->create(); */
+        Product::factory(15)->create();
+       
     }
 }
