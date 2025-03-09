@@ -1,19 +1,15 @@
 @props(['label' => '', 'for' => '', 'disabled' => false])
 
 <div class="mb-5">
-    <label for="{{ $for }}"
-        class="block mb-2 text-sm font-medium text-primary ">{{ $label }}</label>
+    <label for="{{ $for }}" class="block mb-2 text-sm font-medium text-primary ">{{ $label }}</label>
     <input {{ $disabled ? 'disabled' : '' }} {!! $attributes->merge([
-        'class' =>
-            'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500',
+        'class' => 'block w-full bg-neutral-50/50 border border-gray-300 text-primary text-sm rounded-lg 
+                focus:outline-1 focus:outline-primary focus:bg-white p-2.5 ',
     ]) !!}>
 
 
-@error($for)
-    <p {{ $attributes->merge(['class' => 'text-sm text-danger ']) }}>{{ $message }}</p>
-@enderror
+    @error($for)
+        <p {{ $attributes->merge(['class' => 'text-sm text-danger ']) }}>{{ $message }}</p>
+    @enderror
 
 </div>
-
-
-

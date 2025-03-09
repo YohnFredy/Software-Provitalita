@@ -1,14 +1,21 @@
 <div class="flex items-center">
-    <input wire:model.live="terms" id="default-checkbox" type="checkbox" value=""
-        class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded-sm focus:ring-secondary focus:ring-2 ">
-    <label for="default-checkbox" class="ms-2 text-sm font-medium text-primary flex items-center ">Acepto los
+    <input 
+        wire:model.live="terms" 
+        type="checkbox" 
+        class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded-sm focus:ring-secondary focus:ring-2"
+    >
+    <label for="terms-checkbox" class="ms-2 text-sm font-medium text-primary flex items-center">
+        Acepto los
         <flux:modal.trigger name="edit-profile">
-            <p class="font-medium text-secondary hover:underline cursor-pointer ml-1"> Términos y Condiciones</p>
+            <span class="font-medium text-secondary hover:underline cursor-pointer ml-1">
+                Términos y Condiciones
+            </span>
         </flux:modal.trigger>
     </label>
 </div>
+
 @error('terms')
-<p class="text-sm text-danger">{{ $message }}</p>
+    <p class="text-sm text-danger">{{ $message }}</p>
 @enderror
 
 

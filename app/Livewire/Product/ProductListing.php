@@ -74,6 +74,7 @@ class ProductListing extends Component
     }
 
  
+    #[Layout('components.layouts.app')]
     public function render()
     {
         // Base de la consulta

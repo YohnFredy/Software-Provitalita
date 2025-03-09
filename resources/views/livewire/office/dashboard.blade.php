@@ -1,31 +1,32 @@
 <div>
 
-    <div class="p-6 bg-white/80 shadow-lg shadow-ink rounded-lg min-h-screen">
+    <div class=" sm:p-6 sm:bg-white/80 sm:shadow-lg shadow-ink rounded-lg min-h-screen">
         <!-- Header del Dashboard -->
-        <div class="flex justify-between items-center mb-8">
-            <div>
-                <h1 class="text-3xl font-bold text-primary">Oficina Virtual</h1>
-                <p class="text-ink">Bienvenido de nuevo, Usuario</p>
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0 mb-4 sm:mb-8">
+            <div class="text-center sm:text-left w-full sm:w-auto">
+                <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-primary">Oficina Virtual</h1>
+                <p class="text-ink text-sm sm:text-base">Bienvenido de nuevo, Usuario</p>
             </div>
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-3 sm:space-x-4">
                 <div class="relative">
-                    <button class="p-2 bg-white rounded-full text-primary hover:bg-zinc-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
+                    <button class="p-1.5 sm:p-2 bg-white rounded-full text-primary hover:bg-zinc-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                         </svg>
                     </button>
-                    <span class="absolute top-0 right-0 h-3 w-3 rounded-full bg-danger border-2 border-white"></span>
+                    <span
+                        class="absolute top-0 right-0 h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-danger border-2 border-white"></span>
                 </div>
-                <div class="flex items-center rounded-full py-1 px-2 shadow-sm ">
-                    <span class="font-medium text-sm text-primary  up">{{ $user->name }}</span>
+                <div class="flex items-center rounded-full py-1 px-2 shadow-sm">
+                    <span class="font-medium text-xs sm:text-sm text-primary up">{{ $user->name }}</span>
                 </div>
             </div>
         </div>
 
         <!-- Cards de resumen -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4  gap-6 mb-8">
             <div class="bg-white p-6 rounded-lg  shadow-md shadow-ink hover:shadow-lg transition-shadow">
                 <div class="flex justify-between items-start">
                     <div>
@@ -119,10 +120,10 @@
         </div>
 
         <!-- Gráficos y Estadísticas -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-8">
             <!-- Gráfico de Rendimiento -->
             <div class="bg-white p-6 rounded-lg shadow-md shadow-ink">
-                <div class="flex justify-between items-center mb-4">
+                <div class="sm:flex justify-between items-center mb-4">
                     <h2 class="text-lg font-semibold text-primary">Rendimiento de Red</h2>
                     <div class="flex bg-zinc-50 rounded-lg p-1 text-sm shadow-xs shadow-ink">
                         <button
@@ -212,7 +213,7 @@
         </div>
 
         <!-- Listado de Socios y Actividades -->
-       {{--  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {{--  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <!-- Socios Recientes -->
             <div class="bg-white p-6 rounded-lg shadow lg:col-span-2">
                 <div class="flex justify-between items-center mb-6">
@@ -373,77 +374,92 @@
                 </div>
             </div>
         </div> --}}
-    
 
-        
-        <div class=" p-6 text-center rounded-xl shadow-md shadow-ink">
-            <div>
-                <flux:heading class="text-primary!" size="lg">Link patrocinador lado derecho</flux:heading>
-                <p id="p1" class="hidden">
-                    http://activosactivosnetwork.test/register/{{ $user->username}}/right</p>
+ <hr class=" my-8">
 
-                <div class="space-y-2">
-                    <div>
-                        <flux:button variant="primary" class="cursor-pointer mt-2" onclick="copiarAlPortapapeles('p1')">
-                            Clic para Copiar <i class="fas fa-copy mr-2"></i></flux:button>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+            <!-- Link Lado Derecho -->
+            <div class="bg-gradient-to-br from-white to-neutral-300 p-4 sm:p-6 rounded-lg">
+                <div class="flex items-center justify-center mb-3">
+                    <div class="bg-primary/10 p-2 rounded-full mr-2">
+                        <i class="fas fa-arrow-right text-primary"></i>
+                    </div>
+                    <flux:heading class="text-primary! text-lg sm:text-xl">Link lado derecho</flux:heading>
+                </div>
+
+                <div class="relative bg-neutral-50 rounded-lg p-2 border border-dashed border-neutral-200 mb-4">
+                    <p id="p1" class="text-xs sm:text-sm text-neutral-600 truncate select-all">
+                        http://activosactivosnetwork.test/register/{{ $user->username }}/right
+                    </p>
+                    <button
+                        class="absolute right-1 top-1/2 transform -translate-y-1/2 text-neutral-400 hover:text-primary transition-colors"
+                        onclick="copiarAlPortapapeles('p1')">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="text-center">
+                        <flux:button variant="primary"
+                            class="w-full sm:w-auto cursor-pointer transition-transform hover:scale-105"
+                            onclick="copiarAlPortapapeles('p1')">
+                            <i class="fas fa-copy mr-2"></i> Copiar enlace
+                        </flux:button>
                     </div>
 
-                    <div>
-                        <flux:link class=" text-danger hover:text-premium"
+                    <div class="text-center">
+                        <flux:link
+                            class="text-danger hover:text-premium flex items-center justify-center gap-1 transition-all"
                             href="{{ route('register', [$user->username, 'right']) }}">
-                            Registrar lado derecho.
+                            <i class="fas fa-user-plus text-xs"></i> Registrar directo
                         </flux:link>
                     </div>
                 </div>
             </div>
 
-            <div class="mt-6">
-                <flux:heading class="text-primary!" size="lg">Link patrocinador lado izquierdo</flux:heading>
+            <!-- Link Lado Izquierdo -->
+            <div class="bg-gradient-to-bl from-white to-neutral-300 p-4 sm:p-6 rounded-lg ">
+                <div class="flex items-center justify-center mb-3">
+                    <div class="bg-primary/10 p-2 rounded-full mr-2">
+                        <i class="fas fa-arrow-left text-primary"></i>
+                    </div>
+                    <flux:heading class="text-primary! text-lg sm:text-xl">Link lado izquierdo</flux:heading>
+                </div>
 
-                <p id="p2" class="hidden">
-                    http://activosactivosnetwork.test/register/{{ $user->username }}/left</p>
+                <div class="relative bg-neutral-50 rounded-lg p-2 border border-dashed border-neutral-200 mb-4">
+                    <p id="p2" class="text-xs sm:text-sm text-neutral-600 truncate select-all">
+                        http://activosactivosnetwork.test/register/{{ $user->username }}/left
+                    </p>
+                    <button
+                        class="absolute right-1 top-1/2 transform -translate-y-1/2 text-neutral-400 hover:text-primary transition-colors"
+                        onclick="copiarAlPortapapeles('p2')">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
 
-                <div class=" space-y-2">
-                    <div>
-                        <flux:button variant="primary" class="cursor-pointer mt-2" onclick="copiarAlPortapapeles('p2')">
-                            Clic para Copiar <i class="fas fa-copy mr-2"></i></flux:button>
+                <div class="space-y-3">
+                    <div class="text-center">
+                        <flux:button variant="primary"
+                            class="w-full sm:w-auto cursor-pointer transition-transform hover:scale-105"
+                            onclick="copiarAlPortapapeles('p2')">
+                            <i class="fas fa-copy mr-2"></i> Copiar enlace
+                        </flux:button>
                     </div>
 
-                    <div>
-                        <flux:link class=" text-danger hover:text-premium "
+                    <div class="text-center">
+                        <flux:link
+                            class="text-danger hover:text-premium flex items-center justify-center gap-1 transition-all"
                             href="{{ route('register', [$user->username, 'left']) }}">
-                            Registrar lado Izquierdo.
+                            <i class="fas fa-user-plus text-xs"></i> Registrar directo
                         </flux:link>
                     </div>
                 </div>
             </div>
-
-
-
         </div>
-    
     </div>
 
 
 
-
-
-
-
-
-
-
-
-
-
-    <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
-        <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-            
-            
-          
-
-
-    </div>
 
     <script>
         function copiarAlPortapapeles(id_elemento) {

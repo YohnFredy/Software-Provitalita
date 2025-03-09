@@ -15,7 +15,7 @@
             [
                 'name' => 'Unilevel',
                 'icon' => 'network',
-                'route' => 'home',
+                'route' => 'unilevel-tree',
             ],
         ],
 

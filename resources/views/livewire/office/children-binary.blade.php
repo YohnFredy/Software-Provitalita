@@ -1,78 +1,130 @@
 <li>
     @if ($node['level'] < 1)
-        <a class="hover:text-zinc-900" wire:click="show({{ $node['id'] }})">
-            <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm ">
-                <div class="col-span-2 text-zinc-600 font-bold">
-                    <h4 class=" text-lg font-bold capitalize">{{ $node['username'] }}</h4>
+        <a wire:click="show({{ $node['id'] }})" class="hover:bg-neutral-50 transition-colors cursor-pointer">
+
+            <div class="grid grid-cols-2 gap-x-2 gap-y-1 p-2">
+                <div class="col-span-2 flex items-center justify-center mb-1">
+                    <div class="w-6 h-6 sm:w-8 sm:h-8 bg-primary/10 rounded-full flex items-center justify-center mr-2">
+                        <i class="fas fa-user text-primary"></i>
+                    </div>
+                    <h4 class=" text-base sm:text-xl font-bold capitalize text-primary">
+                        {{ $node['username'] }}
+                    </h4>
                 </div>
 
-                <div class="col-span-1">
-                    <h5 class="text-red-700 font-bold">Left</h5>
-                </div>
-                <div class="col-span-1">
-                    <h5 class="text-red-700 font-bold">Right</h5>
+                <h5 class="text-danger font-bold text-xs sm:text-sm text-center">
+                    Izquierdo
+                </h5>
+
+                <h5 class="text-danger font-bold text-xs sm:text-sm text-center">
+                    Derecho
+                </h5>
+
+                <div class="col-span-1  flex justify-center">
+                    <h6 class="text-ink text-xs sm:text-sm flex flex-col">
+                        <span class="text-primary font-semibold flex items-center gap-1">
+                            <i class="fas fa-user-tag text-xs"></i> User
+                        </span>
+                        <span class="truncate pl-1">{{ $node['left'] ?: 'Vacío' }}</span>
+                    </h6>
                 </div>
 
-                <div class="col-span-1">
-                    <h6 class="text-zinc-600">
-                        <span class="text-zinc-800 font-semibold">Usr:</span> {{ $node['left'] }}
-                    </h6>
-                </div>
-                <div class="col-span-1">
-                    <h6 class="text-zinc-600">
-                        <span class="text-zinc-800 font-semibold">Usr:</span> {{ $node['right'] }}
+                <div class="col-span-1 flex justify-center">
+                    <h6 class="text-ink text-xs sm:text-sm flex flex-col">
+                        <span class="text-primary font-semibold flex items-center gap-1">
+                            <i class="fas fa-user-tag text-xs"></i> User
+                        </span>
+                        <span class="truncate pl-1">{{ $node['right'] ?: 'Vacío' }}</span>
                     </h6>
                 </div>
 
-                <div class="col-span-1">
-                    <h6 class="text-zinc-600">
-                        <span class="text-zinc-800 font-semibold">Pts:</span> 10000
+                <div class="col-span-1 flex justify-center">
+                    <h6 class="text-ink text-xs sm:text-sm flex flex-col">
+                        <span class="text-primary font-semibold flex items-center gap-1">
+                            <i class="fas fa-chart-bar text-xs"></i> Puntos
+                        </span>
+                        <span class="font-medium pl-1">0</span>
                     </h6>
                 </div>
-                <div class="col-span-1">
-                    <h6 class="text-zinc-600">
-                        <span class="text-zinc-800 font-semibold">Pts:</span> 100076
+
+                <div class="col-span-1 flex justify-center">
+                    <h6 class="text-ink text-xs sm:text-sm flex flex-col">
+                        <span class="text-primary font-semibold flex items-center gap-1">
+                            <i class="fas fa-chart-bar text-xs"></i> Puntos
+                        </span>
+                        <span class="font-medium pl-1">0</span>
                     </h6>
                 </div>
             </div>
         </a>
     @elseif ($node['level'] < 2)
-        <a class=" " wire:click="show({{ $node['id'] }})">
-            <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
-                <div class="col-span-2 text-zinc-600 font-bold">
-                    <h4 class="text-base font-bold capitalize">{{ $node['username'] }}</h4>
+        <a wire:click="show({{ $node['id'] }})" class="hover:bg-neutral-50 transition-colors cursor-pointer">
+            <div class="grid grid-cols-2 gap-x-2 gap-y-1 p-1">
+                <div class="col-span-2 flex items-center justify-center mb-1">
+                    <div class="w-6 h-6 sm:w-8 sm:h-8 bg-primary/10 rounded-full flex items-center justify-center mr-2">
+                        <i class="fas fa-user text-primary"></i>
+                    </div>
+                    <h4 class="text-sm sm:text-lg font-bold capitalize text-primary">
+                        {{ $node['username'] }}
+                    </h4>
                 </div>
 
-                <div class="col-span-1">
-                    <h5 class="text-red-700 font-bold">Left</h5>
-                </div>
-                <div class="col-span-1">
-                    <h5 class="text-red-700 font-bold">Right</h5>
-                </div>
+                <h5 class="text-danger font-bold text-xs sm:text-sm text-center">
+                    Izquierdo
+                </h5>
 
-                <div class="col-span-1">
-                    <h6 class="text-zinc-600">
-                        <span class="text-zinc-800 font-semibold">Usr:</span> {{ $node['left'] }}
+                <h5 class="text-danger font-bold text-xs sm:text-sm text-center">
+                    Derecho
+                </h5>
+
+                <div class="col-span-1  flex justify-center">
+                    <h6 class="text-ink text-xs sm:text-sm flex flex-col">
+                        <span class="text-primary font-semibold flex items-center gap-1">
+                            <i class="fas fa-user-tag text-xs"></i> User
+                        </span>
+                        <span class="truncate pl-1">{{ $node['left'] ?: 'Vacío' }}</span>
                     </h6>
                 </div>
-                <div class="col-span-1">
-                    <h6 class="text-zinc-600">
-                        <span class="text-zinc-800 font-semibold">Usr:</span> {{ $node['right'] }}
+
+                <div class="col-span-1 flex justify-center">
+                    <h6 class="text-ink text-xs sm:text-sm flex flex-col">
+                        <span class="text-primary font-semibold flex items-center gap-1">
+                            <i class="fas fa-user-tag text-xs"></i> User
+                        </span>
+                        <span class="truncate pl-1">{{ $node['right'] ?: 'Vacío' }}</span>
+                    </h6>
+                </div>
+
+                <div class="col-span-1 flex justify-center">
+                    <h6 class="text-ink text-xs sm:text-sm flex flex-col">
+                        <span class="text-primary font-semibold flex items-center gap-1">
+                            Puntos
+                        </span>
+                        <span class="font-medium pl-1">0</span>
+                    </h6>
+                </div>
+
+                <div class="col-span-1 flex justify-center">
+                    <h6 class="text-ink text-xs sm:text-sm flex flex-col">
+                        <span class="text-primary font-semibold flex items-center gap-1">
+                            Puntos
+                        </span>
+                        <span class="font-medium pl-1">0</span>
                     </h6>
                 </div>
             </div>
         </a>
     @elseif ($node['level'] < 3)
-        <a class=" " wire:click="show({{ $node['id'] }})">
-            <div class="text-zinc-600 font-bold">
-                <h4 class="text-xs capitalize">{{ $node['username'] }}</h4>
-            </div>
+        <a wire:click="show({{ $node['id'] }})" class="hover:bg-neutral-50 transition-colors cursor-pointer">
+            <h4 class="capitalize text-primary">
+                {{ $node['username'] }}
+            </h4>
         </a>
     @elseif ($node['level'] < 4)
-        <a class=" " wire:click="show({{ $node['id'] }})">
-            <div class=" text-zinc-600 ">
-                <h4 class="text-xs capitalize">{{ $node['username'] }}</h4>
-            </div>
+        <a wire:click="show({{ $node['id'] }})" class="hover:bg-neutral-50 transition-colors cursor-pointer">
+            <h4 class="text-[8px] capitalize text-primary">
+                {{ $node['username'] }}
+            </h4>
         </a>
     @else
         <a wire:click="show({{ $node['id'] }})">

@@ -9,15 +9,13 @@
             'route' => 'home',
             'routeIs' => 'home',
         ],
-        [
+       /*  [
             'type' => 'route',
             'name' => 'Productos',
             'icon' => 'shopping-cart',
             'route' => 'products.index',
             'routeIs' => 'products*',
-        ],
-    
-        
+        ], */
         [
             'type' => 'anchor',
             'name' => 'Nosotros',
@@ -83,10 +81,10 @@
         <flux:spacer />
 
         <flux:navbar class="mr-1.5 space-x-0.5 py-0!">
-            <flux:tooltip content="Search" position="bottom">
+            {{-- <flux:tooltip content="Search" position="bottom">
                 <flux:navbar.item class="!h-10 [&>div>svg]:size-5" icon="magnifying-glass" href="#"
                     label="Search" />
-            </flux:tooltip>
+            </flux:tooltip> --}}
             {{-- <flux:tooltip content="Repository" position="bottom">
                 <flux:navbar.item class="h-10 max-lg:hidden [&>div>svg]:size-5" icon="folder-git-2"
                     href="https://github.com/laravel/livewire-starter-kit" target="_blank" label="Repository" />
@@ -184,41 +182,35 @@
         <flux:spacer />
 
         <flux:navlist variant="outline">
-            <flux:navlist.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit"
-                target="_blank">
-                {{ __('Repository') }}
-            </flux:navlist.item>
-
+{{-- 
             <flux:navlist.item icon="book-open-text" href="https://laravel.com/docs/starter-kits" target="_blank">
                 {{ __('Documentation') }}
-            </flux:navlist.item>
+            </flux:navlist.item> --}}
         </flux:navlist>
     </flux:sidebar>
 
-
-
     {{ $slot }}
 
-    <flux:footer class="p-0 lg:p-0">
-        <footer class="bg-ink text-white pt-16 pb-8">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <flux:footer>
+        <footer class="bg-ink text-white rounded-md p-4 sm:p-10">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                     <div>
-                        <img class="h-12 w-auto mb-6" src="/api/placeholder/200/80" alt="ActivosNetwork Logo">
-                        <p class="text-gray-400 mb-6">Una compañía en el sector de salud y bienestar que ofrece
+                        {{-- <img class="h-12 w-auto mb-6" src="/api/placeholder/200/80" alt="ActivosNetwork Logo"> --}}
+                        <p class=" text-xl text-white  font-bold w-auto mb-6">ActivosNetwork</p>
+                        <p class="text-neutral-200 mb-6">Una compañía en el sector de salud y bienestar que ofrece
                             múltiples
                             oportunidades financieras a través de un sistema global de asociación.</p>
                         <div class="flex space-x-4">
-                            <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <a href="#" class="text-neutral-200 hover:text-white transition duration-300">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
-                            <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <a href="#" class="text-neutral-200 hover:text-white transition duration-300">
                                 <i class="fab fa-instagram"></i>
                             </a>
-                            <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <a href="#" class="text-neutral-200 hover:text-white transition duration-300">
                                 <i class="fab fa-twitter"></i>
                             </a>
-                            <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <a href="#" class="text-neutral-200 hover:text-white transition duration-300">
                                 <i class="fab fa-linkedin-in"></i>
                             </a>
                         </div>
@@ -226,49 +218,49 @@
                     <div>
                         <h3 class="text-lg font-bold mb-6">Vehículos Financieros</h3>
                         <ul class="space-y-3">
-                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">ActivosNetwork
+                            <li><a href="{{route('home')}}#franquicias" class="text-neutral-200 hover:text-white transition duration-300">ActivosNetwork
                                     Coffee</a></li>
-                            <li><a href="#"
-                                    class="text-gray-400 hover:text-white transition duration-300">Chelas</a></li>
-                            <li><a href="#"
-                                    class="text-gray-400 hover:text-white transition duration-300">ActivosNetowork</a></li>
-                            <li><a href="#"
-                                    class="text-gray-400 hover:text-white transition duration-300">Maspro</a></li>
-                            <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Net
+                            <li><a href="{{route('home')}}#franquicias"
+                                    class="text-neutral-200 hover:text-white transition duration-300">Chelas</a></li>
+                            <li><a href="{{route('home')}}#franquicias"
+                                    class="text-neutral-200 hover:text-white transition duration-300">ActivosNetowork</a></li>
+                            <li><a href="{{route('home')}}#franquicias"
+                                    class="text-neutral-200 hover:text-white transition duration-300">Maspro</a></li>
+                            <li><a href="{{route('home')}}#franquicias" class="text-neutral-200 hover:text-white transition duration-300">Net
                                     Inmobiliario</a></li>
                         </ul>
                     </div>
                     <div>
                         <h3 class="text-lg font-bold mb-6">Enlaces rápidos</h3>
                         <ul class="space-y-3">
-                            <li><a href="#inicio"
-                                    class="text-gray-400 hover:text-white transition duration-300">Inicio</a></li>
-                            <li><a href="#nosotros"
-                                    class="text-gray-400 hover:text-white transition duration-300">Nosotros</a></li>
-                            <li><a href="#franquicias"
-                                    class="text-gray-400 hover:text-white transition duration-300">Vehículos
+                            <li><a href="{{route('home')}}"
+                                    class="text-neutral-200 hover:text-white transition duration-300">Inicio</a></li>
+                            <li><a href="{{route('home')}}#nosotros"
+                                    class="text-neutral-200 hover:text-white transition duration-300">Nosotros</a></li>
+                            <li><a href="{{route('home')}}#franquicias"
+                                    class="text-neutral-200 hover:text-white transition duration-300">Vehículos
                                     Financieros</a></li>
-                            <li><a href="#inversion"
-                                    class="text-gray-400 hover:text-white transition duration-300">Modelos de
+                            <li><a href="{{route('home')}}#inversion"
+                                    class="text-neutral-200 hover:text-white transition duration-300">Modelos de
                                     Inversión</a>
                             </li>
-                            <li><a href="#diferencias"
-                                    class="text-gray-400 hover:text-white transition duration-300">¿Por
+                            <li><a href="{{route('home')}}#diferencias"
+                                    class="text-neutral-200 hover:text-white transition duration-300">¿Por
                                     qué ActivosNetwork?</a></li>
-                            <li><a href="#contacto"
-                                    class="text-gray-400 hover:text-white transition duration-300">Contacto</a></li>
+                            <li><a href="{{route('home')}}#contacto"
+                                    class="text-neutral-200 hover:text-white transition duration-300">Contacto</a></li>
                         </ul>
                     </div>
                     <div>
                         <h3 class="text-lg font-bold mb-6">Contacto</h3>
-                        <ul class="space-y-3 text-gray-400">
-                            <li class="flex items-start">
+                        <ul class="space-y-3 text-neutral-200">
+                            {{-- <li class="flex items-start">
                                 <i class="fas fa-map-marker-alt mt-1 mr-3"></i>
                                 <span>Av. Principal #123, Ciudad Capital</span>
-                            </li>
+                            </li> --}}
                             <li class="flex items-start">
                                 <i class="fas fa-phone-alt mt-1 mr-3"></i>
-                                <span>+1 (555) 123-4567</span>
+                                <span>+57 (318) 813-2381</span>
                             </li>
                             <li class="flex items-start">
                                 <i class="fas fa-envelope mt-1 mr-3"></i>
@@ -295,11 +287,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            
         </footer>
     </flux:footer>
-
-
 
     @fluxScripts
 </body>

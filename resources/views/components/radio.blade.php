@@ -4,7 +4,7 @@
     'options' => [],
 ])
 
-<div>
+<div class="mb-5">
     @if($label ?? false)
         <label class="block text-primary">{{ $label }}</label>
     @endif

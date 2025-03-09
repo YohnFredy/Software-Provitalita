@@ -80,7 +80,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
     <!-- Session Status -->
     <x-auth-session-status class="text-center" :status="session('status')" />
 
-    <form wire:submit="login" class="flex flex-col gap-6">
+    <form wire:submit="login" class="flex flex-col gap-x-6">
         <!-- Email Address -->
 
         <x-input wire:model="email" :label="__('Email address')" type="email" for="email" required autofocus autocomplete="email"
@@ -100,15 +100,14 @@ new #[Layout('components.layouts.auth')] class extends Component {
         </div>
 
         <!-- Remember Me -->
-        <flux:checkbox wire:model="remember" :label="__('Remember me')" />
+        <flux:checkbox wire:model="remember" label="Recordar mi sesión" />
 
-        <div class="flex items-center justify-end">
+        <div class="flex items-center justify-end mt-5">
             <flux:button variant="primary" type="submit" class="w-full">{{ __('Log in') }}</flux:button>
         </div>
     </form>
     <div class="space-x-1 text-center text-sm text-zinc-600 dark:text-zinc-400">
-        Don't have an account?
-        <flux:link href="#" wire:navigate>Sign up</flux:link>
+        Si no tienes una cuenta, tu referente debe proporcionártela o crearla.
     </div>
 
     {{-- @if (Route::has('register'))

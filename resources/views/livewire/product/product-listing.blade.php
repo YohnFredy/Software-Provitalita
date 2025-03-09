@@ -260,7 +260,7 @@
                                             @endif
                                             <h3 class="font-bold text-gray-800 hover:text-green-600 transition">
                                                 <a
-                                                    href="{{ route('products.show', $product->slug) }}">{{ $product->name }}</a>
+                                                    href="{{-- {{ route('products.show', $product->slug) }} --}}">{{ $product->name }}</a>
                                             </h3>
                                         </div>
                                         <div class="ml-2">

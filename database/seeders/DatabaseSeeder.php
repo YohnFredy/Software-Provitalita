@@ -33,9 +33,9 @@ class DatabaseSeeder extends Seeder
             CitySeeder::class,
             RegisterRedSeeder::class,
             CategorySeeder::class,
-            ImageSeeder::class,
+            ImageSeeder::class, 
         ]);
-        Product::factory(15)->create();
+         Product::factory(10)->create(); 
        
     }
 }

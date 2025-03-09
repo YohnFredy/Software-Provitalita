@@ -7,11 +7,14 @@
 
 <div class="relative mb-5">
     @if ($label)
-        <label for="{{ $for }}" class="block mb-2 text-sm font-medium text-primary">{{ $label }}</label>
+        <label for="{{ $for }}" class="block mb-2 text-sm font-medium text-primary ">{{ $label }}</label>
     @endif
 
     <select id="{{ $for }}" name="{{ $for }}"
-        {{ $attributes->merge(['class' => 'block w-full bg-gray-50 appearance-none border border-gray-300 text-ink py-2 pl-3 pr-10 rounded-md shadow-sm focus:outline-none focus:ring-zinc-500 focus:border-zinc-500 cursor-pointer']) }}>
+        {{ $attributes->merge([
+            'class' => 'block w-full bg-neutral-50/50 appearance-none border border-gray-300 text-primary text-sm rounded-lg 
+            focus:outline-1 focus:outline-primary focus:bg-white p-2.5 cursor-pointer',
+        ]) }}>
         <option value="">{{ $placeholder }}</option>
 
         @foreach ($options as $country)

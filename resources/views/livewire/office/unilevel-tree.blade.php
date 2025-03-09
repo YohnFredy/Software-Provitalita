@@ -8,17 +8,17 @@
         <flux:breadcrumbs.item href="{{ route('dashboard') }}">
             <i class="fas fa-home mr-1"></i> Home
         </flux:breadcrumbs.item>
-        <flux:breadcrumbs.item>
+        <flux:breadcrumbs.item href="{{route('binary-tree')}}">
             <i class="fas fa-network-wired mr-1"></i> Binario
         </flux:breadcrumbs.item>
-        <flux:breadcrumbs.item href="{{ route('unilevel-tree') }}">
+        <flux:breadcrumbs.item>
             <i class="fas fa-sitemap mr-1"></i> Unilevel
         </flux:breadcrumbs.item>
     </flux:breadcrumbs>
 
     <div class="flex justify-between items-center mb-2 mt-2 sm:mt-4">
         <h1 class="font-bold text-xl md:text-2xl text-primary mt-4 flex items-center">
-            <i class="fas fa-diagram-project mr-2"></i> Red Binaria
+            <i class="fas fa-diagram-project mr-2"></i> Red unilevel
         </h1>
     </div>
 
@@ -74,12 +74,8 @@
                     <option value="inactive" disabled>Inactivos</option>
                 </select>
             </div>
-
         </div>
-
-
     </div>
-
 
     <!-- Contenedor principal del árbol con navegación -->
     <div class="sm:shadow-md shadow-ink rounded-lg py-2">
@@ -107,7 +103,7 @@
             <div class="caja ">
                 <div id="tree-container" class="tree">
                     <ul>
-                        @include('livewire.office.children-binary', ['node' => $tree])
+                        @include('livewire.office.children-unilevel', ['node' => $tree])
                     </ul>
                 </div>
             </div>
