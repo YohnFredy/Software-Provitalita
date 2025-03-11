@@ -91,12 +91,11 @@ class Register extends Component
     {
         $this->reset('city');
         $this->city_id = $city_id;
-        $this->reset('city');
     }
 
     public function updatedCity()
     {
-        $this->reset('cityId');
+        $this->reset('city_id');
     }
 
     public function save()

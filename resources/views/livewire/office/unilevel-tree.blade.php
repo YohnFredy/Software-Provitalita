@@ -8,7 +8,7 @@
         <flux:breadcrumbs.item href="{{ route('dashboard') }}">
             <i class="fas fa-home mr-1"></i> Home
         </flux:breadcrumbs.item>
-        <flux:breadcrumbs.item href="{{route('binary-tree')}}">
+        <flux:breadcrumbs.item href="{{ route('binary-tree') }}">
             <i class="fas fa-network-wired mr-1"></i> Binario
         </flux:breadcrumbs.item>
         <flux:breadcrumbs.item>
@@ -78,30 +78,38 @@
     </div>
 
     <!-- Contenedor principal del árbol con navegación -->
-    <div class="sm:shadow-md shadow-ink rounded-lg py-2">
+    <div class="sm:shadow-md shadow-ink rounded-lg py-2" x-data="treeZoom()">
         <!-- Control de navegación -->
         <div class="flex justify-between px-4">
             <div class="flex items-center space-x-2">
-                <button id="zoom-out-btn"
+                <button @click="decreaseZoom()"
                     class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring focus:ring-primary/30">
                     <i class="fas fa-minus"></i>
                 </button>
-                <button id="zoom-in-btn"
+
+                <!-- Botón de aumentar zoom solo visible cuando zoom < 100% -->
+                <button @click="increaseZoom()" x-show="showZoomInButton"
                     class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring focus:ring-primary/30">
                     <i class="fas fa-plus"></i>
                 </button>
-                <button id="zoom-reset-btn"
+
+                <button @click="resetZoom()"
                     class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring focus:ring-primary/30">
                     <i class="fas fa-expand"></i>
                 </button>
-                <span class="text-ink text-sm" id="zoom-level-text">Zoom: 100%</span>
+
+                <span class="text-ink text-sm" x-text="`Zoom: ${Math.round(currentZoom * 100)}%`"></span>
             </div>
         </div>
 
         <!-- Árbol binario -->
-        <div class="flex justify-center ">
+        <div class="flex justify-center overflow-hidden transition-all duration-300 "
+            :style="`height: ${containerHeight}px`">
             <div class="caja ">
-                <div id="tree-container" class="tree">
+                <div id="tree-container" class="tree px-2 transform-gpu transition-transform duration-300"
+                    x-ref="treeContainer"
+                    :style="`transform: scale(${currentZoom}, ${currentZoom}); transform-origin: top center;`"
+                    @transitionend="updateContainerHeight()">
                     <ul>
                         @include('livewire.office.children-unilevel', ['node' => $tree])
                     </ul>
@@ -292,71 +300,4 @@
         </div>
     </div>
 
-
-    <!-- Script directo para el control del árbol -->
-    <script>
-        // Ejecutar cuando Livewire haya cargado completamente
-        document.addEventListener('livewire:load', function() {
-            initTreeZoomControls();
-        });
-
-        // Ejecutar cuando el DOM esté listo (alternativa por si livewire:load no funciona)
-        document.addEventListener('DOMContentLoaded', function() {
-            initTreeZoomControls();
-        });
-
-        function initTreeZoomControls() {
-            // Verificar si los elementos ya tienen eventos asociados
-            if (window.treeZoomInitialized) return;
-            window.treeZoomInitialized = true;
-
-            // Obtener referencias a los elementos
-            const treeContainer = document.getElementById('tree-container');
-            const zoomInBtn = document.getElementById('zoom-in-btn');
-            const zoomOutBtn = document.getElementById('zoom-out-btn');
-            const zoomResetBtn = document.getElementById('zoom-reset-btn');
-            const zoomLevelText = document.getElementById('zoom-level-text');
-
-            // Verificar que todos los elementos necesarios existan
-            if (!treeContainer || !zoomInBtn || !zoomOutBtn || !zoomResetBtn || !zoomLevelText) {
-                console.error('Algunos elementos del árbol no se encontraron');
-                return;
-            }
-
-            // Variables de control
-            let currentZoom = 1.0;
-            const zoomStep = 0.1;
-            const maxZoom = 2.0;
-            const minZoom = 0.5;
-
-            // Función para actualizar el zoom
-            function updateZoom(zoom) {
-                currentZoom = zoom;
-                treeContainer.style.transform = `scale(${currentZoom})`;
-                zoomLevelText.textContent = `Zoom: ${Math.round(currentZoom * 100)}%`;
-            }
-
-            // Asignar eventos a los botones
-            zoomInBtn.addEventListener('click', function() {
-                if (currentZoom < maxZoom) {
-                    updateZoom(currentZoom + zoomStep);
-                }
-            });
-
-            zoomOutBtn.addEventListener('click', function() {
-                if (currentZoom > minZoom) {
-                    updateZoom(currentZoom - zoomStep);
-                }
-            });
-
-            zoomResetBtn.addEventListener('click', function() {
-                updateZoom(1.0);
-            });
-
-            // Inicializar el estado
-            updateZoom(1.0);
-
-            console.log('Controles de zoom del árbol inicializados correctamente');
-        }
-    </script>
 </div>

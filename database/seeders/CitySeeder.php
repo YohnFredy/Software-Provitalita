@@ -19,14 +19,17 @@ class CitySeeder extends Seeder
         $departments = DB::table('departments')->pluck('id'); // Obtener departamentos existentes
 
         foreach ($departments as $department_id) {
-            foreach (range(1, 5) as $index) {
-                DB::table('cities')->insert([
-                    'department_id' => $department_id,
-                    'name' => $faker->city,
-                    'cost' => $faker->randomFloat(2, 5, 50), // Costos entre 5 y 50
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
+            if ($department_id == 1) {
+            } else {
+                foreach (range(1, 5) as $index) {
+                    DB::table('cities')->insert([
+                        'department_id' => $department_id,
+                        'name' => $faker->city,
+                        'cost' => $faker->randomFloat(2, 5, 50), // Costos entre 5 y 50
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
             }
         }
     }

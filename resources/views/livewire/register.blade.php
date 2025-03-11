@@ -52,37 +52,36 @@
                 <x-input wire:model.live="phone" label="Teléfono:" type="text" for="phone" required
                     placeholder="Teléfono" />
             </div>
-        
+
             <!-- Pais -->
             <div class="col-span-2 sm:col-span-1">
                 <x-select wire:model.live="selectedCountry" label="País:" for="selectedCountry"
                     placeholder="Seleccione un país..." :options="$countries" required />
             </div>
 
+
             <!-- Departamento -->
             @if ($selectedCountry)
+
                 <div class="col-span-2 sm:col-span-1">
-
-                    <x-select wire:model.live="selectedDepartment" label="País:" for="selectedDepartment"
+                    <x-select wire:model.live="selectedDepartment" label="Departamento:" for="selectedDepartment"
                         placeholder="Seleccione un departamento..." :options="$departments" />
-
                 </div>
+
 
                 <!-- ciudad -->
                 @if ($selectedDepartment)
                     @if (count($cities) > 0)
                         <div class="col-span-2 sm:col-span-1">
-
-                            <x-select wire:model.live="selectedCity" label="País:" for="selectedCity"
+                            <x-select wire:model.live="selectedCity" label="Ciudad:" for="selectedCity"
                                 placeholder="Seleccione una ciudad..." :options="$cities" />
-
                         </div>
                     @else
                         <!-- Ciudad -->
                         <div class="col-span-2 sm:col-span-1">
                             <x-input wire:model="city" id="city" label="Ciudad:" type="text" for="city"
                                 required autofocus autocomplete="city" placeholder="Ciudad" />
-                        </div class=" col-span-2">
+                        </div>
                     @endif
                 @endif
             @endif

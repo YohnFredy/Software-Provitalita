@@ -5,7 +5,7 @@
         <div class="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0 mb-4 sm:mb-8">
             <div class="text-center sm:text-left w-full sm:w-auto">
                 <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-primary">Oficina Virtual</h1>
-                <p class="text-ink text-sm sm:text-base">Bienvenido de nuevo, Usuario</p>
+                <p class="text-ink text-sm sm:text-base">Bienvenido de nuevo</p>
             </div>
             <div class="flex items-center space-x-3 sm:space-x-4">
                 <div class="relative">
@@ -20,100 +20,125 @@
                         class="absolute top-0 right-0 h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-danger border-2 border-white"></span>
                 </div>
                 <div class="flex items-center rounded-full py-1 px-2 shadow-sm">
-                    <span class="font-medium text-xs sm:text-sm text-primary up">{{ $user->name }}</span>
+                    <span class="font-medium text-xs sm:text-sm text-primary capitalize">{{ $user->name }}</span>
                 </div>
             </div>
         </div>
 
-        <!-- Cards de resumen -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4  gap-6 mb-8">
-            <div class="bg-white p-6 rounded-lg  shadow-md shadow-ink hover:shadow-lg transition-shadow">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <p class="text-sm font-medium text-primary">Ganancias Totales</p>
-                        <h3 class="text-2xl font-bold text-ink mt-1">$0</h3>
-                        <span class="inline-flex items-center text-sm text-premium mt-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
+        <!-- Cards  -->
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
+            <!-- Card Ganancias Totales -->
+            <div
+                class="bg-white rounded-xl shadow-lg hover:shadow-xl shadow-ink border border-primary/30 transition-all duration-300 overflow-hidden">
+
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <div class="space-y-2">
+                            <p class="text-sm font-semibold text-primary uppercase tracking-wider">Ganancias Totales
+                            </p>
+                            <h3 class="text-3xl font-bold text-ink">$0</h3>
+                            <div class="flex items-center mt-2 text-sm font-medium text-premium">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                </svg>
+                                <span>Ganancia mes pasado: $0</span>
+                            </div>
+                        </div>
+                        <div class="p-3 rounded-full bg-primary/20 text-primary shadow-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            0% vs mes pasado
-                        </span>
-                    </div>
-                    <div class="p-3 bg-secondary/5 rounded-full">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-secondary" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-lg  shadow-md shadow-ink hover:shadow-lg transition-shadow">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <p class="text-sm font-medium text-primary">Nuevos Socios</p>
-                        <h3 class="text-2xl font-bold text-ink mt-1">0</h3>
-                        <span class="inline-flex items-center text-sm text-premium mt-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
+            <!-- Card Socios Unilevel -->
+            <div
+                class="bg-white rounded-xl shadow-lg hover:shadow-xl shadow-ink border border-primary/30 transition-all duration-300 overflow-hidden">
+
+                <div class="p-6">
+                    <div class=" flex items-center justify-between">
+                        <p class="text-sm font-semibold text-primary uppercase tracking-wider">Socios Unilevel</p>
+                        <div class="p-3 rounded-full bg-secondary/20 text-secondary shadow-md flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                             </svg>
-                            0% vs mes pasado
-                        </span>
+                        </div>
                     </div>
-                    <div class="p-3 bg-primary/5 rounded-full">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
+
+                    <div class="grid grid-cols-2 gap-4 mt-2">
+                        <div class="bg-neutral-50 rounded-lg p-3 text-center">
+                            <span class="block text-sm text-secondary font-medium">Directos</span>
+                            <span class="block text-xl font-bold text-ink mt-1">
+                                {{$direct}}
+                            </span>
+                        </div>
+                        <div class="bg-neutral-50 rounded-lg p-3 text-center">
+                            <span class="block text-sm text-secondary font-medium">Afiliados</span>
+                            <span
+                                class="block text-xl font-bold text-ink mt-1">{{$totalDirect }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card Socios Binario -->
+            <div
+                class="bg-white rounded-xl shadow-lg hover:shadow-xl shadow-ink border border-primary/30 transition-all duration-300 overflow-hidden">
+                <div class="p-6">
+                    <div class="flex items-center justify-between">
+                        <p class="text-sm font-semibold text-primary uppercase tracking-wider mr-4">Socios Binario</p>
+                        <div class="p-3 rounded-full bg-danger/20 text-danger shadow-md flex-shrink-0">
+                            @if ($left > $right)
+                                <i class="fas fa-balance-scale-left h-6 w-6"></i>
+                            @elseif ($right > $left)
+                                <i class="fas fa-balance-scale-right h-6 w-6"></i>
+                            @else
+                                <i class="fas fa-balance-scale h-6 w-6"></i>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 mt-2">
+                        <div class="bg-neutral-50 rounded-lg p-3 text-center">
+                            <span class="block text-sm font-medium text-danger">Izquierda</span>
+                            <span class="block text-xl font-bold text-ink mt-1">{{ $left }}</span>
+                        </div>
+                        <div class="bg-neutral-50 rounded-lg p-3 text-center">
+                            <span class="block text-sm font-medium text-danger">Derecha</span>
+                            <span class="block text-xl font-bold text-ink mt-1">{{ $right }}</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-lg  shadow-md shadow-ink hover:shadow-lg transition-shadow">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <p class="text-sm font-medium text-primary">Rango alcanzado</p>
-                        <h3 class="text-2xl font-bold text-ink mt-1">Asociado</h3>
-                        <span class="inline-flex items-center text-sm text-primary mt-2">
-                            Próximo nivel: Aprendiz
-                        </span>
-                    </div>
-                    <div class="p-3 bg-premium/5 rounded-full">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-premium" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                        </svg>
-                    </div>
-                </div>
-            </div>
+            <!-- Card Rango alcanzado -->
+            <div
+                class="bg-white rounded-xl shadow-lg hover:shadow-xl shadow-ink border border-primary/30 transition-all duration-300 overflow-hidden">
 
-            <div class="bg-white p-6 rounded-lg  shadow-md shadow-ink hover:shadow-lg transition-shadow">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <p class="text-sm font-medium text-primary">Socios Activos</p>
-                        <h3 class="text-2xl font-bold text-ink mt-1">0</h3>
-                        <span class="inline-flex items-center text-sm text-premium mt-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <div class="space-y-2">
+                            <p class="text-sm font-semibold text-primary uppercase tracking-wider">Rango alcanzado</p>
+                            <h3 class="text-2xl font-bold text-premium">Asociado</h3>
+                            <div class="flex items-center text-sm font-medium mt-1">
+                                <span class="px-3 py-1 rounded-lg bg-neutral-50 text-primary">
+                                    Próximo nivel: Aprendiz
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-3 rounded-full bg-premium/20 text-premium shadow-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M13 17h8m0 0v-8m0 8l-8-8-4 4-6-6" />
+                                    d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                             </svg>
-                            0% vs mes pasado
-                        </span>
-                    </div>
-                    <div class="p-3 bg-danger/5 rounded-full">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-danger" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -122,7 +147,7 @@
         <!-- Gráficos y Estadísticas -->
         <div class="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-8">
             <!-- Gráfico de Rendimiento -->
-            <div class="bg-white p-6 rounded-lg shadow-md shadow-ink">
+            <div class="bg-white p-6 border border-primary/30 rounded-lg shadow-md shadow-ink">
                 <div class="sm:flex justify-between items-center mb-4">
                     <h2 class="text-lg font-semibold text-primary">Rendimiento de Red</h2>
                     <div class="flex bg-zinc-50 rounded-lg p-1 text-sm shadow-xs shadow-ink">
@@ -375,50 +400,11 @@
             </div>
         </div> --}}
 
- <hr class=" my-8">
+        <hr class=" my-8">
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
-            <!-- Link Lado Derecho -->
-            <div class="bg-gradient-to-br from-white to-neutral-300 p-4 sm:p-6 rounded-lg">
-                <div class="flex items-center justify-center mb-3">
-                    <div class="bg-primary/10 p-2 rounded-full mr-2">
-                        <i class="fas fa-arrow-right text-primary"></i>
-                    </div>
-                    <flux:heading class="text-primary! text-lg sm:text-xl">Link lado derecho</flux:heading>
-                </div>
-
-                <div class="relative bg-neutral-50 rounded-lg p-2 border border-dashed border-neutral-200 mb-4">
-                    <p id="p1" class="text-xs sm:text-sm text-neutral-600 truncate select-all">
-                        http://activosactivosnetwork.test/register/{{ $user->username }}/right
-                    </p>
-                    <button
-                        class="absolute right-1 top-1/2 transform -translate-y-1/2 text-neutral-400 hover:text-primary transition-colors"
-                        onclick="copiarAlPortapapeles('p1')">
-                        <i class="fas fa-copy"></i>
-                    </button>
-                </div>
-
-                <div class="space-y-3">
-                    <div class="text-center">
-                        <flux:button variant="primary"
-                            class="w-full sm:w-auto cursor-pointer transition-transform hover:scale-105"
-                            onclick="copiarAlPortapapeles('p1')">
-                            <i class="fas fa-copy mr-2"></i> Copiar enlace
-                        </flux:button>
-                    </div>
-
-                    <div class="text-center">
-                        <flux:link
-                            class="text-danger hover:text-premium flex items-center justify-center gap-1 transition-all"
-                            href="{{ route('register', [$user->username, 'right']) }}">
-                            <i class="fas fa-user-plus text-xs"></i> Registrar directo
-                        </flux:link>
-                    </div>
-                </div>
-            </div>
-
             <!-- Link Lado Izquierdo -->
-            <div class="bg-gradient-to-bl from-white to-neutral-300 p-4 sm:p-6 rounded-lg ">
+            <div class="bg-gradient-to-bl from-white to-primary/20  p-4 sm:p-6 rounded-lg ">
                 <div class="flex items-center justify-center mb-3">
                     <div class="bg-primary/10 p-2 rounded-full mr-2">
                         <i class="fas fa-arrow-left text-primary"></i>
@@ -428,8 +414,7 @@
 
                 <div class="relative bg-neutral-50 rounded-lg p-2 border border-dashed border-neutral-200 mb-4">
                     <p id="p2" class="text-xs sm:text-sm text-neutral-600 truncate select-all">
-                        http://activosactivosnetwork.test/register/{{ $user->username }}/left
-                    </p>
+                        https://activosnetwork.com/register/{{ $user->username }}/left</p>
                     <button
                         class="absolute right-1 top-1/2 transform -translate-y-1/2 text-neutral-400 hover:text-primary transition-colors"
                         onclick="copiarAlPortapapeles('p2')">
@@ -455,11 +440,46 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Link Lado Derecho -->
+            <div class="bg-gradient-to-br from-white to-primary/20 p-4 sm:p-6 rounded-lg">
+                <div class="flex items-center justify-center mb-3">
+                    <div class="bg-primary/10 p-2 rounded-full mr-2">
+                        <i class="fas fa-arrow-right text-primary"></i>
+                    </div>
+                    <flux:heading class="text-primary! text-lg sm:text-xl">Link lado derecho</flux:heading>
+                </div>
+
+                <div class="relative bg-neutral-50 rounded-lg p-2 border border-dashed border-neutral-200 mb-4">
+                    <p id="p1" class="text-xs sm:text-sm text-neutral-600 truncate select-all">
+                        https://activosnetwork.com/register/{{ $user->username }}/right</p>
+                    <button
+                        class="absolute right-1 top-1/2 transform -translate-y-1/2 text-neutral-400 hover:text-primary transition-colors"
+                        onclick="copiarAlPortapapeles('p1')">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="text-center">
+                        <flux:button variant="primary"
+                            class="w-full sm:w-auto cursor-pointer transition-transform hover:scale-105"
+                            onclick="copiarAlPortapapeles('p1')">
+                            <i class="fas fa-copy mr-2"></i> Copiar enlace
+                        </flux:button>
+                    </div>
+
+                    <div class="text-center">
+                        <flux:link
+                            class="text-danger hover:text-premium flex items-center justify-center gap-1 transition-all"
+                            href="{{ route('register', [$user->username, 'right']) }}">
+                            <i class="fas fa-user-plus text-xs"></i> Registrar directo
+                        </flux:link>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-
-
 
     <script>
         function copiarAlPortapapeles(id_elemento) {

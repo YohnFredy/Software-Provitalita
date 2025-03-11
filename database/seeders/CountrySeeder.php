@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Country;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -14,6 +15,11 @@ class CountrySeeder extends Seeder
      */
     public function run(): void
     {
+
+        Country::create([
+            'name' => 'Colombia',
+        ]);
+
         $faker = faker::create();
         foreach (range(1, 5) as $index) {
             DB::table('countries')->insert([

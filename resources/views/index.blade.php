@@ -205,8 +205,8 @@
             <div
                 class="bg-white rounded-xl shadow-md shadow-ink overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-2">
                 <div class="relative">
-                    <img src="{{asset('storage/images/tienda_naturista.jpeg')}}"
-                        alt="ActivosNetwork" class="w-full h-48 md:h-64 object-cover">
+                    <img src="{{ asset('storage/images/tienda_naturista.jpeg') }}" alt="ActivosNetwork"
+                        class="w-full h-48 md:h-64 object-cover">
                     <div class="absolute top-0 left-0 bg-primary text-white py-1 md:py-2 px-3 md:px-4 rounded-br-xl">
                         <i class="fas fa-leaf mr-1 md:mr-2"></i> <span class="text-sm md:text-base">Tienda
                             Naturista</span>
@@ -229,8 +229,8 @@
             <div
                 class="bg-white rounded-xl shadow-md shadow-ink overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-2">
                 <div class="relative">
-                    <img src="{{asset('storage/images/mas_pro.jpeg')}}"
-                        alt="Maspro" class="w-full h-48 md:h-64 object-cover">
+                    <img src="{{ asset('storage/images/mas_pro.jpeg') }}" alt="Maspro"
+                        class="w-full h-48 md:h-64 object-cover">
                     <div class="absolute top-0 left-0 bg-primary text-white py-1 md:py-2 px-3 md:px-4 rounded-br-xl">
                         <i class="fas fa-dumbbell mr-1 md:mr-2"></i> <span class="text-sm md:text-base">Tienda
                             Deportiva</span>
@@ -575,78 +575,88 @@
                         </ul>
                     </div>
                 @endif
-
                 <form action="{{ route('contacto.store') }}" method="POST">
                     @csrf
                     <div class="grid grid-cols-2 gap-x-3">
-
                         <div class="col-span-2 sm:col-span-1">
-                            <x-input id="nombre" label="Nombre completo:" type="text" for="nombre"
-                                placeholder="Nombre completo" value="{{ old('nombre') }}" />
+                            <x-input id="nombre" name="nombre" label="Nombre completo:" for="nombre"
+                                placeholder="Nombre completo" value="{{ old('nombre') }}" required />
                         </div>
 
                         <div class="col-span-2 sm:col-span-1">
-                            <x-input id="email" label="Correo electrónico:" type="email" for="email"
-                                placeholder="Ingrese el Correo electrónico" value="{{ old('email') }}" />
+                            <x-input id="email" name="email" label="Correo electrónico:" type="email"
+                                for="email" placeholder="Ingrese el Correo electrónico"
+                                value="{{ old('email') }}" required />
                         </div>
 
                         <div class="col-span-2 sm:col-span-1">
-                            <x-input id="telefono" label="Telefono:" type="tel" for="telefono"
-                                placeholder="Ingrese el telefono" value="{{ old('telefono') }}" />
+                            <x-input id="telefono" name="telefono" label="Teléfono:" type="tel" for="telefono"
+                                placeholder="Ingrese el teléfono" value="{{ old('telefono') }}" required />
                         </div>
 
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="interes" class="block mb-2 text-sm font-medium text-primary ">Me
-                                interesa:</label>
-                            <div class="relative">
-                                <select id="interes" name="interes" required
-                                    class="block w-full bg-neutral-50/50 appearance-none border border-gray-300  text-primary text-sm rounded-lg focus:outline-1 focus:outline-primary focus:bg-white p-2.5 cursor-pointer">
-                                    <option value="" {{ old('interes') ? '' : 'selected' }}>Seleccionar opción
-                                    </option>
-                                    <option value="ActivosNetwork_coffee"
-                                        {{ old('interes') == 'ActivosNetwork_coffee' ? 'selected' : '' }}>ActivosNetwork
-                                        Coffee</option>
-                                    <option value="chelas" {{ old('interes') == 'chelas' ? 'selected' : '' }}>Chelas
-                                    </option>
-                                    <option value="ActivosNetwork"
-                                        {{ old('interes') == 'ActivosNetwork' ? 'selected' : '' }}>ActivosNetwork
-                                    </option>
-                                    <option value="maspro" {{ old('interes') == 'maspro' ? 'selected' : '' }}>Maspro
-                                    </option>
-                                    <option value="net_inmobiliario"
-                                        {{ old('interes') == 'net_inmobiliario' ? 'selected' : '' }}>Net Inmobiliario
-                                    </option>
-                                    <option value="distribucion"
-                                        {{ old('interes') == 'distribucion' ? 'selected' : '' }}>
-                                        Distribución de
-                                        productos</option>
-                                    <option value="informacion"
-                                        {{ old('interes') == 'informacion' ? 'selected' : '' }}>
-                                        Información general
-                                    </option>
-                                </select>
-                                <div class="absolute inset-y-0 right-5 flex items-center pointer-events-none">
-                                    <svg class="w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                            clip-rule="evenodd" />
-                                    </svg>
+                            <div class="mb-5">
+                                <label for="interes" class="block mb-2 text-sm font-medium text-primary">Me
+                                    interesa:</label>
+                                <div class="relative">
+                                    <select id="interes" name="interes" required
+                                        class="block w-full bg-neutral-50/50 appearance-none border border-gray-300 text-primary text-sm rounded-lg focus:outline-1 focus:outline-primary focus:bg-white p-2.5 cursor-pointer">
+                                        <option value="" {{ old('interes') ? '' : 'selected' }}>Seleccionar
+                                            opción</option>
+                                        <option value="ActivosNetwork_coffee"
+                                            {{ old('interes') == 'ActivosNetwork_coffee' ? 'selected' : '' }}>
+                                            ActivosNetwork
+                                            Coffee</option>
+                                        <option value="chelas" {{ old('interes') == 'chelas' ? 'selected' : '' }}>
+                                            Chelas
+                                        </option>
+                                        <option value="ActivosNetwork"
+                                            {{ old('interes') == 'ActivosNetwork' ? 'selected' : '' }}>ActivosNetwork
+                                        </option>
+                                        <option value="maspro" {{ old('interes') == 'maspro' ? 'selected' : '' }}>
+                                            Maspro
+                                        </option>
+                                        <option value="net_inmobiliario"
+                                            {{ old('interes') == 'net_inmobiliario' ? 'selected' : '' }}>Net
+                                            Inmobiliario
+                                        </option>
+                                        <option value="distribucion"
+                                            {{ old('interes') == 'distribucion' ? 'selected' : '' }}>
+                                            Distribución de
+                                            productos</option>
+                                        <option value="informacion"
+                                            {{ old('interes') == 'informacion' ? 'selected' : '' }}>
+                                            Información general
+                                        </option>
+                                    </select>
+                                    <div class="absolute inset-y-0 right-5 flex items-center pointer-events-none">
+                                        <svg class="w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
                                 </div>
+                                @error('interes')
+                                    <p class="text-sm text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="col-span-2">
                             <div class="mb-5">
                                 <label for="mensaje"
-                                    class="block mb-2 text-sm font-medium text-primary ">Mensaje:</label>
+                                    class="block mb-2 text-sm font-medium text-primary">Mensaje:</label>
                                 <textarea id="mensaje" name="mensaje" rows="6" required
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">{{ old('mensaje') }}</textarea>
+                                    class="block w-full bg-neutral-50/50 border border-gray-300 text-primary text-sm rounded-lg focus:outline-1 focus:outline-primary focus:bg-white p-2.5">{{ old('mensaje') }}</textarea>
+                                @error('mensaje')
+                                    <p class="text-sm text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                     </div>
-
-                    <flux:button variant="primary" class=" w-full" type="submit">
+                    <flux:button type="submit" variant="primary" class="w-full">
                         Enviar mensaje
                     </flux:button>
                 </form>

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Department;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -14,6 +15,12 @@ class DepartmentSeeder extends Seeder
      */
     public function run(): void
     {
+
+        Department::create([
+            'country_id' => 1,
+            'name' => 'Valle del cauca',
+        ]);
+
         $faker = Faker::create();
         $countries = DB::table('countries')->pluck('id'); // Obtener países existentes
 

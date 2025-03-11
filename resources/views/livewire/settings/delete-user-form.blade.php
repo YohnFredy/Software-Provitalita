@@ -12,13 +12,13 @@ new class extends Component {
      */
     public function deleteUser(Logout $logout): void
     {
-        $this->validate([
+       /*  $this->validate([
             'password' => ['required', 'string', 'current_password'],
         ]);
 
         tap(Auth::user(), $logout(...))->delete();
 
-        $this->redirect('/', navigate: true);
+        $this->redirect('/', navigate: true); */
     }
 }; ?>
 

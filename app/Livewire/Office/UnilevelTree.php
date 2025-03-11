@@ -15,7 +15,7 @@ class UnilevelTree extends Component
     public int $secondaryUserId;
     public int $primaryUserId;
 
-    private const MAX_TREE_LEVEL = 10;
+    private const MAX_TREE_LEVEL = 100;
 
     public function mount(): void
     {
