@@ -697,7 +697,7 @@
                             </div>
                             <div>
                                 <h4 class="text-base sm:text-lg font-medium mb-1">Correo electrónico</h4>
-                                <p class="text-sm sm:text-base">info@activosnetwork.com</p>
+                                <p class="text-sm sm:text-base">inf@activosnetwork.com</p>
                             </div>
                         </div>
                         <div class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left">

@@ -82,7 +82,7 @@ class User extends Authenticatable
 
     public function unilevel()
     {
-        return $this->hasOne(unilevel::class);
+        return $this->hasOne(Unilevel::class);
     }
 
     public function unilevelTotal()

@@ -32,7 +32,7 @@ class ContactController extends Controller
 
         try {
             // 1. Enviar el correo a la empresa
-            Mail::to('info@activosnetwork.com')->send(new ContactFormMail($data));
+            Mail::to('inf@activosnetwork.com')->send(new ContactFormMail($data));
             
             // 2. Enviar correo de confirmación al usuario
             Mail::to($validated['email'])->send(new UserConfirmationMail($data));

@@ -32,13 +32,13 @@
 
 
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" {{-- class="dark" --}}>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark bg-white">
 
 <head>
     @include('partials.head')
 </head>
 
-<body class="min-h-screen bg-zinc-50/10">
+<body class="min-h-screen bg-zinc-50/10 text-ink">
     <flux:sidebar sticky stashable class=" shadow-lg bg-zinc-50  shadow-ink">
         <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 

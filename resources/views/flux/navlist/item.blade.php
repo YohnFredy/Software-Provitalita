@@ -26,7 +26,7 @@ $classes = Flux::classes()
     ->add(match ($variant) {
         'outline' => match ($accent) {
             true => [
-                'data-current:text-secondary hover:data-current:text-(--color-accent-content)',
+                'data-current:text-secondary hover:data-current:text-secondary',
                 'data-current:bg-white data-current:border data-current:border-zinc-200',
                 'hover:text-zinc-800 hover:bg-zinc-800/5 ',
                 'border border-transparent',

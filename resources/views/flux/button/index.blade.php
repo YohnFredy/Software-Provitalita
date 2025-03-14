@@ -47,7 +47,7 @@ if ($loading && $type !== 'submit' && ! $isJsMethod) {
 
 $classes = Flux::classes()
     ->add('relative items-center font-medium justify-center gap-2 whitespace-nowrap')
-    ->add('disabled:opacity-75 dark:disabled:opacity-75 disabled:cursor-default disabled:pointer-events-none')
+    ->add('disabled:opacity-75  disabled:cursor-default disabled:pointer-events-none')
     ->add(match ($size) { // Size...
         'base' => 'h-10 text-sm rounded-lg' . ' ' . ($square ? 'w-10' : 'px-4'),
         'sm' => 'h-8 text-sm rounded-md' . ' ' . ($square ? 'w-8' : 'px-3'),
@@ -66,7 +66,7 @@ $classes = Flux::classes()
             : Flux::applyInset($inset, top: '-mt-1', right: '-mr-2', bottom: '-mb-1', left: '-ml-2'),
     } : '')
     ->add(match ($variant) { // Background color...
-        'primary' => ' bg-primary hover:bg-secondary',
+        'primary' => 'bg-primary hover:bg-secondary',
         'filled' => 'bg-zinc-800/5 hover:bg-zinc-800/10 dark:bg-white/10 dark:hover:bg-white/20',
         'outline' => 'bg-white hover:bg-zinc-50 dark:bg-zinc-700 dark:hover:bg-zinc-600/75',
         'danger' => 'bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-500',
@@ -74,7 +74,7 @@ $classes = Flux::classes()
         'subtle' => 'bg-transparent hover:bg-zinc-800/5 dark:hover:bg-white/15',
     })
     ->add(match ($variant) { // Text color...
-        'primary' => 'text-[var(--color-accent-foreground)]',
+        'primary' => 'text-white',
         'filled' => 'text-zinc-800 dark:text-white',
         'outline' => 'text-zinc-800 dark:text-white',
         'danger' => 'text-white',

@@ -14,6 +14,9 @@ class BinaryTree extends Component
     public User $currentUser;
     public int $secondaryUserId;
     public int $primaryUserId;
+    public $sponsor, $totalAffiliates = 0, $ptsLeft = 0, $ptsRight = 0;
+    public $leftPercentage = 0, $rightPercentage = 0;
+
 
     private const MAX_TREE_LEVEL = 100;
 
@@ -25,8 +28,38 @@ class BinaryTree extends Component
     public function resetTree(): void
     {
         $this->currentUser = Auth::user();
-        $this->primaryUserId = $this->currentUser->id;
-        $this->secondaryUserId = $this->currentUser->id;
+
+        $this->primaryUserId = $this->secondaryUserId = $this->currentUser->id;
+
+        $this->setSponsor();
+    }
+
+    private function setSponsor(): void
+    {
+        $this->sponsor = $this->currentUser->unilevel
+            ? User::find($this->currentUser->unilevel->sponsor_id)
+            : $this->currentUser;
+
+        if ($this->currentUser->binaryTotal) {
+            $this->totalAffiliates = $this->currentUser->binaryTotal->left_affiliates + $this->currentUser->binaryTotal->right_affiliates;
+        }else {
+            $this->totalAffiliates =0;
+        }
+
+        /* if ($this->currentUser->binaryTotal) {
+            $this->totalLeft = $this->currentUser->binaryTotal->left_affiliates;
+            $this->totalRight = $this->currentUser->binaryTotal->right_affiliates;
+        } else {
+            $this->totalLeft = 0;
+            $this->totalRight = 0;
+            $this->leftPercentage = 0;
+            $this->rightPercentage = 0;
+        }
+
+        if ($this->totalAffiliates > 0) {
+            $this->leftPercentage = ($this->totalLeft / $this->totalAffiliates) * 100;
+            $this->rightPercentage = ($this->totalRight / $this->totalAffiliates) * 100;
+        } */
     }
 
     private function buildTree(User $user, int $level = 0): array
@@ -70,16 +103,17 @@ class BinaryTree extends Component
     public function show(User $user): void
     {
         $this->currentUser = $user;
-
-        if ($this->primaryUserId === $this->currentUser->id) {
+       
+        if ($this->primaryUserId === $user->id) {
             return;
         }
-        if ($this->currentUser->id === $this->secondaryUserId) {
+
+        if ($user->id === $this->secondaryUserId) {
             $this->currentUser = User::findOrFail($user->binary->sponsor_id);
-            $this->secondaryUserId = $this->currentUser->id;
-        } else {
-            $this->secondaryUserId = $this->currentUser->id;
         }
+        $this->secondaryUserId = $this->currentUser->id;
+
+        $this->setSponsor();
     }
 
 

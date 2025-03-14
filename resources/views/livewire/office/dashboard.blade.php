@@ -1,5 +1,4 @@
 <div>
-
     <div class=" sm:p-6 sm:bg-white/80 sm:shadow-lg shadow-ink rounded-lg min-h-screen">
         <!-- Header del Dashboard -->
         <div class="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0 mb-4 sm:mb-8">
@@ -77,13 +76,12 @@
                         <div class="bg-neutral-50 rounded-lg p-3 text-center">
                             <span class="block text-sm text-secondary font-medium">Directos</span>
                             <span class="block text-xl font-bold text-ink mt-1">
-                                {{$direct}}
+                                {{ $direct }}
                             </span>
                         </div>
                         <div class="bg-neutral-50 rounded-lg p-3 text-center">
                             <span class="block text-sm text-secondary font-medium">Afiliados</span>
-                            <span
-                                class="block text-xl font-bold text-ink mt-1">{{$totalDirect }}</span>
+                            <span class="block text-xl font-bold text-ink mt-1">{{ $totalDirect }}</span>
                         </div>
                     </div>
                 </div>
@@ -401,6 +399,12 @@
         </div> --}}
 
         <hr class=" my-8">
+
+
+        <div id="link-sponsor" class=" bg-secondary/5 rounded-lg py-4 px-6 mb-4 ">
+            <h1 class=" text-center font-medium text-primary text-lg">Haz clic en "Registrar" en el lado
+                correspondiente donde deseas inscribir al prospecto o copia el enlace para enviárselo.</h1>
+        </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
             <!-- Link Lado Izquierdo -->

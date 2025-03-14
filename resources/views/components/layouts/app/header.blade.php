@@ -47,9 +47,9 @@
     @include('partials.head')
 </head>
 
-<body class="min-h-screen bg-white">
+<body class="min-h-screen bg-white text-ink">
     <flux:header container class="border-b border-zinc-200 shadow-md shadow-primary/50">
-        <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
+        <flux:sidebar.toggle class="lg:hidden text-danger! hover:text-primary!" icon="bars-2" inset="left" />
 
         <a href="{{ route('home') }}" class="ml-2 mr-5 flex items-center space-x-2 lg:ml-0" wire:navigate>
             <x-app-logo />
@@ -264,7 +264,7 @@
                             </li>
                             <li class="flex items-start">
                                 <i class="fas fa-envelope mt-1 mr-3"></i>
-                                <span>info@activosnetwork.com</span>
+                                <span>inf@activosnetwork.com</span>
                             </li>
                         </ul>
                     </div>
