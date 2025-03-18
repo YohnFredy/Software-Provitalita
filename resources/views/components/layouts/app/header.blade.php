@@ -9,13 +9,13 @@
             'route' => 'home',
             'routeIs' => 'home',
         ],
-       /*  [
+        [
             'type' => 'route',
             'name' => 'Productos',
             'icon' => 'shopping-cart',
             'route' => 'products.index',
             'routeIs' => 'products*',
-        ], */
+        ], 
         [
             'type' => 'anchor',
             'name' => 'Nosotros',

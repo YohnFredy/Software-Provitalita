@@ -20,7 +20,7 @@ class ProductFactory extends Factory
 
     public function definition(): array
     {
-      $CategoryId = Category::where('is_final', true)->inRandomOrder()->value('id');
+      $CategoryId = Category::inRandomOrder()->value('id');
         $brand = Brand::inRandomOrder()->first()->id;
 
         return [

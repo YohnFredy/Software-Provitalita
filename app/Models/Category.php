@@ -18,30 +18,39 @@ class Category extends Model
         'is_final' => 'boolean',
         'is_active' => 'boolean',
     ];
-    
-    public function parent()
-    {
-        return $this->belongsTo(Category::class, 'parent_id');
-    }
-    
-    
 
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
-  
+    public function parent()
+    {
+        return $this->belongsTo(Category::class, 'parent_id');
+    }
 
     public function children()
     {
         return $this->hasMany(Category::class, 'parent_id')->where('is_active', 1);
     }
-
-    public function allChildren()
+    /**
+     * Obtiene la ruta completa de la categoría
+     * (Categoría padre > Categoría actual)
+     */
+    public function getFullPathAttribute()
     {
-        return $this->children()->with('allChildren');
+        $path = [$this->name];
+        $category = $this;
+        
+        while ($category->parent) {
+            $path[] = $category->parent->name;
+            $category = $category->parent;
+        }
+        
+        return implode(' > ', array_reverse($path));
     }
+    
+    
 
     public function products()
     {

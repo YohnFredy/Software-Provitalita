@@ -12,22 +12,31 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'slug', 'description', 'price', 
-        'commission_income', 'pts', 'maximum_discount',
-        'specifications', 'information', 'is_physical', 
-        'stock', 'allow_backorder', 'category_id', 
-        'brand_id', 'is_active'
+        'name',
+        'slug',
+        'description',
+        'price',
+        'commission_income',
+        'pts',
+        'maximum_discount',
+        'specifications',
+        'information',
+        'is_physical',
+        'stock',
+        'allow_backorder',
+        'category_id',
+        'brand_id',
+        'is_active',
     ];
 
     protected $casts = [
+       'is_physical' => 'boolean',
+        'allow_backorder' => 'boolean',
+        'is_active' => 'boolean',
         'price' => 'decimal:2',
         'commission_income' => 'decimal:2',
         'pts' => 'decimal:2',
-        'maximum_discount' => 'integer',
-        'stock' => 'integer',
-        'is_physical' => 'boolean',
-        'allow_backorder' => 'boolean',
-        'is_active' => 'boolean',
+        'maximum_discount' => 'decimal:2',
     ];
 
     public function category()
@@ -88,4 +97,5 @@ class Product extends Model
     {
         return $this->morphOne(Image::class, 'imageable')->oldestOfMany();
     }
+
 }

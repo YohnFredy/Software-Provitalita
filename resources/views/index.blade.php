@@ -1,4 +1,4 @@
-<x-layouts.app>
+<x-layouts.app title="Dashboard">
 
     @if (session('success'))
         <div class="bg-premium/5 border-l-4 border-premium text-premium p-4 mb-6 rounded shadow-md" role="alert">

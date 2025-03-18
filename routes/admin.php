@@ -1,5 +1,43 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\IndexController;
+use App\Http\Controllers\Admin\ProductController;
+use Illuminate\Support\Facades\Route;
 
 
-require __DIR__.'/auth.php';
+
+
+Route::resource('category', CategoryController::class)->names('categories');
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/', [IndexController::class, 'index'])->middleware(['can:admin.index'])->name('index');
+
+    Route::resource('category', CategoryController::class)
+        ->names('categories')
+        ->middleware([
+            'index' => 'can:admin.categories.index',
+            'create' => 'can:admin.categories.create',
+            'store' => 'can:admin.categories.create',
+            'show' => 'can:admin.categories.show',
+            'edit' => 'can:admin.categories.edit',
+            'update' => 'can:admin.categories.edit',
+            'destroy' => 'can:admin.categories.destroy'
+        ]);
+
+
+        Route::resource('product', ProductController::class)
+        ->names('products')
+        ->middleware([
+            'index' => 'can:admin.products.index',
+            'create' => 'can:admin.products.create',
+            'store' => 'can:admin.products.create',
+            'show' => 'can:admin.products.show',
+            'edit' => 'can:admin.products.edit',
+            'update' => 'can:admin.products.edit',
+            'destroy' => 'can:admin.products.destroy'
+        ]);
+
+    // Otras rutas de recursos con permisos...
+});

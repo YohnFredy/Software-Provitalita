@@ -4,8 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RoleSeeder extends Seeder
 {
@@ -14,17 +14,31 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $role1 = Role::create(['name' => 'Superadmin']);
-        $role2 = Role::create(['name' => 'Admin']);
+        $superadmin = Role::create(['name' => 'Superadmin']);
+        $admin = Role::create(['name' => 'Admin']);
 
-        Permission::create(['name' => 'admin.user.index'])->assignRole($role1);
+        /* Permission::create(['name' => 'admin.users.index'])->assignRole($superadmin); */
+        Permission::create(['name' => 'admin.index'])->syncRoles([$superadmin, $admin]);
 
-        Permission::create(['name' => 'admin.dashboard'])->syncRoles([$role1, $role2]);
-        Permission::create(['name' => 'admin.categories.index'])->syncRoles([$role1, $role2]);
-        Permission::create(['name' => 'admin.categories.create'])->syncRoles([$role1, $role2]);
-        Permission::create(['name' => 'admin.categories.edit'])->syncRoles([$role1, $role2]);
-        Permission::create(['name' => 'admin.products.index'])->syncRoles([$role1, $role2]);
-        Permission::create(['name' => 'admin.products.create'])->syncRoles([$role1, $role2]);
-        Permission::create(['name' => 'admin.products.edit'])->syncRoles([$role1, $role2]);
+        $this->createCategoryPermissions([$superadmin, $admin]);
+        $this->createProductsPermissions([$superadmin, $admin]);
+    }
+
+    private function createCategoryPermissions($roles)
+    {
+        Permission::create(['name' => 'admin.categories.index'])->syncRoles($roles);
+        Permission::create(['name' => 'admin.categories.create'])->syncRoles($roles);
+        Permission::create(['name' => 'admin.categories.show'])->syncRoles($roles);
+        Permission::create(['name' => 'admin.categories.edit'])->syncRoles($roles);
+        Permission::create(['name' => 'admin.categories.destroy'])->syncRoles($roles);
+    }
+
+    private function createProductsPermissions($roles)
+    {
+        Permission::create(['name' => 'admin.products.index'])->syncRoles($roles);
+        Permission::create(['name' => 'admin.products.create'])->syncRoles($roles);
+        Permission::create(['name' => 'admin.products.show'])->syncRoles($roles);
+        Permission::create(['name' => 'admin.products.edit'])->syncRoles($roles);
+        Permission::create(['name' => 'admin.products.destroy'])->syncRoles($roles);
     }
 }
