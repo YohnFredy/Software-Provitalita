@@ -49,7 +49,7 @@
     </section>
 
     <!-- About Us Section -->
-    <section id="nosotros" class="py-8 md:py-16 md:px-10 sm:bg-neutral-100 ">
+    <section id="nosotros" class="py-8 md:py-16 md:px-10 sm:bg-neutral-50 ">
         <div class="text-center mb-6 sm:mb-10 ">
             <h2 class="text-2xl sm:text-4xl font-bold text-primary">Nuestra Historia</h2>
             <div class="h-1 w-24 bg-premium mx-auto mt-4"></div>
@@ -145,7 +145,7 @@
     </section>
 
     <!-- Vehículos Financieros (Franquicias) -->
-    <section id="franquicias" class="pt-4 sm:pb-8 md:px-10 sm:bg-gray-100 rounded-b-lg">
+    <section id="franquicias" class="pt-4 sm:pb-8 md:px-10 sm:bg-neutral-50 rounded-b-lg">
         <div class="text-center mb-6 md:mb-10">
             <h2 class="text-2xl md:text-4xl font-bold text-primary">Nuestros Vehículos Financieros</h2>
             <p class="mt-3 md:mt-4 text-lg md:text-xl text-secondary">Franquicias que impactan en el ámbito
@@ -553,7 +553,7 @@
     </section> --}}
 
     <!-- Contacto -->
-    <section id="contacto" class=" mt-10 sm:bg-neutral-50 rounded-lg">
+    <section id="contacto" class=" mt-10 ">
         <div class="text-center sm:p-8">
             <h2 class="text-2xl md:text-4xl font-bold text-primary">Comienza tu camino con ActivosNetwork</h2>
             <p class="mt-4 text-xl text-secondary">Estamos listos para responder todas tus preguntas</p>

@@ -1,6 +1,6 @@
 <div class="rounded-b-md min-h-screen">
     <!-- Cabecera con título y barra de búsqueda -->
-    <div class="bg-gradient-to-r from-primary to-secondary shadow-md shadow-ink py-4 rounded-t-md px-4 md:px-12">
+    <div class="bg-gradient-to-r from-primary to-secondary shadow-md py-4 rounded-t-md px-4 md:px-12">
         <!-- Título responsivo -->
         <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3">Productos</h1>
         <!-- Contenedor flexible para controles -->
@@ -179,7 +179,7 @@
                 <!-- Barra de control superior -->
                 <div class="hidden md:block">
                     <div
-                        class=" bg-white rounded-lg shadow-md shadow-ink border border-neutral-300 p-4 mb-6 flex flex-col sm:flex-row justify-between items-center">
+                        class=" bg-white mb-6 flex flex-col sm:flex-row justify-between items-center">
                         <div class="mb-4 sm:mb-0">
                             <span class="text-primary">Mostrando {{ $products->count() }} de {{ $products->total() }}
                                 productos</span>
@@ -240,7 +240,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         @foreach ($products as $product)
                             <div wire:key="{{ $product->id }}"
-                                class="bg-white rounded-xl shadow-md shadow-ink border border-neutral-200 overflow-hidden group">
+                                class="bg-white rounded-xl shadow-md shadow-ink/50 border border-neutral-100 overflow-hidden group">
                                 <!-- Contenedor de imagen con efecto de zoom y bordes suaves -->
                                 <div
                                     class="h-56 bg-white relative overflow-hidden flex items-center justify-center p-4">
@@ -279,10 +279,10 @@
                                 </div>
 
                                 <!-- Barra separadora sutil -->
-                                <div class="h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent"></div>
+                                <div class="h-px bg-gradient-to-r from-transparent via-neutral-600 to-transparent"></div>
 
                                 <!-- Contenido del producto con espaciado mejorado -->
-                                <div class="p-5 bg-neutral-50/50">
+                                <div class="p-5 bg-neutral-100">
                                     <!-- Marca y precio -->
                                     <div class="flex justify-between items-start mb-2">
                                         <div>
@@ -318,7 +318,7 @@
 
                                         <a href="{{ route('products.show', $product) }}">
                                             <flux:button type="button" icon="shopping-cart" variant="primary">
-                                                Añadir
+                                                Detalle
                                             </flux:button>
                                         </a>
                                     </div>
