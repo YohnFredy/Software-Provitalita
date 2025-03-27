@@ -14,6 +14,20 @@ return [
     |
     */
 
+    'bold' => [
+        'api_key' => env('BOLD_API_KEY'),
+        'secret_key' => env('BOLD_SECRET_KEY'),
+        'redirection_url' => env('BOLD_REDIRECTION_URL'),
+    ],
+
+    'wompi' => [
+        'public_key' => env('WOMPI_PUBLIC_KEY'),
+        'private_key' => env('WOMPI_PRIVATE_KEY'),
+        'webhook_secret' => env('WOMPI_WEBHOOK_SECRET'),
+        'integrity_key' => env('WOMPI_INTEGRITY_KEY'),
+        'redirect_url' => env('WOMPI_REDIRECT_URL', 'https://fornuvi.com/pagos/respuesta'),
+    ],
+
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],

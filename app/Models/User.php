@@ -89,4 +89,19 @@ class User extends Authenticatable
     {
         return $this->hasOne(UnilevelTotal::class);
     }
+
+    public function binaryPoint(): HasOne
+    {
+        return $this->hasOne(BinaryPoint::class);
+    }
+
+    public function unilevelPoint(): HasOne
+    {
+        return $this->hasOne(UnilevelPoint::class);
+    }
+
+    public function activation()
+    {
+        return $this->hasOne(UserActivation::class);
+    }
 }

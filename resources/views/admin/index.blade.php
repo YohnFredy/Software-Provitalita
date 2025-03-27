@@ -1,3 +1,4 @@
 <x-layouts.admin title="home">
-    hola que mas 
+  
+    @livewire('admin.orders.orders-management')
 </x-layouts.admin>

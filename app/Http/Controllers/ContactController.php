@@ -32,7 +32,7 @@ class ContactController extends Controller
 
         try {
             // 1. Enviar el correo a la empresa
-            Mail::to('inf@activosnetwork.com')->send(new ContactFormMail($data));
+            Mail::to('inf@fornuvi.com')->send(new ContactFormMail($data));
             
             // 2. Enviar correo de confirmación al usuario
             Mail::to($validated['email'])->send(new UserConfirmationMail($data));
@@ -56,9 +56,9 @@ class ContactController extends Controller
     private function getInteresLabel($value)
     {
         $options = [
-            'ActivosNetwork_coffee' => 'ActivosNetwork Coffee',
+            'fornuvi_coffee' => 'fornuvi Coffee',
             'chelas' => 'Chelas',
-            'ActivosNetwork' => 'ActivosNetwork',
+            'fornuvi' => 'fornuvi',
             'maspro' => 'Maspro',
             'net_inmobiliario' => 'Net Inmobiliario',
             'distribucion' => 'Distribución de productos',

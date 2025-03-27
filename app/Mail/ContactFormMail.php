@@ -26,7 +26,7 @@ class ContactFormMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Nuevo mensaje de contacto - ActivosNetwork')
+        return $this->subject('Nuevo mensaje de contacto - fornuvi')
                     ->view('emails.contact-form');
     }
 }

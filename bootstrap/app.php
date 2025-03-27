@@ -16,7 +16,10 @@ return Application::configure(basePath: dirname(__DIR__))
         }
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        // Configurar excepciones de CSRF
+        $middleware->validateCsrfTokens(except: [   
+         'webhook/*',  // Para excluir todos los webhooks
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

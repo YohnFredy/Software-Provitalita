@@ -8,7 +8,7 @@
 </svg> --}}
 
 <div>
-    <p class=" text-2xl font-light text-primary/90 flex items-center">Activos <span class="text-2xl font-bold text-primary ">Networks</span></p>
+    <p class=" text-2xl font-light text-primary/90 flex items-center">For <span class="text-2xl font-bold text-primary ">Nuvi</span></p>
    
     <div class=" h-1 bg-gradient-to-r from-primary via-secondary/10 to-primary ">
   

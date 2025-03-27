@@ -18,7 +18,7 @@ class ProductForm extends Component
 
     public ?Product $product;
 
-    public $name = '', $description = '', $price = '', $commission_income = null, $pts = '', $maximum_discount, $specifications = '', $information = '', $is_physical = 1, $stock = null, $allow_backorder = 1, $category_id = '', $brand_id = null, $is_active = 1;
+    public $name = '', $description = '', $price = 0, $commission_income = 0, $pts_base = 0, $pts_bonus = 0, $pts_dist = 0, $maximum_discount = 0, $specifications = '', $information = '', $is_physical = 1, $stock = 0, $allow_backorder = 1, $category_id = '', $brand_id = null, $is_active = 1;
 
 
     public $newImages = [],  $images = [];
@@ -30,10 +30,12 @@ class ProductForm extends Component
         return [
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0|max:9999999.99',
-            'commission_income' => 'nullable|numeric|min:0|max:999999.99',
-            'pts' => 'nullable|numeric|min:0|max:999999.99',
-            'maximum_discount' => 'nullable|integer|min:0|max:100',
+            'price' => 'numeric|min:0|max:9999999.99',
+            'commission_income' => 'numeric|min:0|max:999999.99',
+            'pts_base' => 'numeric|min:0|max:999999.99',
+            'pts_bonus' => 'numeric|min:0|max:999999.99',
+            'pts_dist' => 'numeric|min:0|max:999999.99',
+            'maximum_discount' => 'integer|min:0|max:100',
             'specifications' => 'nullable|string',
             'information' => 'nullable|string',
             'is_physical' => 'required|boolean',
@@ -72,10 +74,8 @@ class ProductForm extends Component
     public function loadCategoryData()
     {
         $this->category = Category::find($this->product->category_id);
-        // Copiar los atributos de la categoría al componente
-        $this->fill($this->category->toArray());
 
-        // Cargar la cadena de categorías padres desde category principal
+        // Cargar la cadena de categorías padres desde la categoría principal
         $parentChain = collect();
         $currentCategory = $this->category;
 
@@ -100,6 +100,7 @@ class ProductForm extends Component
 
         $this->hasChildCategories = true;
     }
+
 
     public function updatedSelectedLevels($value, $key)
     {
@@ -134,6 +135,7 @@ class ProductForm extends Component
 
     public function save()
     {
+
         $validatedData = $this->validate();
 
         $validatedData['slug'] = Str::slug($this->name);
@@ -178,14 +180,6 @@ class ProductForm extends Component
             $product->images()->create(['path' => $path]);
         }
     }
-
-    public function updatedPrice($value)
-    {
-        if (is_numeric($value)) {
-            $this->suggestedPts = number_format($value * 0.20, 2, '.', '');
-        }
-    }
-
 
     public function render()
     {

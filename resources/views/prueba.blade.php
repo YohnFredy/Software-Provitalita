@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>activosnetwork - Oportunidades Financieras en Salud y Bienestar</title>
+    <title>fornuvi - Oportunidades Financieras en Salud y Bienestar</title>
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -17,7 +17,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
                 <div class="space-y-6">
-                    <h1 class="text-4xl md:text-5xl font-bold leading-tight">Transforma tu futuro financiero con activosnetwork</h1>
+                    <h1 class="text-4xl md:text-5xl font-bold leading-tight">Transforma tu futuro financiero con fornuvi</h1>
                     <p class="text-xl md:text-2xl font-light">Una compañía en el sector de salud y bienestar que ofrece múltiples oportunidades financieras a través de un sistema global de asociación.</p>
                     <div class="pt-6 flex flex-col sm:flex-row gap-4">
                         <a href="#franquicias" class="inline-block px-6 py-3 bg-white text-blue-700 rounded-md font-medium text-center hover:bg-gray-100 transition duration-150">Nuestras Franquicias</a>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="hidden md:block">
-                    <img src="/api/placeholder/600/400" alt="activosnetwork Oportunidades" class="rounded-lg shadow-xl">
+                    <img src="/api/placeholder/600/400" alt="fornuvi Oportunidades" class="rounded-lg shadow-xl">
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div>
-                    <img src="/api/placeholder/600/500" alt="activosnetwork Historia" class="rounded-lg shadow-lg">
+                    <img src="/api/placeholder/600/500" alt="fornuvi Historia" class="rounded-lg shadow-lg">
                 </div>
                 <div class="space-y-6">
                     <div class="flex items-start">
@@ -49,7 +49,7 @@
                         </div>
                         <div>
                             <h3 class="text-xl font-semibold text-gray-900 mb-2">18 años de experiencia</h3>
-                            <p class="text-gray-600">activosnetwork se ha enfocado en el desarrollo de complementos nutricionales y nutraceúticos, respaldados por años de investigación y desarrollo.</p>
+                            <p class="text-gray-600">fornuvi se ha enfocado en el desarrollo de complementos nutricionales y nutraceúticos, respaldados por años de investigación y desarrollo.</p>
                         </div>
                     </div>
                     <div class="flex items-start">
@@ -67,7 +67,7 @@
                         </div>
                         <div>
                             <h3 class="text-xl font-semibold text-gray-900 mb-2">Propuesta innovadora</h3>
-                            <p class="text-gray-600">activosnetwork es una propuesta especialmente adaptada para el mercado latinoamericano, enfocada en apalancamiento, inversiones tangibles, sinergia y un nivel comercial competitivo.</p>
+                            <p class="text-gray-600">fornuvi es una propuesta especialmente adaptada para el mercado latinoamericano, enfocada en apalancamiento, inversiones tangibles, sinergia y un nivel comercial competitivo.</p>
                         </div>
                     </div>
                     <div class="mt-8">
@@ -108,16 +108,16 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- activosnetwork Coffee -->
+                <!-- fornuvi Coffee -->
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:shadow-2xl hover:-translate-y-2">
                     <div class="relative">
-                        <img src="/api/placeholder/600/400" alt="activosnetwork Coffee" class="w-full h-64 object-cover">
+                        <img src="/api/placeholder/600/400" alt="fornuvi Coffee" class="w-full h-64 object-cover">
                         <div class="absolute top-0 left-0 bg-blue-600 text-white py-2 px-4 rounded-br-xl">
                             <i class="fas fa-coffee mr-2"></i> Cafetería
                         </div>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-3">activosnetwork Coffee</h3>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">fornuvi Coffee</h3>
                         <p class="text-gray-600 mb-4">Una cafetería especializada en bebidas que combinan sabor y bienestar. Aquí, cada taza de café está diseñada para revitalizar cuerpo y mente, convirtiéndose en un punto de encuentro ideal.</p>
                         <a href="#contacto" class="inline-block mt-2 text-blue-600 font-medium hover:text-blue-800">
                             Conoce más <i class="fas fa-arrow-right ml-1"></i>
@@ -142,17 +142,17 @@
                     </div>
                 </div>
 
-                <!-- activosactivosnetwork -->
+                <!-- activosfornuvi -->
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:shadow-2xl hover:-translate-y-2">
                     <div class="relative">
-                        <img src="/api/placeholder/600/400" alt="activosactivosnetwork" class="w-full h-64 object-cover">
+                        <img src="/api/placeholder/600/400" alt="activosfornuvi" class="w-full h-64 object-cover">
                         <div class="absolute top-0 left-0 bg-blue-600 text-white py-2 px-4 rounded-br-xl">
                             <i class="fas fa-leaf mr-2"></i> Tienda Naturista
                         </div>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-3">activosactivosnetwork</h3>
-                        <p class="text-gray-600 mb-4">Un espacio dedicado a la salud natural, ofreciendo suplementos, productos orgánicos y alimentos funcionales. activosactivosnetwork fomenta un enfoque integral de bienestar físico y mental.</p>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">activosfornuvi</h3>
+                        <p class="text-gray-600 mb-4">Un espacio dedicado a la salud natural, ofreciendo suplementos, productos orgánicos y alimentos funcionales. activosfornuvi fomenta un enfoque integral de bienestar físico y mental.</p>
                         <a href="#contacto" class="inline-block mt-2 text-blue-600 font-medium hover:text-blue-800">
                             Conoce más <i class="fas fa-arrow-right ml-1"></i>
                         </a>
@@ -304,16 +304,16 @@
         </div>
     </section>
 
-    <!-- Por qué activosnetwork -->
+    <!-- Por qué fornuvi -->
     <section id="diferencias" class="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold">¿Por qué elegir activosnetwork?</h2>
+                <h2 class="text-3xl md:text-4xl font-bold">¿Por qué elegir fornuvi?</h2>
 
 
 
                 <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold">¿Por qué elegir activosnetwork?</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold">¿Por qué elegir fornuvi?</h2>
                     <p class="mt-4 text-xl">Diferencias con respecto al mercadeo en red tradicional</p>
                     <div class="h-1 w-24 bg-white mx-auto mt-4"></div>
                 </div>
@@ -340,7 +340,7 @@
                             <i class="fas fa-users text-2xl"></i>
                         </div>
                         <h3 class="text-xl font-bold text-center mb-4">Mercado más amplio</h3>
-                        <p class="text-center">No te limites a tu lista de contactos. activosnetwork te abre las puertas a un mercado mucho más amplio y diversificado.</p>
+                        <p class="text-center">No te limites a tu lista de contactos. fornuvi te abre las puertas a un mercado mucho más amplio y diversificado.</p>
                     </div>
                 
                     <div class="bg-white bg-opacity-10 rounded-xl p-6 backdrop-blur-sm hover:bg-opacity-20 transition duration-300 shadow-lg">
@@ -348,13 +348,13 @@
                             <i class="fas fa-hand-holding-usd text-2xl"></i>
                         </div>
                         <h3 class="text-xl font-bold text-center mb-4">Respeto a tu inversión</h3>
-                        <p class="text-center">activosnetwork respeta la inversión individual, de esta manera tus ingresos no solo dependen de la red de distribución.</p>
+                        <p class="text-center">fornuvi respeta la inversión individual, de esta manera tus ingresos no solo dependen de la red de distribución.</p>
                     </div>
                 </div>
                 
                 <div class="mt-16 text-center">
                     <a href="#contacto" class="inline-block px-8 py-4 bg-white text-blue-700 rounded-md font-medium text-lg hover:bg-gray-100 transition duration-300">
-                        Únete a activosnetwork hoy
+                        Únete a fornuvi hoy
                     </a>
                 </div>
                 </div>
@@ -374,10 +374,10 @@
                                 <img src="/api/placeholder/80/80" alt="Testimonio 1" class="w-16 h-16 rounded-full object-cover mr-4">
                                 <div>
                                     <h4 class="text-lg font-bold text-gray-900">Carlos Rodríguez</h4>
-                                    <p class="text-blue-600">Franquiciado activosnetwork Coffee</p>
+                                    <p class="text-blue-600">Franquiciado fornuvi Coffee</p>
                                 </div>
                             </div>
-                            <p class="text-gray-600 italic">"Desde que me uní a activosnetwork, mi vida financiera cambió completamente. La franquicia de activosnetwork Coffee no solo me ha dado estabilidad económica, sino también la oportunidad de crear un espacio donde las personas disfrutan de momentos especiales."</p>
+                            <p class="text-gray-600 italic">"Desde que me uní a fornuvi, mi vida financiera cambió completamente. La franquicia de fornuvi Coffee no solo me ha dado estabilidad económica, sino también la oportunidad de crear un espacio donde las personas disfrutan de momentos especiales."</p>
                             <div class="mt-4 flex text-yellow-400">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -392,10 +392,10 @@
                                 <img src="/api/placeholder/80/80" alt="Testimonio 2" class="w-16 h-16 rounded-full object-cover mr-4">
                                 <div>
                                     <h4 class="text-lg font-bold text-gray-900">María Gómez</h4>
-                                    <p class="text-blue-600">Inversora en activosactivosnetwork</p>
+                                    <p class="text-blue-600">Inversora en activosfornuvi</p>
                                 </div>
                             </div>
-                            <p class="text-gray-600 italic">"Lo que más me gusta de activosnetwork es su enfoque en el bienestar. Mi inversión en activosactivosnetwork no solo ha sido rentable, sino que me ha permitido contribuir a la salud de muchas personas. El sistema de acompañamiento es excepcional."</p>
+                            <p class="text-gray-600 italic">"Lo que más me gusta de fornuvi es su enfoque en el bienestar. Mi inversión en activosfornuvi no solo ha sido rentable, sino que me ha permitido contribuir a la salud de muchas personas. El sistema de acompañamiento es excepcional."</p>
                             <div class="mt-4 flex text-yellow-400">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -430,7 +430,7 @@
                 <section id="contacto" class="py-20 bg-gray-50">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-16">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Comienza tu camino con activosnetwork</h2>
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Comienza tu camino con fornuvi</h2>
                         <p class="mt-4 text-xl text-gray-600">Estamos listos para responder todas tus preguntas</p>
                         <div class="h-1 w-24 bg-blue-600 mx-auto mt-4"></div>
                     </div>
@@ -458,9 +458,9 @@
                                         <label for="interes" class="block text-sm font-medium text-gray-700 mb-1">Me interesa</label>
                                         <select id="interes" name="interes" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
                                             <option value="">Seleccionar opción</option>
-                                            <option value="activosnetwork_coffee">activosnetwork Coffee</option>
+                                            <option value="fornuvi_coffee">fornuvi Coffee</option>
                                             <option value="chelas">Chelas</option>
-                                            <option value="activosactivosnetwork">activosactivosnetwork</option>
+                                            <option value="activosfornuvi">activosfornuvi</option>
                                             <option value="maspro">Maspro</option>
                                             <option value="net_inmobiliario">Net Inmobiliario</option>
                                             <option value="distribucion">Distribución de productos</option>
@@ -506,7 +506,7 @@
                                         </div>
                                         <div>
                                             <h4 class="text-lg font-medium mb-1">Correo electrónico</h4>
-                                            <p>info@activosnetworkcompany.com</p>
+                                            <p>info@fornuvicompany.com</p>
                                         </div>
                                     </div>
                                     <div class="flex items-start">
@@ -555,7 +555,7 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center">
                         <h2 class="text-3xl md:text-4xl font-bold mb-4">¿Listo para transformar tu futuro financiero?</h2>
-                        <p class="text-xl mb-8">Únete a activosnetwork y descubre un nuevo camino hacia la libertad financiera y el bienestar.</p>
+                        <p class="text-xl mb-8">Únete a fornuvi y descubre un nuevo camino hacia la libertad financiera y el bienestar.</p>
                         <a href="#contacto" class="inline-block px-8 py-4 bg-white text-blue-700 rounded-md font-medium text-lg hover:bg-gray-100 transition duration-300">
                             Comienza hoy mismo
                         </a>
@@ -568,7 +568,7 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                         <div>
-                            <img class="h-12 w-auto mb-6" src="/api/placeholder/200/80" alt="activosnetwork Logo">
+                            <img class="h-12 w-auto mb-6" src="/api/placeholder/200/80" alt="fornuvi Logo">
                             <p class="text-gray-400 mb-6">Una compañía en el sector de salud y bienestar que ofrece múltiples oportunidades financieras a través de un sistema global de asociación.</p>
                             <div class="flex space-x-4">
                                 <a href="#" class="text-gray-400 hover:text-white transition duration-300">
@@ -588,9 +588,9 @@
                         <div>
                             <h3 class="text-lg font-bold mb-6">Vehículos Financieros</h3>
                             <ul class="space-y-3">
-                                <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">activosnetwork Coffee</a></li>
+                                <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">fornuvi Coffee</a></li>
                                 <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Chelas</a></li>
-                                <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">activosactivosnetwork</a></li>
+                                <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">activosfornuvi</a></li>
                                 <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Maspro</a></li>
                                 <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Net Inmobiliario</a></li>
                             </ul>
@@ -602,7 +602,7 @@
                                 <li><a href="#nosotros" class="text-gray-400 hover:text-white transition duration-300">Nosotros</a></li>
                                 <li><a href="#franquicias" class="text-gray-400 hover:text-white transition duration-300">Vehículos Financieros</a></li>
                                 <li><a href="#inversion" class="text-gray-400 hover:text-white transition duration-300">Modelos de Inversión</a></li>
-                                <li><a href="#diferencias" class="text-gray-400 hover:text-white transition duration-300">¿Por qué activosnetwork?</a></li>
+                                <li><a href="#diferencias" class="text-gray-400 hover:text-white transition duration-300">¿Por qué fornuvi?</a></li>
                                 <li><a href="#contacto" class="text-gray-400 hover:text-white transition duration-300">Contacto</a></li>
                             </ul>
                         </div>
@@ -619,14 +619,14 @@
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-envelope mt-1 mr-3"></i>
-                                    <span>info@activosnetworkcompany.com</span>
+                                    <span>info@fornuvicompany.com</span>
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div class="border-t border-gray-800 pt-8">
                         <div class="flex flex-col md:flex-row justify-between items-center">
-                            <p class="text-gray-400 text-sm mb-4 md:mb-0">&copy; 2025 activosnetwork. Todos los derechos reservados.</p>
+                            <p class="text-gray-400 text-sm mb-4 md:mb-0">&copy; 2025 fornuvi. Todos los derechos reservados.</p>
                             <div class="flex space-x-6">
                                 <a href="#" class="text-gray-400 hover:text-white text-sm transition duration-300">Términos y condiciones</a>
                                 <a href="#" class="text-gray-400 hover:text-white text-sm transition duration-300">Política de privacidad</a>

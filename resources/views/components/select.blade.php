@@ -13,14 +13,16 @@
     <select id="{{ $for }}" name="{{ $for }}"
         {{ $attributes->merge([
             'class' => 'block w-full bg-neutral-50/50 appearance-none border border-gray-300 text-primary text-sm rounded-lg 
-            focus:outline-1 focus:outline-primary focus:bg-white p-2.5 cursor-pointer',
+                            focus:outline-1 focus:outline-primary focus:bg-white p-2.5 cursor-pointer',
         ]) }}>
         <option value="">{{ $placeholder }}</option>
 
-        @foreach ($options as $country)
-            <option value="{{ $country['id'] }}" @selected(old($for) == $country['id'])>
-                {{ $country['name'] }}
-            </option>
+        @foreach ($options as $option)
+            <div wire:key="{{ $option['id'] }}">
+                <option value="{{ $option['id'] }}" @selected(old($for) == $option['id'])>
+                    {{ $option['name'] }}
+                </option>
+            </div>
         @endforeach
     </select>
 

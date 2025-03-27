@@ -29,13 +29,13 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             CountrySeeder::class,
-            DepartmentSeeder::class,
+           /*  DepartmentSeeder::class,
             CitySeeder::class,
             RegisterRedSeeder::class,
             CategorySeeder::class,
-            ImageSeeder::class, 
+            ImageSeeder::class,  */
         ]);
-         Product::factory(10)->create(); 
+        /*  Product::factory(10)->create();  */
        
     }
 }

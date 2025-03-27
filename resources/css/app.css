@@ -29,11 +29,11 @@
     --color-accent-content: var(--color-secondary);
     --color-accent-foreground: var(--color-white);
 
-    --color-primary: #0d4e8f;
-    --color-secondary: #1581ec;
-    --color-danger: #8f150d;
-    --color-premium: #8f5e0d;
-    --color-ink: #18293a;
+    --color-primary: #0761B0;
+    --color-secondary: #0982EB;
+    --color-danger: #B00F07;
+    --color-premium: #B06F07;
+    --color-ink: #032441;
 }
 
 @layer base {

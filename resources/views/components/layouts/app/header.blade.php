@@ -15,13 +15,6 @@
             'icon' => 'shopping-cart',
             'route' => 'products.index',
             'routeIs' => 'products*',
-        ], 
-        [
-            'type' => 'anchor',
-            'name' => 'Nosotros',
-            'icon' => 'hand-thumb-up',
-            'route' => '#nosotros',
-            'routeIs' => 'home',
         ],
         [
             'type' => 'anchor',
@@ -55,17 +48,10 @@
             <x-app-logo />
         </a>
 
-        {{--  <flux:navbar class="-mb-px max-lg:hidden">
-            <flux:navbar.item icon="layout-grid" :href="route('dashboard')"
-                :current="request()->routeIs('dashboard')" wire:navigate>
-                {{ __('Dashboard') }}
-            </flux:navbar.item>
-        </flux:navbar> --}}
-
-        <flux:navbar  class="-mb-px max-lg:hidden">
+        <flux:navbar class="-mb-px max-lg:hidden">
             @foreach ($navbarRoutes as $route)
                 @if ($route['type'] === 'route')
-                    <flux:navbar.item  icon="{{ $route['icon'] }}" :href="route($route['route'])"
+                    <flux:navbar.item icon="{{ $route['icon'] }}" :href="route($route['route'])"
                         :current="request()->routeIs($route['routeIs'])" wire:navigate>
                         {{ __($route['name']) }}
                     </flux:navbar.item>
@@ -79,21 +65,6 @@
             @endforeach
         </flux:navbar>
         <flux:spacer />
-
-        <flux:navbar class="mr-1.5 space-x-0.5 py-0!">
-            {{-- <flux:tooltip content="Search" position="bottom">
-                <flux:navbar.item class="!h-10 [&>div>svg]:size-5" icon="magnifying-glass" href="#"
-                    label="Search" />
-            </flux:tooltip> --}}
-            {{-- <flux:tooltip content="Repository" position="bottom">
-                <flux:navbar.item class="h-10 max-lg:hidden [&>div>svg]:size-5" icon="folder-git-2"
-                    href="https://github.com/laravel/livewire-starter-kit" target="_blank" label="Repository" />
-            </flux:tooltip> --}}
-            {{-- <flux:tooltip content="Documentation" position="bottom">
-                <flux:navbar.item class="h-10 max-lg:hidden [&>div>svg]:size-5" icon="book-open-text"
-                    href="https://laravel.com/docs/starter-kits" target="_blank" label="Documentation" />
-            </flux:tooltip> --}}
-        </flux:navbar>
 
         <!-- Desktop User Menu -->
         <flux:dropdown position="top" align="end">
@@ -124,6 +95,9 @@
                     <flux:menu.radio.group>
                         <flux:menu.item href="/settings/profile" icon="cog" wire:navigate>{{ __('Settings') }}
                         </flux:menu.item>
+                        <flux:menu.item href="{{ route('orders.index') }}" icon="arrow-path-rounded-square" wire:navigate>
+                            Mis ordenes
+                        </flux:menu.item>
                     </flux:menu.radio.group>
 
                     <flux:menu.separator />
@@ -136,29 +110,23 @@
                     </form>
                 </flux:menu>
             @else
-                <flux:link class="flex text-primary" href="{{ route('login') }}" wire:navigate> <span class=" flex items-center">
+                <flux:link class="flex text-primary" href="{{ route('login') }}" wire:navigate> <span
+                        class=" flex items-center">
                         Login <flux:icon.arrow-right-start-on-rectangle class="ml-0" /> </span> </flux:link>
             @endauth
         </flux:dropdown>
+
+        <!-- cart -->
+        @livewire('cart-icon')
     </flux:header>
 
     <!-- Mobile Menu -->
-    <flux:sidebar stashable sticky
-        class="lg:hidden border-r border-zinc-200 bg-zinc-50">
-        <flux:sidebar.toggle class="lg:hidden" icon="x-mark"/>
+    <flux:sidebar stashable sticky class="lg:hidden border-r border-zinc-200 bg-zinc-50">
+        <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
         <a href="{{ route('home') }}" class="ml-1 flex items-center space-x-2" wire:navigate>
             <x-app-logo />
         </a>
-
-        {{-- <flux:navlist variant="outline">
-            <flux:navlist.group heading="Platform">
-                <flux:navlist.item icon="layout-grid" :href="route('dashboard')"
-                    :current="request()->routeIs('dashboard')" wire:navigate>
-                    {{ __('Dashboard') }}
-                </flux:navlist.item>
-            </flux:navlist.group>
-        </flux:navlist> --}}
 
         <flux:navlist variant="outline">
             <flux:navlist.group heading="Platform">
@@ -169,7 +137,8 @@
                             {{ __($route['name']) }}
                         </flux:navlist.item>
                     @elseif ($route['type'] === 'anchor')
-                        <a href="{{ route($route['routeIs']) }}{{ $route['route'] }}" x-on:click="document.body.removeAttribute('data-show-stashed-sidebar')">
+                        <a href="{{ route($route['routeIs']) }}{{ $route['route'] }}"
+                            x-on:click="document.body.removeAttribute('data-show-stashed-sidebar')">
                             <flux:navlist.item icon="{{ $route['icon'] }}" class="cursor-pointer">
                                 {{ __($route['name']) }}
                             </flux:navlist.item>
@@ -181,113 +150,99 @@
 
         <flux:spacer />
 
-        <flux:navlist variant="outline">
-{{-- 
-            <flux:navlist.item icon="book-open-text" href="https://laravel.com/docs/starter-kits" target="_blank">
-                {{ __('Documentation') }}
-            </flux:navlist.item> --}}
-        </flux:navlist>
     </flux:sidebar>
 
     {{ $slot }}
 
     <flux:footer>
         <footer class="bg-ink text-white rounded-md p-4 sm:p-10">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-                    <div>
-                        {{-- <img class="h-12 w-auto mb-6" src="/api/placeholder/200/80" alt="ActivosNetwork Logo"> --}}
-                        <p class=" text-xl text-white  font-bold w-auto mb-6">ActivosNetwork</p>
-                        <p class="text-neutral-200 mb-6">Una compañía en el sector de salud y bienestar que ofrece
-                            múltiples
-                            oportunidades financieras a través de un sistema global de asociación.</p>
-                        <div class="flex space-x-4">
-                            <a href="#" class="text-neutral-200 hover:text-white transition duration-300">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" class="text-neutral-200 hover:text-white transition duration-300">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="#" class="text-neutral-200 hover:text-white transition duration-300">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="text-neutral-200 hover:text-white transition duration-300">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                        </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div>
+                    {{-- <img class="h-12 w-auto mb-6" src="/api/placeholder/200/80" alt="fornuvi Logo"> --}}
+                    <p class=" text-xl text-white  font-bold w-auto mb-6">fornuvi</p>
+                    <p class="text-neutral-200 mb-6">Una compañía en el sector de salud y bienestar que ofrece
+                        múltiples
+                        oportunidades financieras a través de un sistema global de asociación.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-neutral-200 hover:text-white transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-neutral-200 hover:text-white transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-neutral-200 hover:text-white transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-neutral-200 hover:text-white transition duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
                     </div>
-                    <div>
-                        <h3 class="text-lg font-bold mb-6">Vehículos Financieros</h3>
-                        <ul class="space-y-3">
-                            <li><a href="{{route('home')}}#franquicias" class="text-neutral-200 hover:text-white transition duration-300">ActivosNetwork
-                                    Coffee</a></li>
-                            <li><a href="{{route('home')}}#franquicias"
-                                    class="text-neutral-200 hover:text-white transition duration-300">Chelas</a></li>
-                            <li><a href="{{route('home')}}#franquicias"
-                                    class="text-neutral-200 hover:text-white transition duration-300">ActivosNetowork</a></li>
-                            <li><a href="{{route('home')}}#franquicias"
-                                    class="text-neutral-200 hover:text-white transition duration-300">Maspro</a></li>
-                            <li><a href="{{route('home')}}#franquicias" class="text-neutral-200 hover:text-white transition duration-300">Net
-                                    Inmobiliario</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-bold mb-6">Enlaces rápidos</h3>
-                        <ul class="space-y-3">
-                            <li><a href="{{route('home')}}"
-                                    class="text-neutral-200 hover:text-white transition duration-300">Inicio</a></li>
-                            <li><a href="{{route('home')}}#nosotros"
-                                    class="text-neutral-200 hover:text-white transition duration-300">Nosotros</a></li>
-                            <li><a href="{{route('home')}}#franquicias"
-                                    class="text-neutral-200 hover:text-white transition duration-300">Vehículos
-                                    Financieros</a></li>
-                            <li><a href="{{route('home')}}#inversion"
-                                    class="text-neutral-200 hover:text-white transition duration-300">Modelos de
-                                    Inversión</a>
-                            </li>
-                            <li><a href="{{route('home')}}#diferencias"
-                                    class="text-neutral-200 hover:text-white transition duration-300">¿Por
-                                    qué ActivosNetwork?</a></li>
-                            <li><a href="{{route('home')}}#contacto"
-                                    class="text-neutral-200 hover:text-white transition duration-300">Contacto</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-bold mb-6">Contacto</h3>
-                        <ul class="space-y-3 text-neutral-200">
-                            {{-- <li class="flex items-start">
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Enlaces rápidos</h3>
+                    <ul class="space-y-3">
+                        <li><a href="{{ route('home') }}" class="text-neutral-200 hover:text-white transition">Inicio</a></li>
+                        <li><a href="{{ route('products.index') }}" class="text-neutral-200 hover:text-white transition">Tienda</a></li>
+                        <li><a href="{{ route('dashboard') }}" class="text-neutral-200 hover:text-white transition">Oficina</a></li>
+                       
+                        <li><a href="{{ route('home') }}#contacto" class="text-neutral-200 hover:text-white transition">Contacto</a></li>
+                    </ul>
+                </div>
+
+
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Soporte</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-neutral-400 hover:text-white transition">Preguntas
+                                frecuentes</a></li>
+                        <li><a href="#" class="text-neutral-400 hover:text-white transition">Términos y
+                                condiciones</a></li>
+                        <li><a href="#" class="text-neutral-400 hover:text-white transition">Política de
+                                privacidad</a></li>
+                        <li><a href="#" class="text-neutral-400 hover:text-white transition">Envíos y
+                                devoluciones</a></li>
+                        <li><a href="#" class="text-neutral-400 hover:text-white transition">Centro de ayuda</a>
+                        </li>
+                    </ul>
+                </div>
+               
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Contacto</h3>
+                    <ul class="space-y-3 text-neutral-200">
+                        {{-- <li class="flex items-start">
                                 <i class="fas fa-map-marker-alt mt-1 mr-3"></i>
                                 <span>Av. Principal #123, Ciudad Capital</span>
                             </li> --}}
-                            <li class="flex items-start">
-                                <i class="fas fa-phone-alt mt-1 mr-3"></i>
-                                <span>+57 (318) 813-2381</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-envelope mt-1 mr-3"></i>
-                                <span>inf@activosnetwork.com</span>
-                            </li>
-                        </ul>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-3"></i>
+                            <span>+57 (314) 520-78-14</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-3"></i>
+                            <span>inf@fornuvi.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0">&copy; 2025 fornuvi. Todos los derechos
+                        reservados.
+                    </p>
+                    <div class="flex space-x-6">
+                        <a href="#"
+                            class="text-gray-400 hover:text-white text-sm transition duration-300">Términos y
+                            condiciones</a>
+                        <a href="#"
+                            class="text-gray-400 hover:text-white text-sm transition duration-300">Política de
+                            privacidad</a>
+                        <a href="#" class="text-gray-400 hover:text-white text-sm transition duration-300">Aviso
+                            legal</a>
                     </div>
                 </div>
-                <div class="border-t border-gray-800 pt-8">
-                    <div class="flex flex-col md:flex-row justify-between items-center">
-                        <p class="text-gray-400 text-sm mb-4 md:mb-0">&copy; 2025 ActivosNetwork. Todos los derechos
-                            reservados.
-                        </p>
-                        <div class="flex space-x-6">
-                            <a href="#"
-                                class="text-gray-400 hover:text-white text-sm transition duration-300">Términos y
-                                condiciones</a>
-                            <a href="#"
-                                class="text-gray-400 hover:text-white text-sm transition duration-300">Política de
-                                privacidad</a>
-                            <a href="#"
-                                class="text-gray-400 hover:text-white text-sm transition duration-300">Aviso
-                                legal</a>
-                        </div>
-                    </div>
-                </div>
-            
+            </div>
+
         </footer>
     </flux:footer>
 

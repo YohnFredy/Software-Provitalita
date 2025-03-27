@@ -38,6 +38,7 @@ class ProductListing extends Component
         'inStock'
     ];
 
+
     // Resetear paginación cuando cambia un filtro
     public function updated($propertyName)
     {

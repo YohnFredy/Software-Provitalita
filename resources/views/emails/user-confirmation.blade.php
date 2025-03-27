@@ -57,7 +57,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>ActivosNetwork</h1>
+            <h1>fornuvi</h1>
         </div>
         <div class="content">
             <p class="thank-you">¡Gracias por contactarnos!</p>
@@ -74,7 +74,7 @@
             <p>Si tienes alguna duda adicional, no dudes en contactarnos. Estamos aquí para ayudarte.</p>
             
             <p>Saludos cordiales,<br><br>
-            <strong>Equipo de ActivosNetwork</strong></p>
+            <strong>Equipo de fornuvi</strong></p>
             
             <div class="social">
                 <p><strong>Síguenos en redes sociales:</strong></p>
@@ -82,7 +82,7 @@
             </div>
         </div>
         <div class="footer">
-            <p>&copy; {{ date('Y') }} ActivosNetwork. Todos los derechos reservados.</p>
+            <p>&copy; {{ date('Y') }} fornuvi. Todos los derechos reservados.</p>
             <p>Av. Principal #123, Ciudad Capital</p>
             <p>Este es un correo automático, por favor no responda a este mensaje.</p>
         </div>

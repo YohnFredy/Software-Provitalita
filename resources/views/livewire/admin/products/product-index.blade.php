@@ -86,7 +86,7 @@
                                 @endif
                             </th>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $product->name }}</td>
-                            <td class="px-6 py-4 ">{{ $product->description }}</td>
+                            <td class="px-6 py-4 ">{!! Str::limit($product->description, 40) !!}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $product->price }}</td>
 
                             <td class="px-6 py-4 whitespace-nowrap">

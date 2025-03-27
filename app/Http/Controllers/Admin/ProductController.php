@@ -36,7 +36,7 @@ class ProductController extends Controller
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'commission_income' => 'nullable|numeric|min:0',
-            'pts' => 'nullable|numeric|min:0',
+            'pts_base' => 'nullable|numeric|min:0',
             'maximum_discount' => 'nullable|numeric|min:0|max:100',
             'specifications' => 'nullable|string',
             'information' => 'nullable|string',

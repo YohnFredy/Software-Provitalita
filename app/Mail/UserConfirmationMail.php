@@ -28,7 +28,7 @@ class UserConfirmationMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Hemos recibido tu mensaje - ActivosNetwork')
+        return $this->subject('Hemos recibido tu mensaje - fornuvi')
                     ->view('emails.user-confirmation');
     }
 }

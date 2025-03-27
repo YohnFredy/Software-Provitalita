@@ -11,12 +11,15 @@ class ProductShow extends Component
     public Product $product;
     public int $quantity = 1;
     public int $currentImageIndex = 0;
-    
+    public $modalCart = false;
+    public $cart = [];
+
     public function mount(Product $product)
     {
         $this->product = $product;
+        $this->cart = session()->get('cart', []);
     }
-    
+
     public function incrementQuantity()
     {
         if ($this->product->is_physical && $this->product->stock !== null) {
@@ -27,37 +30,55 @@ class ProductShow extends Component
             $this->quantity++;
         }
     }
-    
+
     public function decrementQuantity()
     {
         if ($this->quantity > 1) {
             $this->quantity--;
         }
     }
-    
+
     public function changeImage($index)
     {
         $this->currentImageIndex = $index;
     }
-    
+
     public function addToCart()
     {
-        // Aquí implementarías la lógica para agregar al carrito
-        // Por ejemplo, usando un servicio de carrito o un evento
-        $this->dispatch('product-added', [
-            'productId' => $this->product->id,
-            'quantity' => $this->quantity
-        ]);
-        
-        $this->dispatch('notify', [
-            'type' => 'success',
-            'message' => 'Producto añadido al carrito'
-        ]);
+        $this->cart = session()->get('cart', []);
+
+        // Buscar el índice del producto en el carrito
+        $index = array_search($this->product->id, array_column($this->cart, 'id'));
+
+        if ($index !== false) {
+            // Si el producto ya está en el carrito, incrementar la cantidad
+            $this->cart[$index]['quantity'] += $this->quantity;
+        } else {
+            // Si no está en el carrito, agregarlo
+            $this->cart[] = [
+                'id' => $this->product->id,
+                'name' => $this->product->name,
+                'price' => $this->product->price,
+                'quantity' => $this->quantity,
+                'image' => $this->product->images->first()->path ?? null,
+            ];
+        }
+
+        // Guardar el carrito en la sesión
+        session()->put('cart', $this->cart);
+
+        // Mostrar el modal del carrito
+        $this->modalCart = true;
+
+        // Refrescar los datos del carrito en Livewire
+        $this->cart = session()->get('cart', []);
     }
 
     #[Layout('components.layouts.app')]
     public function render()
     {
-        return view('livewire.product.product-show');
+        return view('livewire.product.product-show', [
+            'cartItems' => session()->get('cart', [])
+        ]);
     }
 }

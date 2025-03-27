@@ -14,19 +14,33 @@
                     <x-input type="number" label="Precio:" for="price" wire:model.blur="price" step="0.01"
                         min="0" required />
                 </div>
+                <div class=" col-span-6 md:col-span-1">
+                    <x-input type="number" label="Comisione inicio:" for="commission_income"
+                        wire:model="commission_income" step="0.01" min="0" required />
+                </div>
                 <div class=" col-span-6 md:col-span-1 relative">
-                    <span class=" absolute right-0  text-palette-400 text-xs">{{ $suggestedPts }}</span>
-                    <x-input type="number" label="Pts:" for="pts" wire:model="pts" step="0.01"
+                    <x-input type="number" label="pts_base:" for="pts_base" wire:model.live="pts_base" step="0.01"
+                        min="0" required />
+                </div>
+
+                <div class=" col-span-6 md:col-span-1 relative">
+
+                    <x-input type="number" label="pts_bonus:" for="pts_bonus" wire:model.live="pts_bonus"
+                        step="0.01" min="0" required />
+                </div>
+
+                <div class=" col-span-6 md:col-span-1 relative">
+
+                    <x-input type="number" label="pts_dist:" for="pts_dist" wire:model.live="pts_dist" step="0.01"
                         min="0" required />
                 </div>
 
                 <div class="col-span-6 md:col-span-1">
-                    <x-input type="number" label="Descuento %:" for="maximum_discount" wire:model="maximum_discount"
-                        min="0" max="100" required />
+                    <x-input type="number" label="Descuento %:" for="maximum_discount"
+                        wire:model.live="maximum_discount" min="0" max="100" required />
                 </div>
                 <div class="col-span-6 md:col-span-1">
-                    <x-input type="number" label="Stock:" for="stock" wire:model="stock" min="0"
-                        required />
+                    <x-input type="number" label="Stock:" for="stock" wire:model="stock" min="0" required />
                 </div>
 
                 <div class="col-span-6 md:col-span-2">
@@ -73,24 +87,25 @@
                 </div>
 
                 @foreach ($categoryLevels as $level => $categories)
-            @if ($categories->isNotEmpty())
-                <div class="sm:col-span-2">
-                    <x-select-l label="{{ $level === 0 ? 'Categoría:' : 'Subcategoría nivel ' . $level }}"
-                        for="level_{{ $level }}" wire:model.live="selectedLevels.{{ $level }}">
-                        <option value="">Ninguno</option>
+                    @if ($categories->isNotEmpty())
+                        <div class="sm:col-span-2">
+                            <x-select-l label="{{ $level === 0 ? 'Categoría:' : 'Subcategoría nivel ' . $level }}"
+                                for="level_{{ $level }}" wire:model.live="selectedLevels.{{ $level }}">
+                                <option value="">Ninguno</option>
 
-                        @foreach ($categories as $cat)
-                            <option value="{{ $cat->id }}">{{ $cat->name }}</option>
-                        @endforeach
-                    </x-select-l>
-                </div>
-            @endif
-        @endforeach
+                                @foreach ($categories as $cat)
+                                    <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                                @endforeach
+                            </x-select-l>
+                        </div>
+                    @endif
+                @endforeach
 
                 <div class="col-span-6 md:col-span-2">
                     @if ($brands)
-                        <x-select-l label="Marca:" for="brand_id" wire:model="brand_id">
+                        <x-select-l label="Marca:" for="brand_id" wire:model.live="brand_id">
                             @foreach ($brands as $brand)
+                                <option value="">Ninguno</option>
                                 <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                             @endforeach
                         </x-select-l>

@@ -1,0 +1,144 @@
+<?php
+
+namespace App\Livewire\Admin\Orders;
+
+use App\Models\BinaryPoint;
+use App\Models\Order;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Livewire\Component;
+use Livewire\WithPagination;
+
+class OrdersManagement extends Component
+{
+    use WithPagination;
+
+    public $selectedStatus = '';
+    public $orderStatuses = [
+        1 => 'Pendiente',
+        2 => 'Aprobada',
+        3 => 'Puntos Generados',
+        4 => 'Enviada',
+        5 => 'Entregada',
+        6 => 'Rechazada',
+        7 => 'Anulación Aprobada',
+        8 => 'Anulación Rechazada'
+    ];
+
+    public $processingBulk = false;
+
+    // Actualizar la URL cuando cambie el filtro
+    protected $queryString = ['selectedStatus'];
+
+    public function mount()
+    {
+        // Inicializar con el valor de la URL o valor predeterminado
+        $this->selectedStatus = request()->query('selectedStatus', '');
+    }
+
+    public function updatingSelectedStatus()
+    {
+        // Resetear la paginación cuando cambia el filtro
+        $this->resetPage();
+    }
+
+    public function uploadPoints($orderId)
+    {
+        DB::transaction(function () use ($orderId) {
+            $order = Order::where('id', $orderId)->where('status', 2)->first();
+
+            if (!$order) {
+                return; // Early return si la orden no existe o no está aprobada
+            }
+
+            $user = $order->user;
+
+            // 1️⃣ Actualizar o crear puntos personales del usuario
+            $this->updatePersonalPoints($user, $order->total_pts, $order->updated_at);
+
+            // 2️⃣ Subir puntos en la estructura binaria
+            $this->distributeBinaryPoints($user, $order->total_pts, $order->updated_at);
+
+            // Marcar la orden como procesada
+            $order->update(['status' => 3]);
+        });
+    }
+
+    private function updatePersonalPoints(User $user, int $points, string $approvedAt)
+    {
+        $binaryPoint = BinaryPoint::firstOrNew(['user_id' => $user->id], [
+            'personal' => 0,
+            'left_points' => 0,
+            'right_points' => 0,
+        ]);
+
+        $binaryPoint->personal += $points;
+        $binaryPoint->approved = $approvedAt;
+        $binaryPoint->save();
+    }
+
+    private function distributeBinaryPoints(User $user, int $points, string $approvedAt)
+    {
+        while ($user->binary && $user->binary->sponsor_id) {
+            $sponsorId = $user->binary->sponsor_id;
+            $side = $user->binary->side;
+
+            // Obtener el patrocinador
+            $sponsor = User::find($sponsorId);
+            if (!$sponsor) {
+                break; // Evita bucles infinitos si el sponsor no existe
+            }
+
+            // Buscar o crear el registro de puntos binarios del patrocinador
+            $sponsorBinaryPoint = BinaryPoint::firstOrNew(['user_id' => $sponsor->id], [
+                'personal' => 0,
+                'left_points' => 0,
+                'right_points' => 0,
+            ]);
+
+            // Sumar puntos en el lado correcto
+            if ($side === 'left') {
+                $sponsorBinaryPoint->left_points += $points;
+            } else {
+                $sponsorBinaryPoint->right_points += $points;
+            }
+
+            $sponsorBinaryPoint->approved = $approvedAt;
+            $sponsorBinaryPoint->save();
+
+            // Continuar con el siguiente patrocinador
+            $user = $sponsor;
+        }
+    }
+
+    public function uploadAllPoints()
+    {
+        DB::transaction(function () {
+            Order::where('status', 2)
+                ->chunk(10, function ($orders) {
+                    foreach ($orders as $order) {
+                        $this->uploadPoints($order->id);
+                    }
+                });
+        });
+    }
+
+    public function render()
+    {
+        $orders = Order::query()
+            ->when($this->selectedStatus !== '', function ($query) {
+                return $query->where('status', $this->selectedStatus);
+            })
+            ->orderBy('created_at', 'asc') // Del más antiguo al más nuevo
+            ->with(['user', 'country', 'department', 'city']) // Eager loading para optimizar
+            ->paginate(10);
+
+        // Contar órdenes aprobadas para el botón global
+        $approvedOrdersCount = Order::where('status', Order::STATUS_SALE_APPROVED)->count();
+
+        return view('livewire.admin.orders.orders-management', [
+            'orders' => $orders,
+            'approvedOrdersCount' => $approvedOrdersCount
+        ]);
+    }
+}

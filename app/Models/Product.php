@@ -10,14 +10,16 @@ use Illuminate\Support\Str;
 class Product extends Model
 {
     use HasFactory;
-
+    
     protected $fillable = [
         'name',
         'slug',
         'description',
         'price',
         'commission_income',
-        'pts',
+        'pts_base',
+        'pts_bonus',
+        'pts_dist',
         'maximum_discount',
         'specifications',
         'information',
@@ -30,12 +32,14 @@ class Product extends Model
     ];
 
     protected $casts = [
-       'is_physical' => 'boolean',
+        'is_physical' => 'boolean',
         'allow_backorder' => 'boolean',
         'is_active' => 'boolean',
         'price' => 'decimal:2',
         'commission_income' => 'decimal:2',
-        'pts' => 'decimal:2',
+        'pts_base' => 'decimal:2',
+        'pts_bonus' => 'decimal:2',
+        'pts_dist' => 'decimal:2',
         'maximum_discount' => 'decimal:2',
     ];
 
@@ -49,15 +53,15 @@ class Product extends Model
         return $this->belongsTo(Brand::class);
     }
 
-     // Verificar si el producto está disponible
-     public function isAvailable()
-     {
-         if (!$this->is_physical) {
-             return true;
-         }
-         
-         return $this->stock > 0 || $this->allow_backorder;
-     }
+    // Verificar si el producto está disponible
+    public function isAvailable()
+    {
+        if (!$this->is_physical) {
+            return true;
+        }
+
+        return $this->stock > 0 || $this->allow_backorder;
+    }
 
 
 
@@ -97,5 +101,4 @@ class Product extends Model
     {
         return $this->morphOne(Image::class, 'imageable')->oldestOfMany();
     }
-
 }

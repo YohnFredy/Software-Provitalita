@@ -20,13 +20,13 @@ class CountrySeeder extends Seeder
             'name' => 'Colombia',
         ]);
 
-        $faker = faker::create();
+        /* $faker = faker::create();
         foreach (range(1, 5) as $index) {
             DB::table('countries')->insert([
                 'name' => $faker->country,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
-        }
+        } */
     }
 }
