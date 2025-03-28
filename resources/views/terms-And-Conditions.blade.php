@@ -104,7 +104,7 @@
             Fornuvi tenga su sede.</p>
 
         <h2 class="text-md font-semibold mt-4">12. Contacto</h2>
-        <p class="mt-2">Si tiene preguntas sobre estos términos, puede contactarnos a inf@fornuvi.com
+        <p class="mt-2">Si tiene preguntas sobre estos términos, puede contactarnos a info@fornuvi.com
 
 
         <p class="mt-6 text-center text-gray-600">Última actualización: Marzo 2025</p>

@@ -59,9 +59,6 @@ class PaymentController extends Controller
         // Registrar en logs el estado recibido de la transacción
         Log::info('Estado de la transacción en Wompi:', ['status' => $transaction['status']]);
 
-        // Actualizar el estado de la orden según la respuesta de Wompi
-        /* $order->status = $this->mapWompiStatus($transaction['status']);
-        $order->save(); */
 
         Log::info('Orden actualizada correctamente.', ['order_id' => $order->id, 'new_status' => $order->status]);
 
@@ -69,19 +66,39 @@ class PaymentController extends Controller
         return view('payments.response', compact('order', 'transaction'));
     }
 
-    /**
-     * Mapea el estado de Wompi a los estados del sistema.
-     */
-    private function mapWompiStatus($status)
+    public function boldResponse(Request $request)
     {
-        $statusMap = [
-            'APPROVED' => 'paid',
-            'DECLINED' => 'declined',
-            'VOIDED' => 'voided',
-            'ERROR' => 'error',
-            'PENDING' => 'pending',
-        ];
+        $orderId = $request->input('bold-order-id');
+        $status = $request->input('bold-tx-status');
 
-        return $statusMap[$status] ?? 'unknown';
-    }
+        // Aquí puedes manejar la lógica según el estado de la transacción
+        switch ($status) {
+            case 'approved':
+                $message = '¡Gracias por tu compra! Tu transacción ha sido aprobada.';
+                // Puedes agregar más lógica, como enviar un correo de confirmación o actualizar el estado de la orden en la base de datos
+                break;
+
+            case 'processing':
+                $message = 'Tu transacción está en proceso. Te notificaremos cuando se complete.';
+                break;
+
+            case 'pending':
+                $message = 'Tu transacción está pendiente. Te notificaremos cuando se confirme.';
+                break;
+
+            case 'rejected':
+                $message = 'Lo sentimos, tu transacción ha sido rechazada. Por favor, intenta nuevamente.';
+                break;
+
+            case 'failed':
+                $message = 'Hubo un error en tu transacción. Por favor, intenta nuevamente.';
+                break;
+
+            default:
+                $message = 'Estado de la transacción desconocido. Por favor, contacta con soporte.';
+                break;
+        }
+
+        return view('payments.response-bold', compact('orderId', 'status', 'message'));
+    } 
 }

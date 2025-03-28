@@ -205,8 +205,8 @@ class OrderCreate extends Component
 
         session()->forget('cart');
 
-     /*    return redirect()->route('orders.payment', $order); */
-        return redirect()->route('wompi.checkout', $order);
+     return redirect()->route('bold.checkout', $order);
+       /*  return redirect()->route('wompi.checkout', $order); */
        
     }
 

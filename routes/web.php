@@ -4,6 +4,7 @@
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\WebhookBoldController;
 use App\Http\Controllers\WebhookController;
 use App\Livewire\Order\OrderCreate;
 use App\Livewire\Product\Cart;
@@ -40,20 +41,21 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('order/create', OrderCreate::class)->name('orders.create');
+    Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('orders/{order}/show', [OrderController::class, 'show'])->name('orders.show');
 
     //Pasarela de pagos Bold
-    Route::get('orders/{order}/payment', [OrderController::class, 'payment'])->name('orders.payment');
-    Route::get('orders/bold/respuesta', [OrderController::class, 'boldResponsePayment'])->name('orders.bold');
+    Route::get('/checkout/bold/{order}', [OrderController::class, 'boldCheckout'])->name('bold.checkout');
+    Route::get('/pagos/respuesta/bold', [PaymentController::class, 'BoldResponse'])->name('bold.response');
 
     //pasarela de pagos Wompi
     Route::get('/checkout/wompi/{order}', [OrderController::class, 'wompiCheckout'])->name('wompi.checkout');
     Route::get('/pagos/respuesta', [PaymentController::class, 'wompiResponse'])->name('wompi.response');
 
-    Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
-    Route::get('orders/{order}/show', [OrderController::class, 'show'])->name('orders.show');
+    
 });
 
-Route::post('webhook/bold/payment-status', [WebhookController::class, 'handleBoldWebhook']);
+Route::post('/webhook/bold', [WebhookBoldController::class, 'handleBoldWebhook']);
 Route::post('/webhook/wompi', [WebhookController::class, 'handleWompiWebhook']);
 
 require __DIR__ . '/auth.php';

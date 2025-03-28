@@ -220,7 +220,7 @@
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-envelope mt-1 mr-3"></i>
-                            <span>inf@fornuvi.com</span>
+                            <span>info@fornuvi.com</span>
                         </li>
                     </ul>
                 </div>

@@ -5,17 +5,17 @@
         <p>Orden: <strong>{{ $order->public_order_number }}</strong></p>
         <p>Total pagado: <strong>${{ number_format($order->total, 2) }}</strong></p>
         <p>Estado del pago: 
-            <strong class="{{ $transaction['status'] === 'APPROVED' ? 'text-green-500' : 'text-red-500' }}">
+            <strong class="{{ $transaction['status'] === 'APPROVED' ? 'text-primary' : 'text-danger' }}">
                 {{ $transaction['status'] }}
             </strong>
         </p>
 
         @if($transaction['status'] === 'APPROVED')
-            <p class="text-green-500 font-bold">¡Tu pago ha sido aprobado! 🎉</p>
+            <p class="text-primary font-bold">¡Tu pago ha sido aprobado! 🎉</p>
         @else
-            <p class="text-red-500 font-bold">Hubo un problema con tu pago. Por favor, intenta nuevamente.</p>
+            <p class="text-danger font-bold">Hubo un problema con tu pago. Por favor, intenta nuevamente.</p>
         @endif
 
-        <a href="{{ route('home') }}" class="mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded">Volver al inicio</a>
+        <a href="{{ route('home') }}" class="mt-4 inline-block bg-secondary text-white px-4 py-2 rounded">Volver al inicio</a>
     </div>
 </x-layouts.app>

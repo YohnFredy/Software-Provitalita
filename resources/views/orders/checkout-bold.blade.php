@@ -1,5 +1,4 @@
-<x-layouts.app title="Detalles de Pago">
-
+<x-layouts.app>
     <div class=" space-y-4">
         <div class="bg-white rounded-lg p-4 sm:p-6 shadow-md border border-neutral-200">
             <h1 class="text-xl sm:text-2xl font-bold text-primary mb-2">Detalles de Pago</h1>
@@ -179,7 +178,8 @@
                             Si prefieres realizar el pago mediante transferencia bancaria en lugar de utilizar nuestra
                             pasarela de pagos, puedes hacerlo a través de Bancolombia, Nequi, Daviplata u otros medios
                             disponibles. Para continuar con el proceso, simplemente contáctanos a través de WhatsApp al
-                            <strong class="underline whitespace-nowrap">(+57) 314 520-78-14</strong> y te proporcionaremos los detalles necesarios para completar tu pago.
+                            <strong class="underline whitespace-nowrap">(+57) 314 520-78-14</strong> y te
+                            proporcionaremos los detalles necesarios para completar tu pago.
                         </p>
                     </div>
 
@@ -191,10 +191,10 @@
                             segura.
                         </p>
                         <div class="mt-4">
-                           {{--  <flux:button disabled icon="credit-card" variant="primary" id="custom-button-payment"
-                                class="w-full sm:w-auto px-6 py-3 text-center">
-                                Pagar ahora
-                            </flux:button> --}}
+                            <!-- Botón personalizado -->
+                            <flux:button variant="primary" id="custom-button-payment">
+                                🔒 Pago 100% seguro con Bold
+                            </flux:button>
                         </div>
                     </div>
                 </div>
@@ -203,11 +203,61 @@
     </div>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const initBoldCheckout = () => {
+                if (document.querySelector(
+                        'script[src="https://checkout.bold.co/library/boldPaymentButton.js"]')) {
+                    console.warn('Bold Checkout script is already loaded.');
+                    return;
+                }
+
+                const js = document.createElement('script');
+                js.src = 'https://checkout.bold.co/library/boldPaymentButton.js';
+                js.onload = () => {
+                    window.dispatchEvent(new Event('boldCheckoutLoaded'));
+                };
+                js.onerror = () => {
+                    console.error("Error al cargar el script de Bold.");
+                };
+                document.head.appendChild(js);
+            };
+
+            // Inicializar Bold Checkout al cargar la página
+            initBoldCheckout();
+
+            // Esperar a que Bold se cargue
+            window.addEventListener('boldCheckoutLoaded', function() {
+                console.log("Bold Checkout cargado correctamente.");
+
+                const checkout = new BoldCheckout({
+                    orderId: "{{ $boldCheckoutConfig['orderId'] }}",
+                    currency: "{{ $boldCheckoutConfig['currency'] }}",
+                    amount: "{{ $boldCheckoutConfig['amount'] }}",
+                    apiKey: "{{ $boldCheckoutConfig['apiKey'] }}",
+                    integritySignature: "{{ $boldCheckoutConfig['integritySignature'] }}",
+                    description: "{{ $boldCheckoutConfig['description'] }}",
+                    redirectionUrl: "{{ $boldCheckoutConfig['redirectionUrl'] }}",
+                    expirationDate: "{{ $boldCheckoutConfig['expiration-date'] }}",
+                });
+
+                const customButton = document.getElementById('custom-button-payment');
+                if (customButton) {
+                    customButton.addEventListener('click', function() {
+                        checkout.open();
+                    });
+                }
+            });
+        });
+    </script>
+
+
+
+    {{--  <script>
         // Pasar la configuración del checkout al objeto window
         window.boldCheckoutConfig = @json($boldCheckoutConfig);
     </script>
 
     <!-- Incluir el archivo JavaScript separado -->
-    <script src="{{ asset('js/boldCheckout.js') }}"></script>
+    <script src="{{ asset('js/boldCheckout.js') }}"></script> --}}
 
 </x-layouts.app>

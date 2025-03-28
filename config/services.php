@@ -17,7 +17,7 @@ return [
     'bold' => [
         'api_key' => env('BOLD_API_KEY'),
         'secret_key' => env('BOLD_SECRET_KEY'),
-        'redirection_url' => env('BOLD_REDIRECTION_URL'),
+        'redirect_url' => env('BOLD_REDIRECT_URL', 'https://fornuvi.com/pagos/respuesta/bold'),
     ],
 
     'wompi' => [

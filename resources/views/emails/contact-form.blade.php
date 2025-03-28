@@ -77,7 +77,7 @@
             </div>
         </div>
         <div class="footer">
-            <p>Este es un correo automático de fornuvi. Por favor no responda a este mensaje.</p>
+            <p>Este es un correo automático de Fornuvi. Por favor no responda a este mensaje.</p>
         </div>
     </div>
 </body>

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('contact');
             $table->string('phone');
             $table->tinyInteger('status')->default(1)->unsigned();
+            $table->string('payment_method')->nullable();
             $table->enum('envio_type', ['store', 'delivery']); // Cambié a nombres más descriptivos
             $table->float('discount')->default(0);
             $table->float('shipping_cost')->default(0);
@@ -30,7 +31,6 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('additional_address')->nullable();
             $table->timestamps();
-
             $table->index('public_order_number');
             $table->index('status'); // Índice para facilitar las consultas por estado
             $table->index('user_id'); // Índice para facilitar las consultas por usuario

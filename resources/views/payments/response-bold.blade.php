@@ -5,10 +5,12 @@
             <p class=" mb-4">Estado de la transacción: <strong>{{ $status }}</strong></p>
             <p class="">Identificador de la orden: <strong>{{ $orderId }}</strong></p>
             <div class="mt-6">
-                @if($status === 'approved' )
-                    <a href="" class="bg-primary text-white  px-4 py-2 rounded hover:bg-secondary">Ver mis pedidos</a>
+                @if ($status === 'approved')
+                    <a href="" class="bg-primary text-white  px-4 py-2 rounded hover:bg-secondary">Ver mis
+                        pedidos</a>
                 @else
-                    <a href="" class="bg-primary text-white px-4 py-2 rounded hover:bg-secondary">Volver a la tienda</a>
+                    <a href="" class="bg-primary text-white px-4 py-2 rounded hover:bg-secondary">Volver a la
+                        tienda</a>
                 @endif
             </div>
         </div>

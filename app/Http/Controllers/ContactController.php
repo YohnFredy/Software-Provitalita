@@ -25,14 +25,14 @@ class ContactController extends Controller
             'nombre' => $validated['nombre'],
             'email' => $validated['email'],
             'telefono' => $validated['telefono'],
-            'interes' => $this->getInteresLabel($validated['interes']),
+            'interes' => $validated['interes'],
             'mensaje' => $validated['mensaje'],
             'fecha' => now()->format('d/m/Y H:i'),
         ];
 
         try {
             // 1. Enviar el correo a la empresa
-            Mail::to('inf@fornuvi.com')->send(new ContactFormMail($data));
+            Mail::to('info@fornuvi.com')->send(new ContactFormMail($data));
             
             // 2. Enviar correo de confirmación al usuario
             Mail::to($validated['email'])->send(new UserConfirmationMail($data));
@@ -48,23 +48,5 @@ class ContactController extends Controller
                 ->withInput()
                 ->withErrors(['error' => 'Hubo un problema al enviar tu mensaje. Por favor, intenta nuevamente más tarde.']);
         }
-    }
-
-    /**
-     * Obtener la etiqueta legible para la opción de interés
-     */
-    private function getInteresLabel($value)
-    {
-        $options = [
-            'fornuvi_coffee' => 'fornuvi Coffee',
-            'chelas' => 'Chelas',
-            'fornuvi' => 'fornuvi',
-            'maspro' => 'Maspro',
-            'net_inmobiliario' => 'Net Inmobiliario',
-            'distribucion' => 'Distribución de productos',
-            'informacion' => 'Información general',
-        ];
-
-        return $options[$value] ?? $value;
     }
 }
