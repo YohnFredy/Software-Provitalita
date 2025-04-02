@@ -27,7 +27,6 @@
                     <tr>
                         <th scope="col" class="py-3 px-6">Número</th>
                         <th scope="col" class="py-3 px-6">Fecha</th>
-                        <th scope="col" class="py-3 px-6">Cliente</th>
                         <th scope="col" class="py-3 px-6">Contacto</th>
                         <th scope="col" class="py-3 px-6">Tipo de Envío</th>
                         <th scope="col" class="py-3 px-6">Total</th>
@@ -37,59 +36,95 @@
                 </thead>
                 <tbody>
                     @forelse ($orders as $order)
-                        <tr class="bg-white border-b hover:bg-neutral-50">
-                            <td class="py-4 px-6 font-medium text-neutral-900">#{{ $order->public_order_number }}</td>
-                            <td class="py-4 px-6">{{ $order->created_at->format('d/m/Y H:i') }}</td>
-                            <td class="py-4 px-6">{{ $order->user->name }}</td>
-                            <td class="py-4 px-6">
-                                {{ $order->contact }}<br>
-                                <span class="text-neutral-500 text-xs">{{ $order->phone }}</span>
-                            </td>
-                            <td class="py-4 px-6">
-                                <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $order->envio_type === 'delivery' ? 'bg-primary/10 text-primary' : 'bg-neutral-100 text-neutral-800' }}">
-                                    {{ $order->envio_type === 'delivery' ? 'Envío a domicilio' : 'Retiro en tienda' }}
-                                </span>
-                            </td>
-                            <td class="py-4 px-6">
-                                ${{ number_format($order->total, 2) }}<br>
-                                <span class="text-neutral-500 text-xs">Puntos:
-                                    {{ number_format($order->total_pts, 2) }}</span>
-                            </td>
-                            <td class="py-4 px-6">
-                                @php
-                                    $statusColors = [
-                                        1 => 'bg-yellow-100 text-yellow-800', // Pendiente
-                                        2 => 'bg-blue-100 text-blue-800', // Aprobada
-                                        3 => 'bg-purple-100 text-purple-800', // Puntos Generados
-                                        4 => 'bg-indigo-100 text-indigo-800', // Enviada
-                                        5 => 'bg-neutral-100 text-neutral-800', // Entregada
-                                        6 => 'bg-red-100 text-red-800', // Rechazada
-                                        7 => 'bg-neutral-100 text-neutral-800', // Anulación Aprobada
-                                        8 => 'bg-orange-100 text-orange-800', // Anulación Rechazada
-                                    ];
-                                @endphp
-                                <span
-                                    class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full {{ $statusColors[$order->status] ?? 'bg-neutral-100 text-neutral-800' }}">
-                                    {{ $orderStatuses[$order->status] ?? 'Desconocido' }}
-                                </span>
-                            </td>
-                            <td class="py-4 px-6">
-                                <div class="flex space-x-2">
-                                    @if ($order->status == 2)
-                                        <flux:button type="button" variant="primary" wire:click="uploadPoints({{ $order->id }})">
-                                            Subir puntos
-                                        </flux:button>
-                                    @endif
-                                    <a href="{{ route('orders.show', $order) }}">
-                                        <flux:button>
-                                            Ver
-                                        </flux:button>
+                        <div wire:key="{{ $order->id }}">
+                            <tr class="bg-white border-b hover:bg-neutral-50">
+                                <td class="py-4 px-6 font-medium text-neutral-900">{{ $order->public_order_number }}
+                                </td>
+                                <td class="py-4 px-6">{{ $order->created_at->format('d/m/Y H:i') }}</td>
+                                <td class="py-4 px-6">{{ $order->user->name }}
+                                    <span class="text-neutral-500 text-xs">{{ $order->phone }}</span>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span
+                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $order->envio_type === 'delivery' ? 'bg-primary/10 text-primary' : 'bg-ink/10 text-ink' }}">
+                                        {{ $order->envio_type === 'delivery' ? 'Envío a domicilio' : 'Retiro en tienda' }}
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6">
+                                    ${{ number_format($order->total, 2) }}<br>
+                                    <span class="text-neutral-500 text-xs">Puntos:
+                                        {{ number_format($order->total_pts, 2) }}</span>
+                                </td>
+                                <td class="py-4 px-6">
+                                    @php
+                                        $statusColors = [
+                                            1 => 'bg-premium/10 text-premium', // Pendiente
+                                            2 => 'bg-primary/10 text-primary', // Aprobada
+                                            3 => 'bg-secondary/10 text-secondary', // Puntos Generados
+                                            4 => 'bg-ink/10 text-ink', // Enviada
+                                            5 => 'bg-primary/10 text-primary', // Entregada
+                                            6 => 'bg-danger/10 text-danger', // Rechazada
+                                            7 => 'bg-danger/10 text-danger', // Anulación Aprobada
+                                            8 => 'bg-danger/10 text-danger', // Anulación Rechazada
+                                        ];
+                                    @endphp
+                                    <span
+                                        class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full {{ $statusColors[$order->status] ?? 'bg-neutral-100 text-neutral-800' }}">
+                                        {{ $orderStatuses[$order->status] ?? 'Desconocido' }}
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6 ">
 
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                                    <flux:dropdown>
+                                        <flux:button icon="chevron-up-down">Opciones</flux:button>
+                                        <flux:menu>
+                                            @if ($order->status == 1)
+                                                <flux:menu.item icon="banknotes"
+                                                    wire:click="cashPayment({{ $order->id }})">Pago efectivo
+                                                </flux:menu.item>
+                                                <flux:menu.item icon="x-mark" variant="danger"
+                                                    wire:click="cancellationApproved({{ $order->id }})">Cancelar
+                                                </flux:menu.item>
+                                                <flux:menu.item icon="archive-box-x-mark" variant="danger"
+                                                    wire:click="rejected({{ $order->id }})"> Rechazada
+                                                </flux:menu.item>
+                                            @endif
+
+                                            @if ($order->status == 2)
+                                                <flux:menu.item icon=""
+                                                    wire:click="uploadPoints({{ $order->id }})">Subir puntos
+                                                </flux:menu.item>
+                                                <flux:menu.item icon="x-mark" variant="danger"
+                                                    wire:click="cancellationApproved({{ $order->id }})">Cancelar
+                                                </flux:menu.item>
+                                                <flux:menu.item icon="archive-box-x-mark" variant="danger"
+                                                    wire:click="rejected({{ $order->id }})"> Rechazada
+                                                </flux:menu.item>
+                                            @endif
+
+                                            @if ($order->status == 3)
+                                                <flux:menu.item icon="paper-airplane"
+                                                    wire:click="sent({{ $order->id }})">
+                                                    Enviado
+                                                </flux:menu.item>
+                                                <flux:menu.item icon="check"
+                                                    wire:click="delivered({{ $order->id }})">Entregado
+                                                </flux:menu.item>
+                                            @endif
+
+                                            @if ($order->status == 4)
+                                                <flux:menu.item icon="check"
+                                                    wire:click="delivered({{ $order->id }})">Entregado
+                                                </flux:menu.item>
+                                            @endif
+
+                                            <flux:navmenu.item href="{{ route('orders.show', $order) }}"
+                                                icon="eye">Ver</flux:navmenu.item>
+                                        </flux:menu>
+                                    </flux:dropdown>
+                                </td>
+                            </tr>
+                        </div>
                     @empty
                         <tr>
                             <td colspan="8" class="py-6 px-6 text-center text-neutral-500">

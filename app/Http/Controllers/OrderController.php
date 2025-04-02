@@ -88,8 +88,13 @@ class OrderController extends Controller
             'redirectionUrl' => config('services.bold.redirect_url'),
             'expiration-date' => $expirationTimestamp,
         ];
+        $subtotal=0;
+        foreach ($order->items as $item) {
+            $subtotal += $item->price;
+        }
 
-        return view('orders.checkout-bold', compact('order', 'boldCheckoutConfig'));
+
+        return view('orders.checkout-bold', compact('order', 'boldCheckoutConfig', 'subtotal'));
     }
 
     public function wompiCheckout(Order $order)

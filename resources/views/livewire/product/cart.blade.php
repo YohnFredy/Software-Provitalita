@@ -73,7 +73,7 @@
                 </li>
 
                 <li class=" flex justify-between py-2">
-                    <p>total:
+                    <p>Subtotal:
                     </p>
                     <p> ${{ number_format($total, 0) }}</p>
                 </li>

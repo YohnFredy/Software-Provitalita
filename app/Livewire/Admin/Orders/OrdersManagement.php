@@ -2,9 +2,11 @@
 
 namespace App\Livewire\Admin\Orders;
 
+use App\Models\ActivationPt;
 use App\Models\BinaryPoint;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\UserActivation;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -25,8 +27,6 @@ class OrdersManagement extends Component
         8 => 'Anulación Rechazada'
     ];
 
-    public $processingBulk = false;
-
     // Actualizar la URL cuando cambie el filtro
     protected $queryString = ['selectedStatus'];
 
@@ -40,6 +40,12 @@ class OrdersManagement extends Component
     {
         // Resetear la paginación cuando cambia el filtro
         $this->resetPage();
+    }
+
+    public function cashPayment($orderId)
+    {
+        $order = Order::find($orderId);
+        $order->update(['status' => 2, 'payment_method' => 'efectivo']);
     }
 
     public function uploadPoints($orderId)
@@ -61,10 +67,12 @@ class OrdersManagement extends Component
 
             // Marcar la orden como procesada
             $order->update(['status' => 3]);
+
+            $this->activateIfEligible($user, $order);
         });
     }
 
-    private function updatePersonalPoints(User $user, int $points, string $approvedAt)
+    private function updatePersonalPoints(User $user, $points, string $approvedAt)
     {
         $binaryPoint = BinaryPoint::firstOrNew(['user_id' => $user->id], [
             'personal' => 0,
@@ -77,7 +85,7 @@ class OrdersManagement extends Component
         $binaryPoint->save();
     }
 
-    private function distributeBinaryPoints(User $user, int $points, string $approvedAt)
+    private function distributeBinaryPoints(User $user, $points, string $approvedAt)
     {
         while ($user->binary && $user->binary->sponsor_id) {
             $sponsorId = $user->binary->sponsor_id;
@@ -121,6 +129,53 @@ class OrdersManagement extends Component
                     }
                 });
         });
+    }
+
+    public function activateIfEligible($user, $order)
+    {
+        $activationPt = ActivationPt::first();
+
+        if (!$activationPt) {
+            return; // Evita errores si no hay configuración de activación.
+        }
+
+        $activation = $user->activation;
+
+        if (!$activation && $order->total_pts >= $activationPt->min_pts_first) {
+            UserActivation::create([
+                'user_id'      => $user->id,
+                'is_active'    => true,
+                'activated_at' => $order->updated_at,
+            ]);
+        } elseif ($activation && !$activation->is_active && $order->total_pts >= $activationPt->min_pts_monthly) {
+            $activation->update([
+                'is_active'    => true,
+                'activated_at' => $order->updated_at,
+            ]);
+        }
+    }
+
+    public function sent($orderId)
+    {
+        $order = Order::find($orderId);
+        $order->update(['status' => 4]);
+    }
+    public function delivered($orderId)
+    {
+        $order = Order::find($orderId);
+        $order->update(['status' => 5]);
+    }
+
+    public function rejected($orderId)
+    {
+        $order = Order::find($orderId);
+        $order->update(['status' => 6]);
+    }
+
+    public function cancellationApproved($orderId)
+    {
+        $order = Order::find($orderId);
+        $order->update(['status' => 7]);
     }
 
     public function render()

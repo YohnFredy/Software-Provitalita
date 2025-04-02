@@ -58,7 +58,17 @@
                         <p class="">Recogida en tienda:</p>
                         <p class="">Calle 15 #42, Cali, Valle del Cauca</p>
                     @else
-                        <p class="">Envío a la dirección:</p>
+                        <p class="font-medium">Dirección:</p>
+                        <p class="text-neutral-600">{{ $order->address }} - {{ $order->additional_address }}
+                        </p>
+                        <p class="text-neutral-600">{{ $order->country->name }} -
+                            {{ $order->department->name }} -
+                            @if (!$order->city_id == null)
+                                {{ $order->city->name }}
+                            @else
+                                {{ $order->addCity }}
+                            @endif
+                        </p>
                     @endif
                 </div>
 

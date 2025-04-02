@@ -57,10 +57,7 @@ class ProductShow extends Component
             // Si no está en el carrito, agregarlo
             $this->cart[] = [
                 'id' => $this->product->id,
-                'name' => $this->product->name,
-                'price' => $this->product->price,
                 'quantity' => $this->quantity,
-                'image' => $this->product->images->first()->path ?? null,
             ];
         }
 

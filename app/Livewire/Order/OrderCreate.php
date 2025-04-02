@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Order;
 
+use App\Models\ActivationPt;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Department;
@@ -15,7 +16,7 @@ use Livewire\Component;
 
 class OrderCreate extends Component
 {
-    public $cart = [], $products = [];
+    public $cart = [], $products = [], $productItems = [], $activationPt;
 
     public $user_id, $quantity = 0, $subTotal = 0, $discount = 0, $shipping_cost = 0, $total = 0, $total_pts = 0, $tipo_usuario = 'inactive';
 
@@ -43,27 +44,120 @@ class OrderCreate extends Component
         $user = Auth::user();
         $this->cart = session('cart', []);
 
+        $productIds = collect($this->cart)->pluck('id');
+        $products = Product::whereIn('id', $productIds)->get()->keyBy('id');
+
+        $this->products = collect($this->cart)->map(function ($item, $index) use ($products) {
+            $product = $products[$item['id']] ?? null;
+            return $product ? [
+                'id' => $product->id,
+                'name' => $product->name,
+                'price' => $product->price,
+                'tax' => 0,
+                'pts_base' => $product->pts_base,
+                'pts_bonus' => $product->pts_bonus,
+                'pts_dist' => $product->pts_dist,
+                'maximum_discount' => $product->maximum_discount,
+                'quantity' => $item['quantity'],
+                'index' => $index,
+            ] : null;
+        })->filter()->sortBy('pts_base')->values()->all();
+
+        $this->activationPt = ActivationPt::first();
+
         if (!$user->activation) {
-            $cantPts = 0;
-            if (!empty($this->cart)) {
-                $productIds = collect($this->cart)->pluck('id')->toArray();
-                $products = Product::whereIn('id', $productIds)->get();
-
-                foreach ($products as $product) {
-                    $quantity = collect($this->cart)->firstWhere('id', $product->id)['quantity'] ?? 0;
-                    $cantPts += $product->pts_bonus * $quantity;
-                }
-            }
-
-            if ($cantPts >= 3.30) {
-                $this->tipo_usuario = "new_affiliate";
-            }
+            $cantPts = collect($this->products)->sum(fn($product) => $product['pts_bonus'] * $product['quantity']);
+            $this->tipo_usuario = $cantPts >= $this->activationPt->min_pts_first ? "new_affiliate" : null;
         } else {
             $this->tipo_usuario = $user->activation->is_active ? "active" : "inactive";
         }
 
         $this->showProducts();
         $this->countries = Country::all();
+    }
+
+    public function showProducts()
+    {
+        $accumulatedPts = 0;
+        $this->productItems = [];
+
+        foreach ($this->products as $product) {
+            if ($this->tipo_usuario === 'inactive') {
+                $quantityProcessed = 0;
+
+                // Procesar productos hasta alcanzar el mínimo de activación
+                while ($quantityProcessed < $product['quantity']) {
+                    $accumulatedPts += $product['pts_base'];
+                    $quantityProcessed++;
+
+                    if ($accumulatedPts >= $this->activationPt->min_pts_monthly) {
+                        $this->tipo_usuario = 'active';
+                        break;
+                    }
+                }
+
+                // Agregar la parte de activación
+                $this->productItems[] = $this->getProductItem(
+                    $product,
+                    $quantityProcessed,
+                    0, // Sin descuento en esta parte
+                    $product['pts_base']
+                );
+
+                // Si queda saldo después de la activación, aplicar descuento
+                $remainingQuantity = $product['quantity'] - $quantityProcessed;
+                if ($remainingQuantity > 0) {
+                    $this->productItems[] = $this->getProductItem(
+                        $product,
+                        $remainingQuantity,
+                        $product['price'] * $product['maximum_discount'] / 100,
+                        $product['pts_dist']
+                    );
+                }
+            } else {
+                // Para 'new_affiliate' y 'active'
+                $this->productItems[] = $this->getProductItem(
+                    $product,
+                    $product['quantity'],
+                    $this->tipo_usuario === 'active' ? ($product['price'] * $product['maximum_discount'] / 100) : 0,
+                    $this->tipo_usuario === 'new_affiliate' ? $product['pts_bonus'] : $product['pts_dist']
+                );
+            }
+        }
+
+        $this->billingProcess();
+    }
+
+    /**
+     * Método auxiliar para generar la estructura de producto
+     */
+    private function getProductItem($product, $quantity, $discount, $pts)
+    {
+        return [
+            'product_id' => $product['id'],
+            'name' => $product['name'],
+            'quantity' => $quantity,
+            'price' => $product['price'],
+            'discount' => $discount,
+            'tax' => $product['tax'],
+            'subtotal' => $product['price'] * $quantity,
+            'pts' => $pts,
+        ];
+    }
+
+    public function billingProcess()
+    {
+        // Inicializar valores
+        $this->quantity = $this->discount = $this->subTotal = $this->total_pts = 0;
+
+        foreach ($this->productItems as $productItem) {
+            $this->quantity += $productItem['quantity'];
+            $this->discount += $productItem['discount'] * $productItem['quantity'];
+            $this->subTotal += $productItem['subtotal'];
+            $this->total_pts += $productItem['pts'] * $productItem['quantity'];
+        }
+
+        $this->total = $this->subTotal - $this->discount + $this->shipping_cost;
     }
 
     public function onEnvioTypeChange()
@@ -106,58 +200,6 @@ class OrderCreate extends Component
         $this->billingProcess();
     }
 
-    public function showProducts()
-    {
-        $this->products = [];
-        $this->subTotal = 0;
-        $this->total_pts = 0;
-        $this->quantity = 0;
-
-        if (empty($this->cart)) {
-            return;
-        }
-
-        $productIds = collect($this->cart)->pluck('id')->toArray();
-        $products = Product::whereIn('id', $productIds)->with('latestImage')->get();
-
-        foreach ($this->cart as $index => $item) {
-            $product = $products->firstWhere('id', $item['id']);
-
-            if (!$product) {
-                continue; // Evita errores si el producto no existe
-            }
-
-            $ptsValue = match ($this->tipo_usuario) {
-                'new_affiliate' => $product->pts_bonus,
-                'active' => $product->pts_dist,
-                default => $product->pts_base,
-            };
-
-            $this->products[] = [
-                'id' => $product->id,
-                'name' => $product->name,
-                'description' => $product->description,
-                'price' => $product->price,
-                'pts' => $ptsValue,
-                'path' => optional($product->latestImage)->path,
-                'quantity' => $item['quantity'],
-                'index' => $index,
-            ];
-
-            // Acumulación de valores en una sola iteración
-            $this->subTotal += $item['quantity'] * $product->price;
-            $this->total_pts += $item['quantity'] * $ptsValue;
-            $this->quantity += $item['quantity'];
-        }
-
-        $this->billingProcess();
-    }
-
-    public function billingProcess()
-    {
-        $this->total = $this->subTotal - $this->discount + $this->shipping_cost;
-    }
-
     public function create_order()
     {
         $this->user_id = Auth::user()->id;
@@ -189,25 +231,24 @@ class OrderCreate extends Component
         }
         $order = Order::create($orderData);
 
-        foreach ($this->products as $product) {
+        foreach ($this->productItems as $productItem) {
             OrderItem::create([
                 'order_id' => $order->id,
-                'product_id' =>  $product['id'],
-                'name' =>  $product['name'],
-                'quantity' => $product['quantity'],
-                'price' => $product['price'],
-                'discount' => 0,
-                'tax' => 0,
-                'subtotal' => $product['quantity'] * $product['price'],
-                'pts' => $product['pts'],
+                'product_id' =>  $productItem['product_id'],
+                'name' =>  $productItem['name'],
+                'quantity' => $productItem['quantity'],
+                'price' => $productItem['price'],
+                'discount' => $productItem['discount'],
+                'tax' => $productItem['tax'],
+                'subtotal' => $productItem['price'] * $productItem['quantity'],
+                'pts' => $productItem['pts'],
             ]);
         }
 
         session()->forget('cart');
 
-     return redirect()->route('bold.checkout', $order);
-       /*  return redirect()->route('wompi.checkout', $order); */
-       
+        return redirect()->route('bold.checkout', $order);
+        /*  return redirect()->route('wompi.checkout', $order); */
     }
 
     #[Layout('components.layouts.app')]

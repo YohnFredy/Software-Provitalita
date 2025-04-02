@@ -19,8 +19,8 @@ class WebhookBoldController extends Controller
 
         //En modo pruebas LLAVE_SECRETA no se ingresa ej: $secretKey = '';
         // Crear HMAC usando la llave secreta
-        //$secretKey = '';  // modo pruebas.
-        $secretKey = config('services.bold.secret_key');
+        $secretKey = '';  // modo pruebas.
+        /* $secretKey = config('services.bold.secret_key'); */
         $hashed = hash_hmac('sha256', $encoded, $secretKey);
 
         // Comparar las firmas

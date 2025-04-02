@@ -62,7 +62,7 @@
                 </div>
 
                 {{-- Información Envío --}}
-                <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 sm:p-5 sm:mt-6">
+                <div class="bg-secondary/5 border border-secondary/30 rounded-lg p-3 sm:p-5 sm:mt-6">
                     <h3 class="font-semibold text-danger mb-2">Información importante sobre el envío</h3>
 
                     <ul class="space-y-2 text-sm text-gray-700">
@@ -113,7 +113,7 @@
                             <li class="flex justify-between py-3">
                                 <span class="text-ink">Descuento</span>
                                 <span
-                                    class="font-medium text-secondary">-${{ number_format($discount, 0, ',', '.') }}</span>
+                                    class="font-medium text-secondary">${{ number_format($discount, 0, ',', '.') }}</span>
                             </li>
                         @endif
 

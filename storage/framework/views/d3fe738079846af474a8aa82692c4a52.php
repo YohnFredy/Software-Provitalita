@@ -1,10 +1,19 @@
-<x-layouts.app>
+<?php if (isset($component)) { $__componentOriginal5863877a5171c196453bfa0bd807e410 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal5863877a5171c196453bfa0bd807e410 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.layouts.app','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('layouts.app'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
     <div class=" space-y-4">
         <div class="bg-white rounded-lg p-4 sm:p-6 shadow-md border border-neutral-200">
             <h1 class="text-xl sm:text-2xl font-bold text-primary mb-2">Detalles de Pago</h1>
             <div class="flex flex-wrap items-center gap-2">
                 <span class="text-sm sm:text-base font-semibold text-primary uppercase">Referencia:</span>
-                <span class="text-sm sm:text-base text-secondary font-bold">{{ $order->public_order_number }}</span>
+                <span class="text-sm sm:text-base text-secondary font-bold"><?php echo e($order->public_order_number); ?></span>
             </div>
         </div>
 
@@ -24,7 +33,7 @@
                         Detalles de Envío
                     </h2>
                     <div class="bg-neutral-50 p-3 rounded-md text-sm sm:text-base">
-                        @if ($order->envio_type == 1)
+                        <?php if($order->envio_type == 1): ?>
                             <div class="flex items-start gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                     class="w-5 h-5 mt-0.5 flex-shrink-0 text-primary" viewBox="0 0 24 24" fill="none"
@@ -41,7 +50,7 @@
                                     <p class="text-neutral-600">Calle 15 #42, Cali, Valle del Cauca</p>
                                 </div>
                             </div>
-                        @else
+                        <?php else: ?>
                             <div class="flex items-start gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                     class="w-5 h-5 mt-0.5 flex-shrink-0 text-primary" viewBox="0 0 24 24" fill="none"
@@ -52,19 +61,22 @@
                                 </svg>
                                 <div>
                                     <p class="font-medium">Dirección:</p>
-                                    <p class="text-neutral-600">{{ $order->address }} - {{ $order->additional_address }}
+                                    <p class="text-neutral-600"><?php echo e($order->address); ?> - <?php echo e($order->additional_address); ?>
+
                                     </p>
-                                    <p class="text-neutral-600">{{ $order->country->name }} -
-                                        {{ $order->department->name }} -
-                                        @if (!$order->city_id == null)
-                                            {{ $order->city->name }}
-                                        @else
-                                            {{ $order->addCity }}
-                                        @endif
+                                    <p class="text-neutral-600"><?php echo e($order->country->name); ?> -
+                                        <?php echo e($order->department->name); ?> -
+                                        <?php if(!$order->city_id == null): ?>
+                                            <?php echo e($order->city->name); ?>
+
+                                        <?php else: ?>
+                                            <?php echo e($order->addCity); ?>
+
+                                        <?php endif; ?>
                                     </p>
                                 </div>
                             </div>
-                        @endif
+                        <?php endif; ?>
                     </div>
                 </div>
 
@@ -87,7 +99,7 @@
                                 <circle cx="12" cy="7" r="4" />
                             </svg>
                             <span class="font-medium">Recibe:</span>
-                            <span class="text-neutral-600">{{ $order->contact }}</span>
+                            <span class="text-neutral-600"><?php echo e($order->contact); ?></span>
                         </div>
                         <div class="flex items-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary" viewBox="0 0 24 24"
@@ -97,12 +109,12 @@
                                     d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                             </svg>
                             <span class="font-medium">Teléfono:</span>
-                            <span class="text-neutral-600">{{ $order->phone }}</span>
+                            <span class="text-neutral-600"><?php echo e($order->phone); ?></span>
                         </div>
                     </div>
                 </div>
 
-                {{-- Información Envío --}}
+                
                 <div class="bg-secondary/5 border border-secondary/30 rounded-lg p-3 sm:p-5">
                     <h3 class="font-semibold text-danger mb-2">Información importante sobre el envío</h3>
 
@@ -163,32 +175,34 @@
                     <tbody>
 
 
-                        @foreach ($order->items as $item)
+                        <?php $__currentLoopData = $order->items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr class="border-b border-neutral-200 hover:bg-neutral-50">
                                 <th scope="row"
                                     class="flex items-center px-4 sm:px-6 py-3 font-medium text-neutral-900 whitespace-nowrap">
-                                    @if ($item->product->latestImage)
-                                        <img src="{{ asset('storage/' . $item->product->latestImage->path) }}"
-                                            alt="{{ $item->product->name }}"
+                                    <?php if($item->product->latestImage): ?>
+                                        <img src="<?php echo e(asset('storage/' . $item->product->latestImage->path)); ?>"
+                                            alt="<?php echo e($item->product->name); ?>"
                                             class="w-10 h-10 rounded-md object-cover">
-                                    @else
-                                        <img src="{{ asset('images/default.png') }}"
-                                            alt="{{ $item->product->name }}"
+                                    <?php else: ?>
+                                        <img src="<?php echo e(asset('images/default.png')); ?>"
+                                            alt="<?php echo e($item->product->name); ?>"
                                             class="w-10 h-10 rounded-md object-cover">
-                                    @endif
+                                    <?php endif; ?>
                                     <div class="ps-3 max-w-[180px] sm:max-w-none">
-                                        <div class="text-xs sm:text-sm font-semibold truncate">{{ $item->name }}
+                                        <div class="text-xs sm:text-sm font-semibold truncate"><?php echo e($item->name); ?>
+
                                         </div>
                                     </div>
                                 </th>
-                                <td class="px-2 sm:px-6 py-3 text-center">{{ $item->quantity }}</td>
-                                <td class="px-2 sm:px-6 py-3 text-center">${{ number_format($item->price, 0) }}</td>
-                                <td class="px-2 sm:px-6 py-3 text-center">{{ number_format($item->pts, 2) }}</td>
-                                <td class="px-2 sm:px-6 py-3 text-center">${{ number_format($item->subtotal, 0) }}
+                                <td class="px-2 sm:px-6 py-3 text-center"><?php echo e($item->quantity); ?></td>
+                                <td class="px-2 sm:px-6 py-3 text-center">$<?php echo e(number_format($item->price, 0)); ?></td>
+                                <td class="px-2 sm:px-6 py-3 text-center"><?php echo e(number_format($item->pts, 2)); ?></td>
+                                <td class="px-2 sm:px-6 py-3 text-center">$<?php echo e(number_format($item->subtotal, 0)); ?>
+
                                 </td>
 
                             </tr>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
                 </table>
             </div>
@@ -196,23 +210,20 @@
                 <div class="mt-4 sm:w-1/2">
                     <div class="flex justify-between items-center border-t pt-2">
                         <span class="font-semibold">Subtotal:</span>
-                        <span>${{ number_format($subtotal, 0) }}</span>
+                        <span>$<?php echo e(number_format($subtotal, 0)); ?></span>
                     </div>
                     <div class="flex justify-between items-center">
                         <span class="font-semibold">Descuento:</span>
-                        <span class="text-danger">- ${{ number_format($order->discount, 0) }}</span>
+                        <span class="text-danger">- $<?php echo e(number_format($order->discount, 0)); ?></span>
                     </div>
-                    {{-- <div class="flex justify-between items-center">
-                        <span class="font-semibold">Envío:</span>
-                        <span>${{ number_format($order->shipping_cost, 0) }}</span>
-                    </div> --}}
+                    
                     <div class="flex justify-between items-center text-lg font-semibold mt-2">
                         <span>Total a Pagar:</span>
-                        <span class=" font-normal">${{ number_format($order->total, 0) }}</span>
+                        <span class=" font-normal">$<?php echo e(number_format($order->total, 0)); ?></span>
                     </div>
                     <div class="flex justify-between items-center text-sm text-primary mt-1">
                         <span>Puntos Acumulados:</span>
-                        <span>{{ $order->total_pts }} pts</span>
+                        <span><?php echo e($order->total_pts); ?> pts</span>
                     </div>
                 </div>
             </div>
@@ -248,9 +259,27 @@
                         </p>
                         <div class="mt-4">
                             <!-- Botón personalizado -->
-                            <flux:button variant="primary" id="custom-button-payment">
+                            <?php if (isset($component)) { $__componentOriginalc04b147acd0e65cc1a77f86fb0e81580 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::button.index','data' => ['variant' => 'primary','id' => 'custom-button-payment']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('flux::button'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['variant' => 'primary','id' => 'custom-button-payment']); ?>
                                 🔒 Pago 100% seguro con Bold
-                            </flux:button>
+                             <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580)): ?>
+<?php $attributes = $__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580; ?>
+<?php unset($__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc04b147acd0e65cc1a77f86fb0e81580)): ?>
+<?php $component = $__componentOriginalc04b147acd0e65cc1a77f86fb0e81580; ?>
+<?php unset($__componentOriginalc04b147acd0e65cc1a77f86fb0e81580); ?>
+<?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -286,14 +315,14 @@
                 console.log("Bold Checkout cargado correctamente.");
 
                 const checkout = new BoldCheckout({
-                    orderId: "{{ $boldCheckoutConfig['orderId'] }}",
-                    currency: "{{ $boldCheckoutConfig['currency'] }}",
-                    amount: "{{ $boldCheckoutConfig['amount'] }}",
-                    apiKey: "{{ $boldCheckoutConfig['apiKey'] }}",
-                    integritySignature: "{{ $boldCheckoutConfig['integritySignature'] }}",
-                    description: "{{ $boldCheckoutConfig['description'] }}",
-                    redirectionUrl: "{{ $boldCheckoutConfig['redirectionUrl'] }}",
-                    expirationDate: "{{ $boldCheckoutConfig['expiration-date'] }}",
+                    orderId: "<?php echo e($boldCheckoutConfig['orderId']); ?>",
+                    currency: "<?php echo e($boldCheckoutConfig['currency']); ?>",
+                    amount: "<?php echo e($boldCheckoutConfig['amount']); ?>",
+                    apiKey: "<?php echo e($boldCheckoutConfig['apiKey']); ?>",
+                    integritySignature: "<?php echo e($boldCheckoutConfig['integritySignature']); ?>",
+                    description: "<?php echo e($boldCheckoutConfig['description']); ?>",
+                    redirectionUrl: "<?php echo e($boldCheckoutConfig['redirectionUrl']); ?>",
+                    expirationDate: "<?php echo e($boldCheckoutConfig['expiration-date']); ?>",
                 });
 
                 const customButton = document.getElementById('custom-button-payment');
@@ -308,12 +337,16 @@
 
 
 
-    {{--  <script>
-        // Pasar la configuración del checkout al objeto window
-        window.boldCheckoutConfig = @json($boldCheckoutConfig);
-    </script>
+    
 
-    <!-- Incluir el archivo JavaScript separado -->
-    <script src="{{ asset('js/boldCheckout.js') }}"></script> --}}
-
-</x-layouts.app>
+ <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal5863877a5171c196453bfa0bd807e410)): ?>
+<?php $attributes = $__attributesOriginal5863877a5171c196453bfa0bd807e410; ?>
+<?php unset($__attributesOriginal5863877a5171c196453bfa0bd807e410); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal5863877a5171c196453bfa0bd807e410)): ?>
+<?php $component = $__componentOriginal5863877a5171c196453bfa0bd807e410; ?>
+<?php unset($__componentOriginal5863877a5171c196453bfa0bd807e410); ?>
+<?php endif; ?>
+<?php /**PATH C:\Users\Fredy\Herd\fornuvi\resources\views/orders/checkout-bold.blade.php ENDPATH**/ ?>
