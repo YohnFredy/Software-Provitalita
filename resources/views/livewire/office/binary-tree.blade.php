@@ -99,10 +99,15 @@
             </div>
         </div>
 
+        <!-- Indicador de carga -->
+        <div x-show="!isLoaded" class="flex justify-center items-center py-12">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+        </div>
+
         <!-- Árbol binario -->
-        <div class="flex justify-center overflow-hidden transition-all duration-300 "
-            :style="`height: ${containerHeight}px`">
-            <div class="caja ">
+        <div class="flex justify-center overflow-hidden transition-all duration-300 min-h-[50vh]"
+            :style="`height: ${isLoaded ? containerHeight : '50vh'}px`">
+            <div class="caja">
                 <div id="tree-container" class="tree px-2 transform-gpu transition-transform duration-300"
                     x-ref="treeContainer"
                     :style="`transform: scale(${currentZoom}, ${currentZoom}); transform-origin: top center;`"

@@ -42,8 +42,8 @@ class BinaryTree extends Component
 
         if ($this->currentUser->binaryTotal) {
             $this->totalAffiliates = $this->currentUser->binaryTotal->left_affiliates + $this->currentUser->binaryTotal->right_affiliates;
-        }else {
-            $this->totalAffiliates =0;
+        } else {
+            $this->totalAffiliates = 0;
         }
 
         /* if ($this->currentUser->binaryTotal) {
@@ -103,7 +103,7 @@ class BinaryTree extends Component
     public function show(User $user): void
     {
         $this->currentUser = $user;
-       
+
         if ($this->primaryUserId === $user->id) {
             return;
         }
@@ -120,6 +120,7 @@ class BinaryTree extends Component
     #[Layout('components.layouts.office')]
     public function render()
     {
+
         $this->tree = $this->buildTree($this->currentUser);
         return view('livewire.office.binary-tree');
     }
