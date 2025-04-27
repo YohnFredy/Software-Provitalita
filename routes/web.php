@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\WebhookBoldController;
@@ -20,6 +21,16 @@ Route::get('/', function () {
     return view('index');
 })->name('home');
 
+
+// Ruta principal para la landing page
+Route::get('/landing', [LandingPageController::class, 'show'])->name('landing.show');
+// Ruta para recibir los datos de seguimiento (eventos) vía AJAX
+Route::post('/track-event', [LandingPageController::class, 'trackEvent'])->name('landing.track');
+
+
+
+
+
 Route::get('/productos', ProductListing::class)->name('products.index');
 Route::get('producto/{product}', ProductShow::class)->name('products.show');
 Route::get('carrito', Cart::class)->name('products.cart');
@@ -27,6 +38,9 @@ Route::get('carrito', Cart::class)->name('products.cart');
 Route::post('/contacto', [ContactController::class, 'store'])->name('contacto.store');
 
 Route::get('prueba', Prueba::class)->name('prueba');
+
+
+
 
 /* Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
