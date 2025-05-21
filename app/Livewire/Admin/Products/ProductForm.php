@@ -8,6 +8,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -99,6 +100,18 @@ class ProductForm extends Component
         }
 
         $this->hasChildCategories = true;
+    }
+
+    #[On('calculadora-financiera')]
+    public function updateDatos($precioPublico, $pts_base, $bonoInicioPorcentaje, $pts_bono, $descuentoPorcentaje, $pts_dist)
+    {
+
+        $this->price = $precioPublico;
+        $this->commission_income = $bonoInicioPorcentaje;
+        $this->pts_base = $pts_base;
+        $this->pts_bonus = $pts_bono;
+        $this->pts_dist = $pts_dist;
+        $this->maximum_discount = $descuentoPorcentaje;
     }
 
 

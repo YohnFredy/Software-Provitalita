@@ -43,7 +43,7 @@
                         <span class="text-primary font-semibold flex items-center gap-1">
                             <i class="fas fa-chart-bar text-xs"></i> Puntos
                         </span>
-                        <span class="font-medium pl-1">0</span>
+                        <span class="font-medium pl-1">{{ $node['ptsLeft'] ?: 'Vacío' }}</span>
                     </h6>
                 </div>
 
@@ -52,7 +52,7 @@
                         <span class="text-primary font-semibold flex items-center gap-1">
                             <i class="fas fa-chart-bar text-xs"></i> Puntos
                         </span>
-                        <span class="font-medium pl-1">0</span>
+                        <span class="font-medium pl-1">{{ $node['ptsRight'] ?: 'Vacío' }}</span>
                     </h6>
                 </div>
             </div>
@@ -100,7 +100,7 @@
                         <span class="text-primary font-semibold flex items-center gap-1">
                             Puntos
                         </span>
-                        <span class="font-medium pl-1">0</span>
+                        <span class="font-medium pl-1">{{ $node['ptsLeft'] ?: 'Vacío' }}</span>
                     </h6>
                 </div>
 
@@ -109,7 +109,7 @@
                         <span class="text-primary font-semibold flex items-center gap-1">
                             Puntos
                         </span>
-                        <span class="font-medium pl-1">0</span>
+                        <span class="font-medium pl-1">{{$node['ptsRight'] ?: 'Vacío' }}</span>
                     </h6>
                 </div>
             </div>

@@ -41,8 +41,8 @@
                                 <td class="py-4 px-6 font-medium text-neutral-900">{{ $order->public_order_number }}
                                 </td>
                                 <td class="py-4 px-6">{{ $order->created_at->format('d/m/Y H:i') }}</td>
-                                <td class="py-4 px-6">{{ $order->user->name }}
-                                    <span class="text-neutral-500 text-xs">{{ $order->phone }}</span>
+                                <td class="py-4 px-6">{{ $order->contact }}
+                                    {{-- <span class="text-neutral-500 text-xs">{{ $order->phone }}</span> --}}
                                 </td>
                                 <td class="py-4 px-6">
                                     <span
@@ -120,6 +120,9 @@
 
                                             <flux:navmenu.item href="{{ route('orders.show', $order) }}"
                                                 icon="eye">Ver</flux:navmenu.item>
+
+                                            <flux:navmenu.item href="{{ route('admin.invoice.show', $order) }}"
+                                                icon="eye">Factura</flux:navmenu.item>
                                         </flux:menu>
                                     </flux:dropdown>
                                 </td>

@@ -22,13 +22,15 @@ class OrderCreate extends Component
 
     public $countries = [], $departments = [], $cities = [];
 
-    public $name = '', $phone = '', $envio_type = 2, $selectedCountry, $selectedDepartment, $selectedCity,  $city = '', $address = '', $additionalAddress = '', $terms = false;
+    public $name = '', $phone = '', $dni = '', $email = '', $envio_type = 2, $selectedCountry, $selectedDepartment, $selectedCity,  $city = '', $address = '', $additionalAddress = '', $terms = false;
 
     public function rules()
     {
         return [
             'name' => 'required|min:3',
             'phone' => 'required|min:3',
+            'dni' => 'required|min:3',
+            'email' => 'required|email|min:3',
             'envio_type' => 'required|in:1,2',
             'selectedCountry' => Rule::requiredIf($this->envio_type == 2),
             'selectedDepartment' => Rule::requiredIf($this->envio_type == 2),
@@ -212,6 +214,8 @@ class OrderCreate extends Component
             'user_id' => $this->user_id,
             'contact' => $this->name,
             'phone' => $this->phone,
+            'dni' => $this->dni,
+            'email' => $this->email,
             'envio_type' => $this->envio_type,
             'discount' => $this->discount,
             'shipping_cost' => $this->shipping_cost,

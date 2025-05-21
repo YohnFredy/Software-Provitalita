@@ -10,7 +10,7 @@
             <!-- Name -->
             <div class="col-span-2 sm:col-span-1">
                 <x-input wire:model="name" label="{{ __('Nombre') }}:" type="text" for="name" required autofocus
-                    autocomplete="name" placeholder="Full name" />
+                    autocomplete="name" placeholder="Nombre" />
             </div>
 
             <!-- Apellidos -->

@@ -31,16 +31,48 @@
         #whatsapp-button {
             /* opacity: 0.5; */
             /* transition: opacity 0.5s ease-in-out; */
-            display: none; /* Lo mostraremos con JS */
-            transform: translateY(20px); /* Efecto sutil de aparición */
+            display: none;
+            /* Lo mostraremos con JS */
+            transform: translateY(20px);
+            /* Efecto sutil de aparición */
             transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
         }
+
         #whatsapp-button.visible {
             /* opacity: 1; */
-            display: inline-flex; /* O block, según tu diseño */
+            display: inline-flex;
+            /* O block, según tu diseño */
             transform: translateY(0);
         }
     </style>
+
+
+    <!-- Meta Pixel Code -->
+    <script>
+        ! function(f, b, e, v, n, t, s) {
+            if (f.fbq) return;
+            n = f.fbq = function() {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = '2.0';
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1754820885471422');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=1754820885471422&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
 </head>
 
 <body class="min-h-screen bg-primary/5 text-ink">
@@ -66,13 +98,15 @@
         <main class="mt-4 md:mt-8">
             <!-- Video principal -->
             <div class=" mx-auto max-w-4xl sm:px-2 ">
-                <video id="fornuvi-video" class="w-full h-full object-cover sm:rounded-t-lg shadow-md" controls preload="metadata"
-                    poster="{{ asset('storage/videos/empresarios.jpg') }}">
-                    <source src="{{ asset('storage/videos/fornuvi_oportunidad.mp4') }}" type="video/mp4">
+                <video id="fornuvi-video" class="w-full h-full object-contain sm:rounded-t-lg shadow-md" controls
+                    preload="metadata" poster="{{ asset('storage/videos/empresarios.jpg') }}">
+                    <source src="{{ asset('storage/videos/oportunidad_fornuvi.mp4') }}" type="video/mp4">
                     Tu navegador no soporta la etiqueta de video. Considera actualizarlo.
                 </video>
-                <div class="p-4 md:p-6 text-center bg-gradient-to-r from-neutral-800 via-neutral-600 to-neutral-700 sm:rounded-b-lg " sm:rounded-b-lg shadow-md">
-                    <p class="font-medium text-base md:text-lg text-neutral-100">Mira este corto video y descubre cómo funciona.
+                <div class="p-4 md:p-6 text-center bg-gradient-to-r from-neutral-800 via-neutral-600 to-neutral-700 sm:rounded-b-lg "
+                    sm:rounded-b-lg shadow-md">
+                    <p class="font-medium text-base md:text-lg text-neutral-100">Mira este corto video y descubre cómo
+                        funciona.
                     </p>
                 </div>
             </div>
@@ -80,10 +114,10 @@
 
             <!-- Botón de WhatsApp -->
             <div class="text-center my-4 md:my-8 px-4">
-                <a id="whatsapp-button"
+                <a {{-- id="whatsapp-button" --}}
                     href="https://wa.me/+573145207814?text=Hola%2C%20vi%20el%20video%20de%20FORNUVI%20y%20quiero%20m%C3%A1s%20informaci%C3%B3n."
                     target="_blank" rel="noopener noreferrer"
-                    class="inline-flex items-center justify-center px-4 sm:px-8 py-3 sm:py-4 bg-primary hover:bg-secondary text-white font-bold text-base md:text-lg rounded-2xl shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 w-full sm:w-auto">
+                    class="inline-flex items-center justify-center px-4 sm:px-8 py-3 sm:py-4 bg-green-600 hover:bg-green-500 text-white font-bold text-base md:text-lg rounded-2xl shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 w-full sm:w-auto">
                     <i class="fab fa-whatsapp text-3xl mr-2"></i>
                     <span class="whitespace-normal">¡Quiero Más Información por WhatsApp!</span>
                 </a>
@@ -221,7 +255,7 @@
 
                     <a href="https://wa.me/+573145207814?text=Hola%2C%20vi%20la%20p%C3%A1gina%20de%20FORNUVI%20y%20estoy%20listo%20para%20saber%20m%C3%A1s."
                         target="_blank" rel="noopener noreferrer"
-                        class="inline-flex items-center justify-center px-4 sm:px-8 py-3 sm:py-4 bg-white hover:bg-white/95 text-primary font-bold text-base md:text-lg rounded-2xl shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 w-full sm:w-auto">
+                        class="inline-flex items-center justify-center px-4 sm:px-8 py-3 sm:py-4 bg-green-600 hover:bg-green-500 text-white font-bold text-base md:text-lg rounded-2xl shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 w-full sm:w-auto">
                         <i class="fab fa-whatsapp text-3xl mr-2"></i>
                         <span class="whitespace-normal">Sí, ¡Quiero Saber Cómo Empezar!</span>
                     </a>

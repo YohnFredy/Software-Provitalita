@@ -190,12 +190,12 @@
                         <span class="font-medium text-secondary">Derecha</span>
                     </div>
                     <div class="flex h-4 rounded-full overflow-hidden bg-white mb-1">
-                        <div class="bg-primary" style="width: {{ $leftPercentage }}%"></div>
-                        <div class="bg-secondary" style="width: {{ $rightPercentage }}%"></div>
+                        <div class="bg-primary" style="width: {{$currentUser->binaryPts?->left_points ?? 0 }}%"></div>
+                        <div class="bg-secondary" style="width: {{$currentUser->binaryPts?->right_points ?? 0 }}%"></div>
                     </div>
                     <div class="flex justify-between text-sm text-ink">
-                        <span>{{ $ptsLeft }} puntos</span>
-                        <span>{{ $ptsRight }} puntos</span>
+                        <span>{{$currentUser->binaryPts?->left_points ?? 0 }} puntos</span>
+                        <span>{{$currentUser->binaryPts?->right_points ?? 0 }} puntos</span>
                     </div>
                 </div>
 

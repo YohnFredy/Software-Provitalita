@@ -22,6 +22,8 @@ class RoleSeeder extends Seeder
 
         $this->createCategoryPermissions([$superadmin, $admin]);
         $this->createProductsPermissions([$superadmin, $admin]);
+
+        Permission::create(['name' => 'admin.factura'])->syncRoles([$superadmin, $admin]);
     }
 
     private function createCategoryPermissions($roles)

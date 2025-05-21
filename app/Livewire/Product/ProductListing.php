@@ -23,38 +23,27 @@ class ProductListing extends Component
     public $isPhysical = 'all';
     public $inStock = 'all';
     public $perPage = 12;
-    public $filter=false;
+    public $filter = false;
 
     public $showDropdown = false;
 
-    protected $updatesQueryString = [
-        'search',
-        'category',
-        'selectedBrand',
-        'priceMin',
-        'priceMax',
-        'sortBy',
-        'isPhysical',
-        'inStock'
-    ];
 
 
-    // Resetear paginación cuando cambia un filtro
-    public function updated($propertyName)
-    {
-        if (in_array($propertyName, ['search', 'category', 'selectedBrand', 'priceMin', 'priceMax', 'sortBy', 'isPhysical', 'inStock'])) {
-            $this->resetPage();
-            $this->filter = true;
-        }
-    }
-    
     #[On('showCategory')]
     public function showCategory($id)
     {
+        $this->clearFilters();
         $this->filter = true;
         $this->showDropdown = false;
         $this->category = $id;
         $this->resetPage();
+    }
+
+    public function updatedSearch($value)
+    {
+        $this->clearFilters();
+        $this->filter = true;
+        $this->search = $value;
     }
 
     // Limpiar filtros
@@ -74,7 +63,7 @@ class ProductListing extends Component
         $this->resetPage();
     }
 
- 
+
     #[Layout('components.layouts.app')]
     public function render()
     {

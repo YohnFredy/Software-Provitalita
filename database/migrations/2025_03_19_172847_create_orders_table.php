@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->restrictOnDelete();
             $table->string('contact');
             $table->string('phone');
+            $table->string('dni')->nullable();
+            $table->string('email')->nullable();
             $table->tinyInteger('status')->default(1)->unsigned();
             $table->string('payment_method')->nullable();
             $table->enum('envio_type', ['store', 'delivery']); // Cambié a nombres más descriptivos

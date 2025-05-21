@@ -80,6 +80,11 @@ class User extends Authenticatable
         return $this->hasOne(BinaryTotal::class);
     }
 
+    public function binaryPts()
+    {
+        return $this->hasOne(BinaryPoint::class);
+    }
+
     public function unilevel()
     {
         return $this->hasOne(Unilevel::class);

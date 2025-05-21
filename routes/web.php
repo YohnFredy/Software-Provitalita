@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
@@ -57,6 +58,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('order/create', OrderCreate::class)->name('orders.create');
     Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('orders/{order}/show', [OrderController::class, 'show'])->name('orders.show');
+
+    
 
     //Pasarela de pagos Bold
     Route::get('/checkout/bold/{order}', [OrderController::class, 'boldCheckout'])->name('bold.checkout');

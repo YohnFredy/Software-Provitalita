@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->decimal('price', 10, 2)->default(0); // 10,2 permite precios grandes sin desperdiciar espacio
-            $table->decimal('commission_income', 8, 2)->default(0);
+            $table->tinyInteger('commission_income')->default(0);
             $table->decimal('pts_base', 8, 2)->default(0);
             $table->decimal('pts_bonus', 8, 2)->default(0);
             $table->decimal('pts_dist', 8, 2)->default(0);
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->text('information')->nullable();
             $table->boolean('is_physical')->default(true);
             $table->integer('stock')->nullable(); // Solo para productos físicos
-            $table->boolean('allow_backorder')->default(false); 
+            $table->boolean('allow_backorder')->default(false);
             $table->foreignId('category_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null');
             $table->foreignId('brand_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null');
             $table->boolean('is_active')->default(true);

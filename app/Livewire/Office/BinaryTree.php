@@ -73,6 +73,11 @@ class BinaryTree extends Component
             'right' => $user->binaryTotal?->right_affiliates ?? 0
         ];
 
+        $PtsBinary = [
+            'left' => $user->binaryPts?->left_points ?? 0,
+            'right' => $user->binaryPts?->right_points ?? 0
+        ];
+
         $branch = [
             'level' => $level,
             'id' => $user->id,
@@ -81,6 +86,8 @@ class BinaryTree extends Component
             'position' => $user->binary?->side ?? 'right',
             'left' => $totalBinary['left'],
             'right' => $totalBinary['right'],
+            'ptsLeft' => $PtsBinary['left'],
+            'ptsRight' => $PtsBinary['right'],
         ];
 
         if ($level < self::MAX_TREE_LEVEL) {

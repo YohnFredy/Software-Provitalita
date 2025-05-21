@@ -18,6 +18,14 @@
                         <x-input wire:model.blur="phone" label="Teléfono de contacto:" type="tel" for="phone"
                             required placeholder="Ej: +57 300 123 4567" />
                     </div>
+                    <div>
+                        <x-input wire:model.blur="dni" label="Número de documento:" type="text" for="dni"
+                            required placeholder="Número de documento" />
+                    </div>
+                    <div>
+                        <x-input wire:model.blur="email" label="Correo electrónico:" type="email" for="email"
+                            required autocomplete="email" placeholder="Correo electrónico:" />
+                    </div>
                 </div>
 
                 {{-- Ubicación --}}
@@ -122,7 +130,7 @@
                             <span class="font-medium">${{ number_format($shipping_cost, 0, ',', '.') }}</span>
                         </li>
 
-                        
+
 
                         <li class="flex justify-between py-4">
                             <span class="font-semibold">Total</span>

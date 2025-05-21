@@ -1,6 +1,10 @@
 <div>
-    <h1 class=" font-bold mb-2 text-palette-200">
-        {{ $isEditMode ? 'Editar producto' : 'Crear porducto' }}</h1>
+    <div class=" flex justify-between items-center mb-2">
+        <h1 class=" font-bold  text-palette-200">
+            {{ $isEditMode ? 'Editar producto' : 'Crear porducto' }}</h1>
+        @livewire('admin.products.calculadora-financiera')
+    </div>
+
     <div class="p-4 rounded-lg bg-white border border-palette-200/25 shadow-lg shadow-palette-800">
         <form wire:submit.prevent="{{ $isEditMode ? 'update' : 'save' }}" x-on:submit="$refs.fileInput.value = ''">
             <div class=" grid grid-cols-6 gap-4 gap-y-2">
