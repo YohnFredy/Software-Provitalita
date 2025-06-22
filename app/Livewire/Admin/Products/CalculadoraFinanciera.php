@@ -92,6 +92,7 @@ class CalculadoraFinanciera extends Component
         $this->dispatch(
             'calculadora-financiera',
             precioPublico: $this->precioPublico,
+            ivaPorcentaje: $this->ivaPorcentaje,
             pts_base: $this->pts_base,
             bonoInicioPorcentaje: $this->bonoInicioPorcentaje,
             pts_bono: $this->pts_bono,

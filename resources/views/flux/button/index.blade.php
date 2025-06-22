@@ -71,7 +71,7 @@ $classes = Flux::classes()
         'filled' => 'bg-zinc-800/5 hover:bg-zinc-800/10 dark:bg-white/10 dark:hover:bg-white/20',
         'outline' => 'bg-white hover:bg-neutral-50',
         'danger' => 'bg-danger hover:bg-danger/90',
-        'ghost' => 'bg-transparent hover:bg-zinc-800/5 dark:hover:bg-white/15',
+        'ghost' => 'bg-transparent hover:bg-zinc-800/5 dark:hover:bg-zinc-800/5',
         'subtle' => 'bg-transparent hover:bg-zinc-800/5 dark:hover:bg-white/15',
     })
     ->add(match ($variant) { // Text color...
@@ -79,7 +79,7 @@ $classes = Flux::classes()
         'filled' => 'text-zinc-800 dark:text-white',
         'outline' => 'text-primary hover:text-secondary',
         'danger' => 'text-white',
-        'ghost' => 'text-zinc-800 dark:text-white',
+        'ghost' => 'text-zinc-800 dark:text-zinc-800',
         'subtle' => 'text-zinc-400 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-white',
     })
     ->add(match ($variant) { // Border color...

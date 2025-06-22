@@ -15,9 +15,18 @@
                 </div>
 
                 <div class=" col-span-6 md:col-span-1">
-                    <x-input type="number" label="Precio:" for="price" wire:model.blur="price" step="0.01"
+                    <x-input type="number" label="Precio publico:" for="public_price" wire:model.blur="public_price" step="0.01"
                         min="0" required />
                 </div>
+                <div class=" col-span-6 md:col-span-1">
+                    <x-input type="number" label="iva %:" for="tax_percent" wire:model.blur="tax_percent" step="0.01"
+                        min="0" required />
+                </div>
+                <div class=" col-span-6 md:col-span-1">
+                    <x-input type="number" label="Precio sin iva" for="price" wire:model.live="price" step="0.01"
+                        min="0" disabled required />
+                </div>
+
                 <div class=" col-span-6 md:col-span-1">
                     <x-input type="number" label="Comisione inicio:" for="commission_income"
                         wire:model="commission_income" step="0.01" min="0" required />

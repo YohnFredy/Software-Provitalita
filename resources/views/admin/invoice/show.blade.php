@@ -99,9 +99,7 @@
             <div class="bg-secondary/5 p-6">
                 <div class="flex justify-between items-center">
                     <div class="flex items-center">
-
-                        <img src="{{ asset('storage/images/logo_fornuvi.png') }}" alt="" class=" object-cover h-12 ">
-
+                        <x-app-logo-icon class="fill-current" />
                     </div>
                     <div class="text-right">
                         <h2 class="text-xl font-semibold text-ink/70">

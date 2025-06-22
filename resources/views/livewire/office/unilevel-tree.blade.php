@@ -25,16 +25,17 @@
     <!-- Leyenda de árbol -->
     <div class="bg-white p-4 rounded-lg mb-4 shadow-md shadow-ink border border-zinc-200">
         <div class="flex flex-wrap items-center gap-4">
-            <span class="font-semibold text-primary"><i class="fas fa-info-circle bg-white mr-1"></i>
+            <span class="font-semibold text-premium"><i class="fas fa-info-circle bg-white mr-1"></i>
                 Rango: Asociado:</span>
             <div class="flex items-center">
-                <div class="w-4 h-4 rounded-full bg-neutral-300 mr-2"></div>
-                <span>Usuario Activo</span>
-            </div>
 
-            <div class="flex items-center">
-                <div class="w-4 h-4 rounded-full bg-danger mr-2"></div>
-                <span>Inactivo</span>
+                @if ($activo == true)
+                    <div class="w-4 h-4 rounded-full bg-primary mr-2"></div>
+                    <span>Usuario Activo</span>
+                @else
+                    <div class="w-4 h-4 rounded-full bg-neutral-300 mr-2"></div>
+                    <span>Usuario Inactivo</span>
+                @endif
             </div>
         </div>
     </div>
@@ -49,29 +50,52 @@
                 <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-primary"></i>
             </div>
 
-            <div class="col-span-3 sm:col-span-1">
-                <select
-                    class=" w-full text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 border rounded-lg focus:ring-2 focus:ring-primary/30 focus:border-primary bg-white transition-colors">
-                    <option value="">Niveles</option>
-                    <option value="1" disabled>Nivel 1</option>
-                    <option value="2" disabled>Nivel 2</option>
-                    <option value="3" disabled>Nivel 3</option>
-                </select>
+            <div class="relative col-span-3 sm:col-span-1">
+                <div class="col-span-3 sm:col-span-1">
+                    <select wire:model.live="selectedLevels"
+                        class="block w-full bg-neutral-50/50 appearance-none border border-gray-300 text-primary text-sm rounded-lg 
+                            focus:outline-1 focus:outline-primary focus:bg-white p-2.5 cursor-pointer">
+                        <option value="">Niveles</option>
+                        <option value="2">2 Niveles</option>
+                        <option value="3">3 Niveles</option>
+                        <option value="4">4 Niveles</option>
+                        <option value="5">5 Niveles</option>
+                    </select>
+
+                    <div class="absolute inset-y-0 right-2.5 top-1 flex items-center pointer-events-none">
+                        <svg class="w-4 h-4 text-primary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
             </div>
-            <div class="col-span-3 sm:col-span-1">
+            <div class=" relative col-span-3 sm:col-span-1">
                 <select
-                    class=" w-full text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 border rounded-lg focus:ring-2 focus:ring-primary/30 focus:border-primary bg-white transition-colors">
+                    class="block w-full bg-neutral-50/50 appearance-none border border-gray-300 text-primary text-sm rounded-lg focus:outline-1 focus:outline-primary focus:bg-white p-2.5 cursor-pointer">
                     <option value="">Estados</option>
                     <option value="active" disabled>Activos</option>
                     <option value="pending" disabled>Pendientes</option>
                     <option value="inactive" disabled>Inactivos</option>
                 </select>
+
+                <div class="absolute inset-y-0 right-2.5 top-1 flex items-center pointer-events-none">
+                    <svg class="w-4 h-4 text-primary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Contenedor principal del árbol con navegación -->
-    <div class="sm:shadow-md shadow-ink rounded-lg py-2" x-data="treeZoom()">
+    <div class="sm:shadow-md shadow-ink rounded-lg py-2" x-data="treeZoom()"
+        @recalculate-tree-height.window="recalculate()">
         <!-- Control de navegación -->
         <div class="flex justify-between px-4">
             <div class="flex items-center space-x-2">
@@ -162,7 +186,8 @@
             <div class="p-6">
                 <div class="mb-4">
                     <div class="relative">
-                        <input disabled type="text" wire:model="searchUser" placeholder="Buscar por username o email"
+                        <input disabled type="text" wire:model="searchUser"
+                            placeholder="Buscar por username o email"
                             class="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring focus:ring-primary/30 focus:border-primary">
                         <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
                     </div>

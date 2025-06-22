@@ -1,23 +1,15 @@
-<div class="flex items-center">
-    <input 
-        wire:model.live="terms" 
-        type="checkbox" 
-        class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded-sm focus:ring-secondary focus:ring-2"
-    >
-    <label for="terms-checkbox" class="ms-2 text-sm font-medium text-primary flex items-center">
-        Acepto los
+<flux:field variant="inline">
+    <flux:checkbox wire:model.live="terms"  />
+    
+    <flux:label> Acepto los
         <flux:modal.trigger name="edit-profile">
             <span class="font-medium text-secondary hover:underline cursor-pointer ml-1">
-                Términos y Condiciones
+                Términos y Condiciones.
             </span>
-        </flux:modal.trigger>
-    </label>
-</div>
+        </flux:modal.trigger></flux:label>
 
-@error('terms')
-    <p class="text-sm text-danger">{{ $message }}</p>
-@enderror
-
+    <flux:error name="terms" />
+</flux:field>
 
 <flux:modal name="edit-profile" class="w-full">
 

@@ -16,6 +16,13 @@
             'route' => 'products.index',
             'routeIs' => 'products*',
         ],
+         [
+            'type' => 'route',
+            'name' => 'Compañias',
+            'icon' => 'building-storefront',
+            'route' => 'companies.index',
+            'routeIs' => 'companies.index',
+        ],
         [
             'type' => 'anchor',
             'name' => 'Contáctanos',
@@ -40,11 +47,12 @@
     @include('partials.head')
 </head>
 
-<body class="min-h-screen bg-white text-ink">
+<body class="min-h-screen bg-white dark:bg-white text-ink">
     <flux:header container class="border-b border-zinc-200 shadow-md shadow-primary/50">
-        <flux:sidebar.toggle class="lg:hidden text-danger! hover:text-primary!" icon="bars-2" inset="left" />
+        <flux:sidebar.toggle class="lg:hidden bg-danger/3!  text-danger! hover:bg-secondary/5! hover:text-primary" icon="bars-3" inset="left" />
+     
 
-        <a href="{{ route('home') }}" class="ml-2 mr-5 flex items-center space-x-2 lg:ml-0" wire:navigate>
+        <a href="{{ route('home') }}" class="ml-2 sm:ml-3 mr-5 lg:ml-0" wire:navigate>
             <x-app-logo />
         </a>
 
@@ -69,20 +77,19 @@
         <!-- Desktop User Menu -->
         <flux:dropdown position="top" align="end">
             @auth
-                <flux:profile class="cursor-pointer" :initials="auth()->user()->initials()" />
-
+                <flux:profile class="cursor-pointer text-white" :initials="auth()->user()->initials()" />
                 <flux:menu>
                     <flux:menu.radio.group>
                         <div class="p-0 text-sm font-normal">
                             <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                                 <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg">
                                     <span
-                                        class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black">
+                                        class="flex h-full w-full items-center justify-center rounded-lg bg-premium text-white">
                                         {{ auth()->user()->initials() }}
                                     </span>
                                 </span>
 
-                                <div class="grid flex-1 text-left text-sm leading-tight">
+                                <div class="grid flex-1 text-left text-sm leading-tight text-ink">
                                     <span class="truncate font-semibold">{{ auth()->user()->name }}</span>
                                     <span class="truncate text-xs">{{ auth()->user()->email }}</span>
                                 </div>
@@ -125,7 +132,7 @@
         <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
         <a href="{{ route('home') }}" class="ml-1 flex items-center space-x-2" wire:navigate>
-            <x-app-logo />
+            <x-side-app-logo />
         </a>
 
         <flux:navlist variant="outline">

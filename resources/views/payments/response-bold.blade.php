@@ -9,7 +9,8 @@
                     <a href="" class="bg-primary text-white  px-4 py-2 rounded hover:bg-secondary">Ver mis
                         pedidos</a>
                 @else
-                    <a href="" class="bg-primary text-white px-4 py-2 rounded hover:bg-secondary">Volver a la
+                    <a href="{{ route('products.index') }}"
+                        class="bg-primary text-white px-4 py-2 rounded hover:bg-secondary">Volver a la
                         tienda</a>
                 @endif
             </div>

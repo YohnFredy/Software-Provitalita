@@ -23,7 +23,7 @@
                         <div class="col-span-4 lg:col-span-2 flex items-center justify-center">
                             <div class="text-sm">
                                 <p class=" text-primary">
-                                    ${{ number_format($product['price'], 0) }}
+                                    ${{ number_format($product['final_price'], 0) }}
                                 </p>
 
                               {{--   <p class=" text-premium mt-2"> Pts_base: {{ $product['pts_base'] }}</p> --}}

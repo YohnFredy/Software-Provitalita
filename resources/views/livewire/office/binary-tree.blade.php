@@ -25,16 +25,17 @@
     <!-- Leyenda de árbol -->
     <div class="bg-white p-4 rounded-lg mb-4 shadow-md shadow-ink border border-zinc-200">
         <div class="flex flex-wrap items-center gap-4">
-            <span class="font-semibold text-primary"><i class="fas fa-info-circle bg-white mr-1"></i>
+            <span class="font-semibold text-premium"><i class="fas fa-info-circle bg-white mr-1"></i>
                 Rango: Asociado:</span>
             <div class="flex items-center">
-                <div class="w-4 h-4 rounded-full bg-neutral-300 mr-2"></div>
-                <span>Usuario Activo</span>
-            </div>
 
-            <div class="flex items-center">
-                <div class="w-4 h-4 rounded-full bg-danger mr-2"></div>
-                <span>Inactivo</span>
+                @if ($activo == true)
+                    <div class="w-4 h-4 rounded-full bg-primary mr-2"></div>
+                    <span>Usuario Activo</span>
+                @else
+                    <div class="w-4 h-4 rounded-full bg-neutral-300 mr-2"></div>
+                    <span>Usuario Inactivo</span>
+                @endif
             </div>
         </div>
     </div>
@@ -50,32 +51,53 @@
                 <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-primary"></i>
             </div>
 
-            <div class="col-span-3 sm:col-span-1">
-                <select
-                    class=" w-full text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 border rounded-lg focus:ring-2 focus:ring-primary/30 focus:border-primary bg-white transition-colors">
+            <div class="relative col-span-3 sm:col-span-1">
+                <select wire:model.live="selectedLevels"
+                    class="block w-full bg-neutral-50/50 appearance-none border border-gray-300 text-primary text-sm rounded-lg 
+                            focus:outline-1 focus:outline-primary focus:bg-white p-2.5 cursor-pointer">
                     <option value="">Niveles</option>
-                    <option value="1" disabled>Nivel 1</option>
-                    <option value="2" disabled>Nivel 2</option>
-                    <option value="3" disabled>Nivel 3</option>
+                    <option value="3">3 Niveles</option>
+                    <option value="4">4 Niveles</option>
+                    <option value="5">5 Niveles</option>
+                    <option value="6">6 Niveles</option>
+                    <option value="7">7 Niveles</option>
                 </select>
+
+                <div class="absolute inset-y-0 right-2.5 top-1 flex items-center pointer-events-none">
+                    <svg class="w-4 h-4 text-primary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </div>
             </div>
-            <div class="col-span-3 sm:col-span-1">
+            <div class=" relative col-span-3 sm:col-span-1">
                 <select
-                    class=" w-full text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 border rounded-lg focus:ring-2 focus:ring-primary/30 focus:border-primary bg-white transition-colors">
+                    class="block w-full bg-neutral-50/50 appearance-none border border-gray-300 text-primary text-sm rounded-lg focus:outline-1 focus:outline-primary focus:bg-white p-2.5 cursor-pointer">
                     <option value="">Estados</option>
                     <option value="active" disabled>Activos</option>
                     <option value="pending" disabled>Pendientes</option>
                     <option value="inactive" disabled>Inactivos</option>
                 </select>
+
+                <div class="absolute inset-y-0 right-2.5 top-1 flex items-center pointer-events-none">
+                    <svg class="w-4 h-4 text-primary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </div>
             </div>
-
         </div>
-
-
     </div>
 
     <!-- Contenedor principal del árbol con navegación -->
-    <div class="sm:shadow-md shadow-ink rounded-lg py-2" x-data="treeZoom()">
+    <div class="sm:shadow-md shadow-ink rounded-lg py-2" x-data="treeZoom()"
+        @recalculate-tree-height.window="recalculate()">
+
+
         <!-- Control de navegación -->
         <div class="flex justify-between px-4">
             <div class="flex items-center space-x-2">
@@ -99,22 +121,25 @@
             </div>
         </div>
 
-        <!-- Indicador de carga -->
-        <div x-show="!isLoaded" class="flex justify-center items-center py-12">
-            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-        </div>
+        <!-- Contenedor del Árbol y el Spinner -->
+        <div class="relative min-h-[50vh]">
+            <!-- Indicador de carga: se muestra MIENTRAS !isLoaded -->
+            <div x-show="!isLoaded" x-transition
+                class="absolute inset-0 flex justify-center items-center py-12 bg-white/50">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            </div>
 
-        <!-- Árbol binario -->
-        <div class="flex justify-center overflow-hidden transition-all duration-300 min-h-[50vh]"
-            :style="`height: ${isLoaded ? containerHeight : '50vh'}px`">
-            <div class="caja">
-                <div id="tree-container" class="tree px-2 transform-gpu transition-transform duration-300"
-                    x-ref="treeContainer"
-                    :style="`transform: scale(${currentZoom}, ${currentZoom}); transform-origin: top center;`"
-                    @transitionend="updateContainerHeight()">
-                    <ul>
-                        @include('livewire.office.children-binary', ['node' => $tree])
-                    </ul>
+            <!-- Árbol binario: se oculta HASTA que isLoaded sea true -->
+            <div class="flex justify-center overflow-hidden transition-all duration-300"
+                :style="`height: ${isLoaded ? containerHeight + 'px' : '50vh'}; visibility: ${isLoaded ? 'visible' : 'hidden'}`">
+                <div class="caja">
+                    <div id="tree-container" class="tree px-2 transform-gpu transition-transform duration-300"
+                        x-ref="treeContainer" :style="`transform: scale(${currentZoom}); transform-origin: top center;`"
+                        @transitionend="updateContainerHeight()">
+                        <ul>
+                            @include('livewire.office.children-binary', ['node' => $tree])
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -190,12 +215,14 @@
                         <span class="font-medium text-secondary">Derecha</span>
                     </div>
                     <div class="flex h-4 rounded-full overflow-hidden bg-white mb-1">
-                        <div class="bg-primary" style="width: {{$currentUser->binaryPts?->left_points ?? 0 }}%"></div>
-                        <div class="bg-secondary" style="width: {{$currentUser->binaryPts?->right_points ?? 0 }}%"></div>
+                        <div class="bg-primary" style="width: {{ $currentUser->binaryPts?->left_points ?? 0 }}%">
+                        </div>
+                        <div class="bg-secondary" style="width: {{ $currentUser->binaryPts?->right_points ?? 0 }}%">
+                        </div>
                     </div>
                     <div class="flex justify-between text-sm text-ink">
-                        <span>{{$currentUser->binaryPts?->left_points ?? 0 }} puntos</span>
-                        <span>{{$currentUser->binaryPts?->right_points ?? 0 }} puntos</span>
+                        <span>{{ $currentUser->binaryPts?->left_points ?? 0 }} puntos</span>
+                        <span>{{ $currentUser->binaryPts?->right_points ?? 0 }} puntos</span>
                     </div>
                 </div>
 

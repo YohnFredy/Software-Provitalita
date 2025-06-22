@@ -69,6 +69,8 @@ class ProductShow extends Component
 
         // Refrescar los datos del carrito en Livewire
         $this->cart = session()->get('cart', []);
+
+        $this->dispatch('update-cart'); 
     }
 
     #[Layout('components.layouts.app')]

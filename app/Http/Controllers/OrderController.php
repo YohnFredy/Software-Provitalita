@@ -90,7 +90,7 @@ class OrderController extends Controller
         ];
         $subtotal=0;
         foreach ($order->items as $item) {
-            $subtotal += $item->price;
+            $subtotal += $item->final_price * $item->quantity;
         }
 
 

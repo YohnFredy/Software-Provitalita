@@ -28,7 +28,7 @@ class Cart extends Component
                 'id' => $product->id,
                 'name' => $product->name,
                 'description' => $product->description,
-                'price' => $product->price,
+                'final_price' => $product->final_price,
                 'pts_base' => $product->pts_base,
                 'path' => $product->latestImage->path,
                 'quantity' => $item['quantity'],
@@ -87,9 +87,11 @@ class Cart extends Component
         $this->total = 0;
         foreach ($this->products as $product) {
 
-            $this->total += $product['quantity'] * $product['price'];
+            $this->total += $product['quantity'] * $product['final_price'];
             $this->quantity += $product['quantity'];
         }
+
+        $this->dispatch('update-cart'); 
 
         return view('livewire.product.cart');
     }

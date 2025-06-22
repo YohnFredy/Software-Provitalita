@@ -10,3 +10,8 @@ Route::get('dashboard', Dashboard::class)->name('dashboard');
 Route::get('binary/tree', BinaryTree::class)->name('binary-tree');
 Route::get('unilevel/tree', UnilevelTree::class)->name('unilevel-tree');
 
+
+Route::get('upload-invoice', function () {
+        return view('office.pages.upload-invoice');
+    })->name('invoice.upload');
+

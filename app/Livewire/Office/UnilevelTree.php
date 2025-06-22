@@ -14,17 +14,29 @@ class UnilevelTree extends Component
     public User $currentUser;
     public int $secondaryUserId;
     public int $primaryUserId;
-
-    private const MAX_TREE_LEVEL = 100;
+    public int $activo = 0;
+    public $levels = 2, $selectedLevels = '';
 
     public function mount(): void
     {
         $this->resetTree();
     }
 
+    public function updatedSelectedLevels($value)
+    {
+        // Si el valor está vacío (opción "Niveles"), usamos un valor por defecto.
+        // Si no, usamos el valor seleccionado.
+        $this->levels = $value ?: 2; // Usará 4 si $value es ""
+         $this->dispatch('recalculate-tree-height');
+    }
+
     public function resetTree(): void
     {
-        $this->currentUser = Auth::user();
+        $user = Auth::user();
+        $this->currentUser = $user;
+
+        $this->activo = (int) ($user->activation?->is_active ?? false);
+
         $this->primaryUserId = $this->currentUser->id;
         $this->secondaryUserId = $this->currentUser->id;
     }
@@ -44,7 +56,7 @@ class UnilevelTree extends Component
             'total_affiliates' => $user->unilevelTotal?->total_affiliates ?? 0,
         ];
 
-        if ($level < self::MAX_TREE_LEVEL) {
+        if ($level < $this->levels) {
             $branch['children'] = $this->getChildrenBranches($user->id, $level);
         }
 
@@ -74,6 +86,8 @@ class UnilevelTree extends Component
         } else {
             $this->secondaryUserId = $this->currentUser->id;
         }
+
+        $this->dispatch('recalculate-tree-height');
     }
 
     #[Layout('components.layouts.office')]

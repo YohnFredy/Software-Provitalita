@@ -19,7 +19,7 @@ class ProductForm extends Component
 
     public ?Product $product;
 
-    public $name = '', $description = '', $price = 0, $commission_income = 0, $pts_base = 0, $pts_bonus = 0, $pts_dist = 0, $maximum_discount = 0, $specifications = '', $information = '', $is_physical = 1, $stock = 0, $allow_backorder = 1, $category_id = '', $brand_id = null, $is_active = 1;
+    public $name = '', $description = '', $price = 0, $public_price = 0, $tax_percent = 19, $commission_income = 0, $pts_base = 0, $pts_bonus = 0, $pts_dist = 0, $maximum_discount = 0, $specifications = '', $information = '', $is_physical = 1, $stock = 0, $allow_backorder = 1, $category_id = '', $brand_id = null, $is_active = 1;
 
 
     public $newImages = [],  $images = [];
@@ -49,6 +49,33 @@ class ProductForm extends Component
             'hasChildCategories' => 'required|boolean|accepted',
         ];
     }
+
+    // Método para asegurar que los valores vacíos se convierten en 0
+    private function getValidValue($value)
+    {
+        return $value === '' ? 0 : $value;
+    }
+
+    public function updatedPublicPrice($valor)
+    {
+        // Aseguramos que los valores sean válidos
+        $this->tax_percent = $this->getValidValue($this->tax_percent);
+        $valor = $this->getValidValue($valor);
+
+        // Cálculo de precio
+        $this->price = $valor / (1 + ($this->tax_percent / 100));
+    }
+
+    public function updatedTaxPercent($valor)
+    {
+        // Aseguramos que los valores sean válidos
+        $this->public_price = $this->getValidValue($this->public_price);
+        $valor = $this->getValidValue($valor);
+
+        // Cálculo de precio
+        $this->price = $this->public_price / (1 + ($valor / 100));
+    }
+
 
     public function mount(Product $product)
     {
@@ -103,15 +130,24 @@ class ProductForm extends Component
     }
 
     #[On('calculadora-financiera')]
-    public function updateDatos($precioPublico, $pts_base, $bonoInicioPorcentaje, $pts_bono, $descuentoPorcentaje, $pts_dist)
+    public function updateDatos($precioPublico, $ivaPorcentaje, $pts_base, $bonoInicioPorcentaje, $pts_bono, $descuentoPorcentaje, $pts_dist)
     {
 
-        $this->price = $precioPublico;
+        $this->public_price = $precioPublico;
+        $this->tax_percent = $ivaPorcentaje;
         $this->commission_income = $bonoInicioPorcentaje;
         $this->pts_base = $pts_base;
         $this->pts_bonus = $pts_bono;
         $this->pts_dist = $pts_dist;
         $this->maximum_discount = $descuentoPorcentaje;
+
+
+        // Aseguramos que los valores sean válidos
+        $this->tax_percent = $this->getValidValue($this->tax_percent);
+        $valor = $this->getValidValue($this->public_price);
+
+        // Cálculo de precio
+        $this->price = $valor / (1 + ($this->tax_percent / 100));
     }
 
 

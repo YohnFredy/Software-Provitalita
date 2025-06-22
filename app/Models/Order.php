@@ -9,7 +9,42 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['public_order_number', 'user_id', 'contact', 'phone', 'dni', 'email', 'status', 'payment_method', 'envio_type', 'discount', 'shipping_cost', 'total', 'total_pts', 'country_id', 'department_id', 'city_id', 'addCity', 'address', 'additional_address', 'payment_id'];
+    protected $fillable = [
+        'public_order_number',
+        'user_id',
+        'contact',
+        'phone',
+        'dni',
+        'email',
+        'status',
+        'payment_method',
+        'envio_type',
+        'subtotal',
+        'discount',
+        'taxable_amount',
+        'tax_amount',
+        'shipping_cost',
+        'total',
+        'total_pts',
+        'country_id',
+        'department_id',
+        'city_id',
+        'addCity',
+        'address',
+        'additional_address',
+    ];
+
+    protected $casts = [
+        'subtotal' => 'decimal:2',
+        'discount' => 'decimal:2',
+        'taxable_amount' => 'decimal:2',
+        'tax_amount' => 'decimal:2',
+        'shipping_cost' => 'decimal:2',
+        'total' => 'decimal:2',
+        'total_pts' => 'decimal:2',
+        'status' => 'integer',
+    ];
+
 
     const STATUS_SALE_PENDING = 1;
     const STATUS_SALE_APPROVED = 2;

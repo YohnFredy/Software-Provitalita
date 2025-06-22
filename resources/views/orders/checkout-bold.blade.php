@@ -1,5 +1,5 @@
 <x-layouts.app>
-    <div class=" space-y-4">
+    <div class=" space-y-4 ">
         <div class="bg-white rounded-lg p-4 sm:p-6 shadow-md border border-neutral-200">
             <h1 class="text-xl sm:text-2xl font-bold text-primary mb-2">Detalles de Pago</h1>
             <div class="flex flex-wrap items-center gap-2">
@@ -104,10 +104,10 @@
 
                 {{-- Información Envío --}}
                 <div class="bg-secondary/5 border border-secondary/30 rounded-lg p-3 sm:p-5">
-                    <h3 class="font-semibold text-danger mb-2">Información importante sobre el envío</h3>
+                    <h3 class=" text-xl font-semibold text-danger mb-2">Información importante sobre el envío</h3>
 
-                    <ul class="space-y-2 text-sm text-gray-700">
-                        <li class="flex items-start">
+                    <ul class="space-y-2 text-base text-gray-700">
+                        <li class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mr-2 flex-shrink-0"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -115,7 +115,7 @@
                             </svg>
                             <span>El costo del envío se pagará contra entrega directamente al repartidor.</span>
                         </li>
-                        <li class="flex items-start">
+                        <li class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mr-2 flex-shrink-0"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -124,7 +124,7 @@
                             <span>Solo necesitas pagar ahora el valor del producto a través de nuestra pasarela
                                 segura.</span>
                         </li>
-                        <li class="flex items-start">
+                        <li class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mr-2 flex-shrink-0"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -139,7 +139,7 @@
         </div>
 
         <!-- Order Summary -->
-        <div class="bg-white rounded-lg p-4 sm:p-6 shadow-md border border-neutral-200">
+        <div class="sm:bg-white sm:rounded-lg pt-8  sm:p-6 sm:shadow-md sm:border sm:border-neutral-200">
             <h2 class="text-lg font-semibold text-primary uppercase flex items-center gap-2 mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -148,8 +148,8 @@
                 </svg>
                 Resumen de Pedido
             </h2>
-            <div class="overflow-x-auto -mx-4 sm:mx-0 rounded-lg border border-neutral-200">
-                <table class="w-full text-sm text-left rtl:text-right text-neutral-600">
+            <div class="overflow-x-auto  sm:mx-0 rounded-lg border border-neutral-200">
+                <table class="w-full  text-sm text-left rtl:text-right text-neutral-600">
                     <thead class="text-xs bg-primary text-white uppercase">
 
                         <tr>
@@ -182,9 +182,11 @@
                                     </div>
                                 </th>
                                 <td class="px-2 sm:px-6 py-3 text-center">{{ $item->quantity }}</td>
-                                <td class="px-2 sm:px-6 py-3 text-center">${{ number_format($item->price, 0) }}</td>
+                                <td class="px-2 sm:px-6 py-3 text-center">${{ number_format($item->final_price, 0) }}
+                                </td>
                                 <td class="px-2 sm:px-6 py-3 text-center">{{ number_format($item->pts, 2) }}</td>
-                                <td class="px-2 sm:px-6 py-3 text-center">${{ number_format($item->subtotal, 0) }}
+                                <td class="px-2 sm:px-6 py-3 text-center">
+                                    ${{ number_format($item->final_price * $item->quantity, 0) }}
                                 </td>
 
                             </tr>
@@ -192,25 +194,47 @@
                     </tbody>
                 </table>
             </div>
+
             <div class=" sm:flex justify-end">
                 <div class="mt-4 sm:w-1/2">
                     <div class="flex justify-between items-center border-t pt-2">
-                        <span class="font-semibold">Subtotal:</span>
+                        <span class="font-semibold">Subtotal productos:</span>
                         <span>${{ number_format($subtotal, 0) }}</span>
                     </div>
-                    <div class="flex justify-between items-center">
-                        <span class="font-semibold">Descuento:</span>
-                        <span class="text-danger">- ${{ number_format($order->discount, 0) }}</span>
+
+                    @if ($order->discount > 0)
+                        <div class="flex justify-between items-center border-t pt-2 ">
+                            <span class="font-semibold">Descuento:</span>
+                            <span class="text-danger">- ${{ number_format($order->discount, 0) }}</span>
+                        </div>
+                        <div class="flex justify-between items-center border-t pt-2">
+                            <span class="font-semibold"> Subtotal descuento:</span>
+                            <span>${{ number_format($subtotal - $order->discount, 0) }}</span>
+                        </div>
+                    @endif
+
+                    <div class="flex justify-between items-center border-t pt-2">
+                        <span class="font-semibold"> Subtotal (Sin IVA):</span>
+                        <span>${{ number_format($order->taxable_amount, 0) }}</span>
                     </div>
-                    {{-- <div class="flex justify-between items-center">
-                        <span class="font-semibold">Envío:</span>
-                        <span>${{ number_format($order->shipping_cost, 0) }}</span>
-                    </div> --}}
-                    <div class="flex justify-between items-center text-lg font-semibold mt-2">
-                        <span>Total a Pagar:</span>
-                        <span class=" font-normal">${{ number_format($order->total, 0) }}</span>
+
+                    <div class="flex justify-between items-center border-t pt-2">
+                        <span class="font-semibold"> IVA:</span>
+                        <span>${{ number_format($order->tax_amount, 0) }}</span>
                     </div>
-                    <div class="flex justify-between items-center text-sm text-primary mt-1">
+
+                    @if ($order->shipping_cost > 0)
+                        <div class="flex justify-between items-center border-t pt-2">
+                            <span class="font-semibold">Envío:</span>
+                            <span>${{ number_format($order->shipping_cost, 0) }}</span>
+                        </div>
+                    @endif
+
+                    <div class="flex justify-between items-center border-t pt-2">
+                        <span class="font-semibold">Total a Pagar:</span>
+                        <span class="">${{ number_format($order->total, 0) }}</span>
+                    </div>
+                    <div class="flex justify-between items-center text-sm text-primary mt-1 border-t pt-2">
                         <span>Puntos Acumulados:</span>
                         <span>{{ $order->total_pts }} pts</span>
                     </div>
@@ -218,9 +242,9 @@
             </div>
         </div>
 
-        <div class="space-y-6">
+        <div class="space-y-6 border-t-2 pt-8 sm:border-t-0 sm:pt-0">
             <!-- Payment Methods -->
-            <div class="bg-white rounded-lg p-5 sm:p-6 shadow-md border border-neutral-200">
+            <div class="sm:bg-white rounded-lg sm:p-6 sm:shadow-md sm:border sm:border-neutral-200">
                 <h2 class="text-lg sm:text-xl font-semibold text-primary uppercase mb-4">Métodos de Pago</h2>
 
                 <div class="space-y-5">
@@ -228,29 +252,51 @@
                     <div class="bg-neutral-50 p-4 sm:p-5 rounded-md border border-neutral-300">
                         <h3 class="font-semibold text-primary text-base sm:text-lg mb-2">Pago por Transferencia
                             Bancaria</h3>
-                        <p class="text-neutral-600 text-sm sm:text-base leading-relaxed">
-                            La orden ha sido generada exitosamente.
 
-                            Si prefieres realizar el pago mediante transferencia bancaria en lugar de utilizar nuestra
-                            pasarela de pagos, puedes hacerlo a través de Bancolombia, Nequi, Daviplata u otros medios
-                            disponibles. Para continuar con el proceso, simplemente contáctanos a través de WhatsApp al
-                            <strong class="underline whitespace-nowrap">(+57) 314 520-78-14</strong> y te
-                            proporcionaremos los detalles necesarios para completar tu pago.
-                        </p>
+                        <div class="text-neutral-600 sm:text-base leading-relaxed">
+                            <p class=" mb-2">
+                                La orden ha sido generada exitosamente.
+                            </p>
+
+                            <strong>Tienes dos opciones para realizar el pago:</strong>
+
+                            <ul class="list-disc ml-4 md:ml-8  mb-2">
+                                <li>
+                                    A través de nuestra pasarela de pagos (ver más abajo).
+                                </li>
+                                <li>
+                                    Mediante transferencia bancaria a través de Nequi, Bancolombia, Daviplata u otros
+                                    medios
+                                    disponibles.
+                                </li>
+                            </ul>
+
+                            <p class=" mb-1">
+                                Si eliges pagar por transferencia, puedes hacerlo directamente a nuestra cuenta Nequi
+                                asociada al número
+                                <strong class="underline whitespace-nowrap">(+57) 314 520-78-14</strong>.
+                            </p>
+                            <p>
+                                Este número también es nuestro contacto de WhatsApp, así que por favor escríbenos allí
+                                para
+                                confirmar tu pago y enviarnos el comprobante.
+                            </p>
+
+                        </div>
                     </div>
 
                     <!-- Pasarela de Pago -->
                     <div class="bg-neutral-50 p-4 sm:p-5 rounded-md border border-neutral-300">
                         <h3 class="font-semibold text-primary text-base sm:text-lg mb-2">Pago con Pasarela Bold</h3>
-                        <p class="text-neutral-600 text-sm sm:text-base leading-relaxed">
+                        <p class="text-neutral-600 sm:text-base leading-relaxed">
                             Haga clic en el botón a continuación para proceder con el pago a través de nuestra pasarela
                             segura.
                         </p>
                         <div class="mt-4">
                             <!-- Botón personalizado -->
-                            <flux:button variant="primary" id="custom-button-payment">
+                            <x-button-dynamic id="custom-button-payment">
                                 🔒 Pago 100% seguro con Bold
-                            </flux:button>
+                            </x-button-dynamic>
                         </div>
                     </div>
                 </div>

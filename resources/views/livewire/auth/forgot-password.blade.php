@@ -30,15 +30,10 @@ new #[Layout('components.layouts.auth')] class extends Component {
 
     <form wire:submit="sendPasswordResetLink" class="flex flex-col gap-6">
         <!-- Email Address -->
-        <flux:input
-            wire:model="email"
-            :label="__('Email')"
-            type="email"
-            name="email"
-            required
-            autofocus
-            placeholder="email@example.com"
-        />
+
+
+
+        <x-input wire:model="email" id="email" label="{{ __('Email address') }}:" for="email" type="email" name="email" required autofocus placeholder="email@example.com" />
 
         <flux:button variant="primary" type="submit" class="w-full">Enlace de restablecimiento </flux:button>
     </form>

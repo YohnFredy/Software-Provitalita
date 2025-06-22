@@ -323,7 +323,7 @@
 
                                         <div class="flex flex-col items-end">
                                             <span class="font-bold text-secondary text-lg">
-                                                ${{ number_format($product->price, 0) }}
+                                                ${{ number_format($product->final_price, 0) }}
                                             </span>
 
                                             <a href="{{ route('products.show', $product) }}">

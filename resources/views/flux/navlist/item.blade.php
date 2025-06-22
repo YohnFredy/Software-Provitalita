@@ -39,9 +39,9 @@ $classes = Flux::classes()
         },
         default => match ($accent) {
             true => [
-                'data-current:text-(--color-accent-content) hover:data-current:text-(--color-accent-content)',
-                'data-current:bg-zinc-800/[4%]',
-                'hover:text-zinc-800 hover:bg-zinc-800/[4%]',
+                'data-current:text-primary hover:data-current:text-secondary',
+                'data-current:bg-primary/5',
+                'hover:text-primary hover:bg-secondary/5',
             ],
             false => [
                 'data-current:text-zinc-800',

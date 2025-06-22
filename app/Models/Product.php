@@ -16,6 +16,7 @@ class Product extends Model
         'slug',
         'description',
         'price',
+        'tax_percent',
         'commission_income',
         'pts_base',
         'pts_bonus',
@@ -32,16 +33,26 @@ class Product extends Model
     ];
 
     protected $casts = [
-        'is_physical' => 'boolean',
-        'allow_backorder' => 'boolean',
-        'is_active' => 'boolean',
         'price' => 'decimal:2',
-        'commission_income' => 'decimal:2',
+        'tax_percent' => 'decimal:2',
+        'commission_income' => 'integer',
         'pts_base' => 'decimal:2',
         'pts_bonus' => 'decimal:2',
         'pts_dist' => 'decimal:2',
-        'maximum_discount' => 'decimal:2',
+        'maximum_discount' => 'integer',
+        'is_physical' => 'boolean',
+        'stock' => 'integer',
+        'allow_backorder' => 'boolean',
+        'is_active' => 'boolean',
     ];
+
+    protected $appends = ['final_price'];
+
+    public function getFinalPriceAttribute(): float
+    {
+        // Si estás usando una columna virtual en la base de datos, puedes comentar esta función
+        return $this->price + ($this->price * $this->tax_percent / 100);
+    }
 
     public function category()
     {

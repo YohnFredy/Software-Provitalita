@@ -78,11 +78,11 @@
                     <!-- Precio -->
                     <div class="mt-4">
                         <p class="text-2xl text-secondary">
-                            ${{ number_format($product->price, 0) }}
+                            ${{ number_format($product->final_price, 0) }}
                         </p>
                         @if ($product->maximum_discount > 0)
                             <p class="text-sm text-primary">
-                                Descuento máximo: {{ $product->maximum_discount }}%
+                                Descuento Usuarios Activos: {{ $product->maximum_discount }}%
                             </p>
                         @endif
                     </div>
@@ -208,7 +208,7 @@
         </flux:heading>
 
         <div
-            class=" grid grid-cols-10 gap-2 border-y border-neutral-400 divide-y divide-neutral-300  sm:divide-none py-4 mt-4">
+            class=" grid grid-cols-10 gap-2 border-y border-neutral-400 divide-y divide-neutral-300  sm:divide-none py-4 mt-4 text-ink">
             <div class="col-span-10 sm:col-span-1 flex justify-center">
                 <img class="w-12 h-12 rounded-md border border-neutral-300 object-cover mb-1"
                     src="{{ asset('storage/' . $product->latestImage->path) }}" alt="{{ $product->name }}">
@@ -218,7 +218,7 @@
             </div>
 
             <div class="  col-span-10 sm:col-span-2 flex justify-center items-center mb-1">
-                ${{ number_format($product->price, 0) }}
+                ${{ number_format($product->final_price, 0) }}
             </div>
 
             {{-- <div class=" col-span-10 sm:col-span-2 flex justify-center items-center mb-1">

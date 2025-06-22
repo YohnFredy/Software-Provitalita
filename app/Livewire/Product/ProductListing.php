@@ -90,11 +90,11 @@ class ProductListing extends Component
         }
 
         if ($this->priceMin) {
-            $productsQuery->where('price', '>=', $this->priceMin);
+            $productsQuery->where('final_price', '>=', $this->priceMin);
         }
 
         if ($this->priceMax) {
-            $productsQuery->where('price', '<=', $this->priceMax);
+            $productsQuery->where('final_price', '<=', $this->priceMax);
         }
 
         // Filtro de tipo de producto (físico/digital)
@@ -117,8 +117,8 @@ class ProductListing extends Component
 
         // Ordenamiento
         $sortOptions = [
-            'price_asc' => ['price', 'asc'],
-            'price_desc' => ['price', 'desc'],
+            'price_asc' => ['final_price', 'asc'],
+            'price_desc' => ['final_price', 'desc'],
             'name_asc' => ['name', 'asc'],
             'name_desc' => ['name', 'desc'],
             'newest' => ['created_at', 'desc']

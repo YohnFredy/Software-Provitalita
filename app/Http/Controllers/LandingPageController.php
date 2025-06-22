@@ -38,6 +38,33 @@ class LandingPageController extends Controller
         return view('landing', ['visitId' => $visit->id]);
     }
 
+    public function show2(Request $request)
+    {
+        // Crear un registro inicial de la visita (algunos datos se actualizarán después con AJAX)
+        $visit = Visit::create([
+            'visit_time' => now(),
+            'ip_address' => $request->ip(),
+            'user_agent' => $request->userAgent(),
+            'referrer_url' => $request->headers->get('referer'), // Puede ser null o no fiable
+            'landing_page_url' => $request->fullUrl(),
+
+            // Capturar parámetros UTM de la URL
+            'utm_source'   => $request->query('utm_source'),
+            'utm_medium'   => $request->query('utm_medium'),
+            'utm_campaign' => $request->query('utm_campaign'),
+            'utm_term'     => $request->query('utm_term'),
+            'utm_content'  => $request->query('utm_content'),
+
+            // Inicializar campos de video y acción
+            'video_played' => false,
+            'video_completed' => false,
+            'clicked_whatsapp' => false,
+        ]);
+
+        // Pasamos el ID de la visita a la vista para que el JS pueda usarlo
+        return view('oportunidad-de-negocio', ['visitId' => $visit->id]);
+    }
+
     /**
      * Recibe y guarda eventos de seguimiento (video, clics) enviados por JavaScript.
      */

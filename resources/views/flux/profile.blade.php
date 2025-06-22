@@ -16,18 +16,18 @@ $initials ??= collect(explode(' ', $name ?? ''))
     ->implode('');
 
 // When using the outline icon variant, we need to size it down to match the default icon sizes...
-$iconClasses = Flux::classes('text-zinc-400 group-hover:text-zinc-800')
+$iconClasses = Flux::classes('text-primary group-hover:text-danger')
     ->add($iconVariant === 'outline' ? 'size-4' : '');
 
 $classes = Flux::classes()
     ->add('group flex items-center rounded-lg')
     ->add('[ui-dropdown>&]:w-full') // Without this, the "name" won't get truncated in a sidebar dropdown...
-    ->add('p-1 hover:bg-zinc-800/5')
+    ->add('p-1 hover:bg-primary/10')
     ;
 @endphp
 
 <button type="button" {{ $attributes->class($classes) }} data-flux-profile>
-    <div class="shrink-0 size-8 bg-zinc-200 rounded-sm overflow-hidden">
+    <div class="shrink-0 size-8 bg-secondary hover:bg-primary rounded-sm overflow-hidden">
         <?php if (is_string($avatar)): ?>
             <img src="{{ $avatar }}" />
         <?php elseif ($avatar): ?>

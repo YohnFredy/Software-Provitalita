@@ -81,48 +81,64 @@
             </div>
         </div>
 
-        <!-- Order Summary -->
-        <div class="sm:bg-white rounded-lg sm:p-6 sm border border-neutral-200 shadow-md mb-6">
-            <p class="text-lg font-semibold text-primary uppercase mb-4">Resumen de Pedido</p>
-            <div class="overflow-x-auto">
-                <table class="w-full text-sm text-left text-neutral-500">
-                    <thead class="text-xs bg-primary text-white uppercase">
-                        <tr>
-                            <th class="px-4 py-3">Producto</th>
-                            <th class="px-4 py-3">Cant</th>
-                            <th class="px-4 py-3">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($order->items as $item)
-                            <tr class="border-b border-neutral-300 hover:bg-neutral-50">
-                                <td class="flex items-center px-4 py-3 text-primary">
-                                    <img src="{{ asset($item->product->latestImage ? 'storage/' . $item->product->latestImage->path : 'images/default.png') }}"
-                                        class="w-10 h-10 rounded-md mr-3">
-                                    <div class="text-base font-semibold">{{ $item->name }}</div>
-                                </td>
-                                <td class="px-4 py-3 text-center">{{ $item->quantity }}</td>
-                                <td class="px-4 py-3 font-semibold">
-                                    ${{ number_format($item->price * $item->quantity, 0) }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
         <!-- Payment Summary -->
-        <div class="sm:bg-white rounded-lg sm:p-6 sm border border-neutral-200 shadow-md text-center">
-            <div class="flex flex-col md:flex-row items-center justify-between">
-                <img src="https://www.agenciatravelfest.com/wp-content/uploads/2022/10/logos-medios-de-pago.jpg"
-                    class="h-24 object-cover rounded-md" alt="Métodos de Pago">
-                <div class="text-right mt-4 md:mt-0">
-                    <p>Subtotal: ${{ number_format($order->total - $order->shipping_cost, 0) }}</p>
-                    <p class="text-lg font-semibold">Total: ${{ number_format($order->total, 0) }}</p>
+        <div class="sm:bg-white rounded-lg sm:p-6 sm:border sm:border-neutral-200 sm:shadow-md text-center">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-start">
+                {{-- Imagen en la mitad en pantallas grandes --}}
+                <div class="w-full md:w-1/2 flex justify-center md:justify-start mb-4 md:mb-0">
+                    <img src="https://www.agenciatravelfest.com/wp-content/uploads/2022/10/logos-medios-de-pago.jpg"
+                        class="w-full h-24 object-contain rounded-md" alt="Métodos de Pago">
+                </div>
+
+                {{-- Detalles de la orden --}}
+                <div class="w-full md:w-1/2 md:pl-6">
+                    <div class="flex justify-between items-center border-t pt-2">
+                        <span class="font-semibold">Subtotal productos:</span>
+                        <span>${{ number_format($order->subtotal, 0) }}</span>
+                    </div>
+
+                    @if ($order->discount > 0)
+                        <div class="flex justify-between items-center border-t pt-2">
+                            <span class="font-semibold">Descuento:</span>
+                            <span class="text-red-600">- ${{ number_format($order->discount, 0) }}</span>
+                        </div>
+
+                        <div class="flex justify-between items-center border-t pt-2">
+                            <span class="font-semibold">Subtotal descuento:</span>
+                            <span>${{ number_format($order->subtotal - $order->discount, 0) }}</span>
+                        </div>
+                    @endif
+
+                    <div class="flex justify-between items-center border-t pt-2">
+                        <span class="font-semibold">Subtotal (Sin IVA):</span>
+                        <span>${{ number_format($order->taxable_amount, 0) }}</span>
+                    </div>
+                    <div class="flex justify-between items-center border-t pt-2">
+                        <span class="font-semibold">IVA:</span>
+                        <span>${{ number_format($order->tax_amount, 0) }}</span>
+                    </div>
+
+                    @if ($order->shipping_cost > 0)
+                        <div class="flex justify-between items-center border-t pt-2">
+                            <span class="font-semibold">Envío:</span>
+                            <span>${{ number_format($order->shipping_cost, 0) }}</span>
+                        </div>
+                    @endif
+
+                    <div class="flex justify-between items-center border-t pt-2">
+                        <span class="font-semibold">Total a Pagar:</span>
+                        <span class="text-black font-bold text-lg">${{ number_format($order->total, 0) }}</span>
+                    </div>
+                    <div class="flex justify-between items-center text-sm text-primary mt-1 border-t pt-2">
+                        <span>Puntos Acumulados:</span>
+                        <span>{{ $order->total_pts }} pts</span>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
+
 
     <!-- Incluir el archivo JavaScript separado -->
     <script src="{{ asset('js/boldCheckout.js') }}"></script>

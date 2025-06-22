@@ -10,7 +10,7 @@
         <flux:heading class="text-primary! pr-6" size="lg">Política de Términos y Condiciones de Compra
         </flux:heading>
 
-        <div class="text-sm">
+        <div class="text-sm text-ink">
             <h5 class="my-4 text-justify">Al realizar una compra en nuestra tienda en línea, el cliente acepta los
                 siguientes
                 términos y condiciones, aplicables a todos los productos, incluidos los productos naturales y otros

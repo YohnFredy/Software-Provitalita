@@ -13,18 +13,23 @@ return new class extends Migration
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('product_id')->constrained()->cascadeOnUpdate();
-            $table->string('name'); // Puede ser redundante si 'product' tiene nombre
-            $table->integer('quantity')->unsigned()->default(1); // Asegurar que la cantidad no sea negativa
-            $table->decimal('price', 10, 2); // Precio unitario del producto
-            $table->decimal('discount', 10, 2)->default(0); // Descuento aplicado al ítem (opcional)
-            $table->decimal('tax', 10, 2)->default(0); // Impuestos aplicados al ítem (opcional)
-            $table->decimal('subtotal', 10, 2); // Subtotal por producto: cantidad * precio
-            $table->decimal('pts', 10, 2)->default(0); // Puntos obtenidos por el ítem
+            $table->foreignId('order_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate(); // Relación con la orden
+            $table->foreignId('product_id')->constrained()->cascadeOnUpdate(); // Producto relacionado
+
+            $table->string('name'); // Nombre del producto al momento de la compra (por si cambia luego)
+
+            $table->decimal('final_price', 10, 2); //Precio con iva
+            $table->decimal('pts', 10, 2)->default(0);
+            $table->unsignedInteger('quantity');
+            $table->decimal('discount', 10, 2)->default(0); //Descuento total
+            $table->decimal('tax_percent', 5, 2)->default(0); //Porcentaje de impuesto aplicado (ej. 19%)
+            $table->decimal('tax_amount', 10, 2)->default(0); // Valor del IVA total en este item
+            $table->decimal('subtotal', 10, 2); // prcio sin iva con descuento * quantity
+            $table->decimal('total', 10, 2); // subtotal - discount + tax_amount
+            $table->decimal('totalPts', 10, 2)->default(0);
+            
             $table->timestamps();
 
-            // Índices para mejorar el rendimiento de las consultas
             $table->index('order_id');
             $table->index('product_id');
         });

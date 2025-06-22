@@ -20,7 +20,7 @@
                         for="precioPublico" autofocus autocomplete="precioPublico" />
                 </div>
                 <div class="col-span-6 md:col-span-1">
-                    <x-input wire:model.blur="valorProducto" type="number" step="any" label="Producto Iva:"
+                    <x-input wire:model.blur="valorProducto" type="number" step="any" label="Costo producto:"
                         for="precioPublico" />
                 </div>
                 <div class="col-span-6 md:col-span-1">

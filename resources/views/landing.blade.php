@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" {{-- class="dark" --}}>
 
 <head>
     <meta charset="utf-8" />
@@ -44,43 +44,27 @@
             /* O block, según tu diseño */
             transform: translateY(0);
         }
+
+        /* Estilo para mensaje de error del video */
+        .video-error-message {
+            padding: 1rem;
+            background-color: #fee2e2;
+            color: #b91c1c;
+            border-radius: 0.5rem;
+            margin-top: 0.5rem;
+            text-align: center;
+            display: none;
+        }
     </style>
 
-
-    <!-- Meta Pixel Code -->
-    <script>
-        ! function(f, b, e, v, n, t, s) {
-            if (f.fbq) return;
-            n = f.fbq = function() {
-                n.callMethod ?
-                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-            };
-            if (!f._fbq) f._fbq = n;
-            n.push = n;
-            n.loaded = !0;
-            n.version = '2.0';
-            n.queue = [];
-            t = b.createElement(e);
-            t.async = !0;
-            t.src = v;
-            s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s)
-        }(window, document, 'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1754820885471422');
-        fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-            src="https://www.facebook.com/tr?id=1754820885471422&ev=PageView&noscript=1" /></noscript>
-    <!-- End Meta Pixel Code -->
 </head>
 
-<body class="min-h-screen bg-primary/5 text-ink">
+<body class="min-h-screen bg-neutral-100 dark:bg-neutral-100 text-ink">
     <div class="py-8 md:py-10 mx-auto max-w-4xl">
 
         <header class="">
             <div class="flex justify-center">
-                <img src="{{ asset('storage/images/logo_fornuvi.png') }}" alt="FORNUVI Logo" class="">
+                 <x-app-logo-icon class=" fill-current" />
             </div>
             <div
                 class="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold leading-tight text-center mt-4 md:mt-8 mx-4">
@@ -96,21 +80,33 @@
         </header>
 
         <main class="mt-4 md:mt-8">
-            <!-- Video principal -->
-            <div class=" mx-auto max-w-4xl sm:px-2 ">
-                <video id="fornuvi-video" class="w-full h-full object-contain sm:rounded-t-lg shadow-md" controls
-                    preload="metadata" poster="{{ asset('storage/videos/empresarios.jpg') }}">
-                    <source src="{{ asset('storage/videos/oportunidad_fornuvi.mp4') }}" type="video/mp4">
-                    Tu navegador no soporta la etiqueta de video. Considera actualizarlo.
-                </video>
-                <div class="p-4 md:p-6 text-center bg-gradient-to-r from-neutral-800 via-neutral-600 to-neutral-700 sm:rounded-b-lg "
-                    sm:rounded-b-lg shadow-md">
+            <!-- Video principal optimizado para móviles -->
+            <div class="mx-auto max-w-4xl sm:px-2">
+                <div class="video-container relative">
+                    <video id="fornuvi-video" class="w-full h-full object-contain sm:rounded-t-lg shadow-md" controls
+                        playsinline webkit-playsinline preload="none"
+                        poster="{{ asset('storage/videos/empresarios.jpg') }}">
+                        <source src="{{ asset('storage/videos/oportunidad_fornuvi.mp4') }}" type="video/mp4">
+                        Tu navegador no soporta la etiqueta de video. Considera actualizarlo.
+                    </video>
+                    {{-- Mensaje de error, oculto por defecto --}}
+                    <div id="video-error" class="video-error-message p-4 bg-red-100 text-danger rounded-lg mt-2"
+                        style="display: none;">
+                        <p>Lo sentimos, hubo un problema al cargar el video.</p>
+                        <p class="mt-2">
+                            <a href="{{ asset('storage/videos/oportunidad_fornuvi.mp4') }}"
+                                class="text-red-800 underline font-medium" download>Descargar video</a>
+                            para verlo.
+                        </p>
+                    </div>
+                </div>
+                <div
+                    class="p-4 md:p-6 text-center bg-gradient-to-r from-neutral-800 via-neutral-600 to-neutral-700 sm:rounded-b-lg shadow-md">
                     <p class="font-medium text-base md:text-lg text-neutral-100">Mira este corto video y descubre cómo
                         funciona.
                     </p>
                 </div>
             </div>
-
 
             <!-- Botón de WhatsApp -->
             <div class="text-center my-4 md:my-8 px-4">
@@ -319,7 +315,6 @@
         </footer>
     </div>
 
-
     {{-- Pasamos el ID de la visita y la URL de tracking al JavaScript --}}
     <script>
         // Pasamos datos de PHP a JavaScript de forma segura
@@ -328,8 +323,140 @@
             trackUrl: '{{ route('landing.track') }}',
             csrfToken: '{{ csrf_token() }}'
         };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const videoElement = document.getElementById('fornuvi-video');
+            const videoError = document.getElementById('video-error');
+            const videoErrorMessageText = videoError ? videoError.querySelector('p:first-child') : null;
+
+            function isMobileDevice() {
+                return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -
+                    1) || (window.innerWidth <= 768);
+            }
+
+            if (videoElement && videoError && videoErrorMessageText) {
+                videoElement.setAttribute('playsinline', '');
+                videoElement.setAttribute('webkit-playsinline', '');
+                videoElement.setAttribute('x5-playsinline', '');
+                videoElement.setAttribute('x5-video-player-type', 'h5');
+
+                videoElement.addEventListener('error', function(e) {
+                    console.error('Error de video:', e);
+                    let errorText = 'Lo sentimos, hubo un problema al cargar el video.';
+                    if (videoElement.error) {
+                        switch (videoElement.error.code) {
+                            case videoElement.error.MEDIA_ERR_ABORTED:
+                                errorText = 'La reproducción del video fue abortada.';
+                                break;
+                            case videoElement.error.MEDIA_ERR_NETWORK:
+                                errorText = 'Hubo un problema de red al cargar el video.';
+                                break;
+                            case videoElement.error.MEDIA_ERR_DECODE:
+                                errorText =
+                                    'El video no pudo ser decodificado o el formato no es compatible.';
+                                break;
+                            case videoElement.error.MEDIA_ERR_SRC_NOT_SUPPORTED:
+                                errorText = 'El formato del video no es compatible.';
+                                break;
+                            default:
+                                errorText = 'Ocurrió un error desconocido al cargar el video.';
+                        }
+                    }
+                    videoErrorMessageText.textContent = errorText;
+                    videoError.style.display = 'block';
+                    videoElement.style.display = 'none';
+                });
+
+                videoElement.addEventListener('canplay', () => console.log('Video puede empezar a reproducirse.'));
+                videoElement.addEventListener('canplaythrough', () => console.log(
+                    'Video listo para reproducirse completamente.'));
+
+                let mobileMsgElement = null;
+
+                // Función para actualizar la visibilidad del mensaje de sonido
+                function updateSoundMessageVisibility() {
+                    if (mobileMsgElement) {
+                        if (videoElement.muted) {
+                            mobileMsgElement.style.display = 'block'; // O la clase que lo haga visible
+                        } else {
+                            mobileMsgElement.style.display = 'none';
+                        }
+                    }
+                }
+
+                if (isMobileDevice()) {
+                    videoElement.muted = true; // Iniciar mudo en móviles
+
+                    const videoContainer = videoElement.parentElement;
+                    if (videoContainer) {
+                        mobileMsgElement = document.createElement('div');
+                        mobileMsgElement.className =
+                            'absolute top-0 left-0 right-0 p-2 bg-black/60 text-white text-sm text-left shadow-md pointer-events-none z-10 sm:rounded-t-lg';
+                        mobileMsgElement.innerHTML = 'Toca el video para activar el sonido';
+                        videoContainer.appendChild(mobileMsgElement);
+
+                        // Mostrar/ocultar mensaje basado en el estado 'muted'
+                        updateSoundMessageVisibility(); // Llamada inicial
+                        videoElement.addEventListener('volumechange', updateSoundMessageVisibility);
+                    }
+
+                    const unmuteAndPlay = () => {
+                        if (videoElement.muted) {
+                            videoElement.muted = false; // Esto disparará 'volumechange' y ocultará el mensaje
+                        }
+                        if (videoElement.paused) {
+                            videoElement.play().catch(e => console.warn("Play después de unmute falló:", e));
+                        }
+                        // Ya no es necesario remover estos listeners si queremos que el tap siempre intente desmutear/reproducir
+                        // Pero si es solo para la primera interacción:
+                        // videoElement.removeEventListener('click', unmuteAndPlay);
+                        // videoElement.removeEventListener('touchstart', unmuteAndPlay);
+                    };
+
+                    videoElement.addEventListener('click', unmuteAndPlay);
+                    videoElement.addEventListener('touchstart', unmuteAndPlay, {
+                        passive: true
+                    });
+                }
+
+                if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                    videoElement.muted = true;
+                    videoElement.playsInline = true;
+                    const playPromise = videoElement.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then(_ => {
+                            console.log('Autoplay (muted) intentado en iOS exitosamente.');
+                            // 'volumechange' se disparará si el estado de muteo cambia o ya es el deseado
+                            updateSoundMessageVisibility(); // Asegurar estado correcto del mensaje
+                        }).catch(error => {
+                            console.warn('Autoplay (muted) en iOS fue prevenido o falló.', error);
+                            updateSoundMessageVisibility(); // Asegurar estado correcto del mensaje
+                        });
+                    }
+                } else {
+                    // Para otros dispositivos (no iOS y no móviles si la lógica se expandiera),
+                    // también asegurar el estado inicial del mensaje si no es móvil pero se quiere
+                    // la misma lógica de mensaje (aunque el mensaje solo se crea en isMobileDevice()).
+                    // Esto es más por completitud si se refactoriza.
+                    if (mobileMsgElement) { // Si el mensaje existe (solo en móviles por ahora)
+                        updateSoundMessageVisibility();
+                    }
+                }
+
+                setTimeout(() => {
+                    if (videoElement.readyState === 0 && !videoElement.error) {
+                        console.warn('Video no parece haber cargado metadatos después de 5 segundos.');
+                    }
+                }, 5000);
+
+            } else {
+                console.error('Faltan elementos del video en el DOM.');
+            }
+        });
     </script>
+
     {{-- El archivo app.js contendrá la lógica de seguimiento --}}
+
 </body>
 
 </html>

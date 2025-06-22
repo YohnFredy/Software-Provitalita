@@ -14,21 +14,28 @@ class BinaryTree extends Component
     public User $currentUser;
     public int $secondaryUserId;
     public int $primaryUserId;
+    public int $activo = 0;
     public $sponsor, $totalAffiliates = 0, $ptsLeft = 0, $ptsRight = 0;
     public $leftPercentage = 0, $rightPercentage = 0;
-
-
-    private const MAX_TREE_LEVEL = 100;
+    public $levels = 3, $selectedLevels = '';
 
     public function mount(): void
     {
         $this->resetTree();
     }
 
-    public function resetTree(): void
+    public function updatedSelectedLevels($value)
     {
-        $this->currentUser = Auth::user();
+        $this->levels = $value ?: 3;
+        $this->dispatch('recalculate-tree-height');
+    }
 
+     public function resetTree(): void
+    {
+        $user = Auth::user();
+        $this->currentUser = $user;
+
+        $this->activo = (int) ($user->activation?->is_active ?? false);
         $this->primaryUserId = $this->secondaryUserId = $this->currentUser->id;
 
         $this->setSponsor();
@@ -90,7 +97,7 @@ class BinaryTree extends Component
             'ptsRight' => $PtsBinary['right'],
         ];
 
-        if ($level < self::MAX_TREE_LEVEL) {
+        if ($level < $this->levels) {
             $branch['children'] = $this->getChildrenBranches($user->id, $level);
         }
 
@@ -107,6 +114,7 @@ class BinaryTree extends Component
             ->toArray();
     }
 
+    // CUANDO SE MUESTRA OTRO USUARIO EN EL ÁRBOL
     public function show(User $user): void
     {
         $this->currentUser = $user;
@@ -121,13 +129,16 @@ class BinaryTree extends Component
         $this->secondaryUserId = $this->currentUser->id;
 
         $this->setSponsor();
+        
+        // Disparamos el evento AQUÍ también
+        $this->dispatch('recalculate-tree-height');
     }
 
 
     #[Layout('components.layouts.office')]
     public function render()
     {
-
+        // HEMOS QUITADO EL DISPATCH DE AQUÍ
         $this->tree = $this->buildTree($this->currentUser);
         return view('livewire.office.binary-tree');
     }

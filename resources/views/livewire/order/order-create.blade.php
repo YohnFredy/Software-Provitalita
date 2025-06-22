@@ -108,39 +108,55 @@
         {{-- Resumen de la orden --}}
         <div class="lg:col-span-1">
             <div class="sticky top-6">
-                <div class="bg-white rounded-lg shadow-md border border-neutral-200 p-3 sm:p-6 mb-6">
+                <div class="sm:bg-white rounded-lg sm:shadow-md sm:border sm:border-neutral-200 sm:p-6 mb-6">
                     <h2 class="text-lg font-semibold text-primary mb-4">Resumen de la orden</h2>
 
                     <ul class="divide-y divide-gray-200">
                         <li class="flex justify-between py-3">
-                            <span class="text-gray-700">Productos ({{ $quantity }})</span>
-                            <span class="font-medium">${{ number_format($subTotal, 0, ',', '.') }}</span>
+                            <span class="text-gray-700">Subtotal: ({{ $this->quantity }})</span>
+                            <span class="font-medium">${{ number_format($this->subTotal, 0, ',', '.') }}</span>
                         </li>
 
-                        @if ($discount > 0)
+                        @if ($this->discount > 0)
                             <li class="flex justify-between py-3">
-                                <span class="text-ink">Descuento</span>
+                                <span class="text-ink">Descuento:</span>
                                 <span
-                                    class="font-medium text-secondary">${{ number_format($discount, 0, ',', '.') }}</span>
+                                    class="font-medium text-secondary">-${{ number_format($this->discount, 0, ',', '.') }}</span>
+                            </li>
+
+                            <li class="flex justify-between py-3">
+                                <span class="text-ink">Subtotal descuento:</span>
+                                <span
+                                    class="font-medium">${{ number_format($this->subTotal - $this->discount, 0, ',', '.') }}</span>
                             </li>
                         @endif
 
                         <li class="flex justify-between py-3">
-                            <span class="text-gray-700">Envío</span>
-                            <span class="font-medium">${{ number_format($shipping_cost, 0, ',', '.') }}</span>
+                            <span class="text-gray-700">Subtotal (sin IVA):</span>
+                            <span class="font-medium">${{ number_format($this->totalWithoutTaxes, 0, ',', '.') }}</span>
                         </li>
 
+                        <li class="flex justify-between py-3">
+                            <span class="text-gray-700">IVA (19%):</span>
+                            <span class="font-medium">${{ number_format($this->totalTax, 0, ',', '.') }}</span>
+                        </li>
 
+                        @if ($this->shipping_cost > 0)
+                            <li class="flex justify-between py-3">
+                                <span class="text-gray-700">Envío:</span>
+                                <span class="font-medium">${{ number_format($this->shipping_cost, 0, ',', '.') }}</span>
+                            </li>
+                        @endif
 
                         <li class="flex justify-between py-4">
-                            <span class="font-semibold">Total</span>
+                            <span class="font-semibold">Total a pagar:</span>
                             <span
-                                class="font-bold text-lg text-primary">${{ number_format($total, 0, ',', '.') }}</span>
+                                class="font-bold text-lg text-primary">${{ number_format($this->total, 0, ',', '.') }}</span>
                         </li>
 
                         <li class="flex justify-end py-3 font-medium text-danger underline">
                             <span class="">Total Puntos: </span>
-                            <span class="ml-1"> {{ number_format($total_pts, 2, ',', '.') }}</span>
+                            <span class="ml-1"> {{ number_format($this->total_pts, 2, ',', '.') }}</span>
                         </li>
                     </ul>
                 </div>

@@ -14,10 +14,10 @@ $classes = Flux::classes()
         default => 'underline',
     })
     ->add(match ($variant) {
-        'subtle' => 'text-zinc-500 hover:text-zinc-800',
+        'subtle' => 'text-zinc-500 hover:text-zinc-800 ',
         default => match ($accent) {
-            true => 'text-[var(--color-accent-content)] decoration-[color-mix(in_oklab,var(--color-accent-content),transparent_80%)]',
-            false => 'text-zinc-800  decoration-zinc-800/20',
+            true => 'text-secondary dark:text-secondary decoration-[color-mix(in_oklab,var(--color-accent-content),transparent_80%)] ',
+            false => 'text-zinc-800 decoration-zinc-800/20',
         },
     })
     ;

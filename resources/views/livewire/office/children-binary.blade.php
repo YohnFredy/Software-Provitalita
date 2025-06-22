@@ -7,9 +7,15 @@
                     <div class="w-6 h-6 sm:w-8 sm:h-8 bg-primary/10 rounded-full flex items-center justify-center mr-2">
                         <i class="fas fa-user text-primary"></i>
                     </div>
-                    <h4 class=" text-base sm:text-xl font-bold capitalize text-primary">
-                        {{ $node['username'] }}
-                    </h4>
+                    @if ($node['username'] == 'master')
+                        <h4 class=" text-base sm:text-xl font-bold capitalize text-primary">
+                            Alejandra
+                        </h4>
+                    @else
+                        <h4 class=" text-base sm:text-xl font-bold capitalize text-primary">
+                            {{ $node['username'] }}
+                        </h4>
+                    @endif
                 </div>
 
                 <h5 class="text-danger font-bold text-xs sm:text-sm text-center">
@@ -109,7 +115,7 @@
                         <span class="text-primary font-semibold flex items-center gap-1">
                             Puntos
                         </span>
-                        <span class="font-medium pl-1">{{$node['ptsRight'] ?: 'Vacío' }}</span>
+                        <span class="font-medium pl-1">{{ $node['ptsRight'] ?: 'Vacío' }}</span>
                     </h6>
                 </div>
             </div>
