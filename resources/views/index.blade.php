@@ -1,6 +1,5 @@
 <x-layouts.app title="Dashboard">
 
-
     @if (session('success'))
         <div class="bg-premium/5 border-l-4 border-premium text-premium p-4 mb-6 rounded shadow-md" role="alert">
             <div class="flex">
@@ -23,279 +22,541 @@
     @endif
 
     <!-- Hero Section -->
-<section id="inicio" class="p-4 sm:p-10 border border-primary/10 bg-primary/5 rounded-lg">
-    <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-6">
-        <div class="space-y-4 sm:space-y-6 text-center md:text-left">
-            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-primary leading-tight">
-                Bienvenido a Fornuvi
-            </h1>
-            <p class="text-base sm:text-lg md:text-xl text-ink font-light">
-                Calidad, Oportunidad y Crecimiento. Una compañía en el sector de salud y bienestar a través de un
-                sistema global de asociación.
-            </p>
+    <section id="inicio" class="p-6 sm:p-10 bg-gradient-to-r from-primary to-secondary text-white rounded-lg">
+        <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-x-8 ">
+            <div class=" space-y-6 sm:space-y-8 text-center">
+                <h1 class="text-3xl md:text-4xl font-bold leading-tight">Transforma tu futuro financiero con
+                    ActivosNetwork
+                </h1>
+                <p class="text-lg md:text-2xl font-light">Una compañía en el sector de salud y bienestar que ofrece
+                    múltiples oportunidades financieras a través de un sistema global de asociación.</p>
 
-            <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
-                <a href="#contacto">
-                    <flux:button variant="primary">
-                        Comienza Hoy
-                    </flux:button>
-                </a>
-            </div>
-        </div>
-
-        <!-- Imagen ahora visible en móviles pero más pequeña -->
-        <div class="flex justify-center md:justify-end">
-            <img src="https://us.123rf.com/450wm/zhunsky/zhunsky2304/zhunsky230400043/201771464-globo-en-manos-humanas-concepto-de-conservaci%C3%B3n-ambiental-renderizado-3d.jpg?ver=6"
-                alt="ActivosNetwork Oportunidades"
-                class="w-40 sm:w-56 md:w-full rounded-lg shadow-lg shadow-ink">
-        </div>
-    </div>
-</section>
-
-
-<!-- Nuestra Misión -->
-<section class="py-6 sm:py-16 bg-white">
-    <div class="container mx-auto px-4">
-        <div class="flex flex-col-reverse md:flex-row items-center gap-8">
-            
-            <!-- Texto -->
-            <div class="md:w-1/2 text-center md:text-left">
-                <h2 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-primary">Nuestra Misión</h2>
-                <p class="text-base sm:text-lg text-ink leading-relaxed mb-4">
-                    En Fornuvi creemos en la excelencia, la innovación y la oportunidad. Nuestra misión es ofrecer
-                    productos de la más alta calidad a través de nuestra tienda online, brindando a nuestros clientes 
-                    una experiencia de compra excepcional con productos naturales, saludables y confiables.
-                </p>
-                <p class="text-base sm:text-lg text-ink leading-relaxed">
-                    Nos especializamos en la comercialización de productos propios y de terceros, asegurando que cumplan 
-                    con los más altos estándares de calidad y competitividad en el mercado.
-                </p>
-                <div class="mt-6 sm:mt-8">
-                    <a href="#" class="text-secondary hover:text-primary font-medium inline-flex items-center group">
-                        Conoce más sobre nosotros
-                        <svg class="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                        </svg>
+                <div class="sm:pt-4 flex flex-col sm:flex-row justify-center sm:justify-start gap-4">
+                    <a href="#franquicias"
+                        class="inline-block px-6 py-3 bg-white text-primary rounded-md font-medium text-center hover:bg-neutral-100 transition duration-150">Nuestras
+                        Franquicias
                     </a>
+                    <a href="#contacto"
+                        class="inline-block px-6 py-3 border-2 border-white text-white rounded-md font-medium text-center hover:bg-white hover:text-primary transition duration-150">Comienza
+                        Hoy</a>
                 </div>
             </div>
-
-            <!-- Imagen -->
-            <div class="md:w-1/2 flex justify-center">
-                <img src="https://d1ih8jugeo2m5m.cloudfront.net/2024/09/oportunidades_de_negocio.jpg"
-                    alt="Productos naturales Fornuvi" 
-                    class="w-full max-w-xs sm:max-w-sm md:max-w-full rounded-lg shadow-xl">
+            <div class="hidden md:block">
+                <img src="https://images.pexels.com/photos/7792804/pexels-photo-7792804.jpeg"
+                    alt="ActivosNetwork Oportunidades" class="rounded-lg shadow-lg shadow-ink">
             </div>
-
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Tienda en Línea -->
-<section class="py-6 sm:py-16 bg-neutral-50">
-    <div class="container mx-auto px-4">
-        
-        <!-- Encabezado -->
-        <div class="max-w-3xl mx-auto text-center mb-8 sm:mb-12">
-            <h2 class="text-2xl sm:text-3xl font-bold text-primary mb-4">
-                Una Tienda en Línea para Todos
-            </h2>
-            <p class="text-base sm:text-lg text-ink leading-relaxed">
-                Nuestra plataforma ofrece una amplia variedad de productos naturales y de otros nichos 
-                cuidadosamente seleccionados, con la calidad y confianza que mereces.
-            </p>
+    <!-- About Us Section -->
+    <section id="nosotros" class="py-8 md:py-16 md:px-10 sm:bg-neutral-50 ">
+        <div class="text-center mb-6 sm:mb-10 ">
+            <h2 class="text-2xl sm:text-4xl font-bold text-primary">Nuestra Historia</h2>
+            <div class="h-1 w-24 bg-premium mx-auto mt-4"></div>
         </div>
 
-        <!-- Tarjetas -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-            
-            <!-- Tarjeta 1 -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                <div class="h-1 bg-primary"></div>
-                <div class="p-6 text-center">
-                    <div class="w-16 h-16 bg-premium/10 text-premium rounded-full flex items-center justify-center mb-4">
-                        <i class="fas fa-leaf text-2xl"></i>
+        <div class="grid grid-cols-1 lg:grid-cols-2 md:gap-x-10 gap-y-6 md:gap-y-10 items-center">
+            <div>
+                <img src="https://thefoodtech.com/wp-content/uploads/2025/02/vibrant-health-nutritional-power-pill.webp"
+                    alt="ActivosNetwork Historia" class="rounded-lg shadow-lg shadow-ink">
+            </div>
+            <div class="">
+                <div class="flex items-start">
+                    <div class="bg-primary rounded-full text-white mr-3 flex-shrink-0">
+                        <div class="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center"><i
+                                class="fas fa-history text-lg md:text-xl"></i></div>
                     </div>
-                    <h3 class="text-lg sm:text-xl font-semibold text-primary mb-3">Productos Naturales</h3>
-                    <p class="text-ink mb-4">
-                        Seleccionamos cuidadosamente productos naturales que aportan bienestar y salud para tu vida diaria.
-                    </p>
-                    <a href="#" class="text-secondary hover:text-primary font-medium">Ver productos</a>
-                </div>
-            </div>
-
-            <!-- Tarjeta 2 -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                <div class="h-1 bg-primary"></div>
-                <div class="p-6 text-center">
-                    <div class="w-16 h-16 bg-premium/10 text-premium rounded-full flex items-center justify-center mb-4">
-                        <i class="fas fa-check-circle text-2xl"></i>
+                    <div>
+                        <h3 class="text-lg md:text-xl font-semibold text-primary mb-1 md:mb-2">18 años de
+                            experiencia</h3>
+                        <p class="text-ink text-sm md:text-base">ActivosNetwork se ha enfocado en el desarrollo de
+                            complementos
+                            nutricionales y nutraceúticos, respaldados por años de investigación y desarrollo.</p>
                     </div>
-                    <h3 class="text-lg sm:text-xl font-semibold text-primary mb-3">Calidad Garantizada</h3>
-                    <p class="text-ink mb-4">
-                        Cada artículo en Fornuvi cumple con nuestros estrictos criterios de calidad y efectividad.
-                    </p>
-                    <a href="#" class="text-secondary hover:text-primary font-medium">Nuestros estándares</a>
                 </div>
-            </div>
-
-            <!-- Tarjeta 3 -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                <div class="h-1 bg-primary"></div>
-                <div class="p-6 text-center">
-                    <div class="w-16 h-16 bg-premium/10 text-premium rounded-full flex items-center justify-center mb-4">
-                        <i class="fas fa-tag text-2xl"></i>
+                <div class="flex items-start">
+                    <div class="bg-primary rounded-full text-white mr-3 flex-shrink-0">
+                        <div class="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center"><i
+                                class="fas fa-globe-americas text-lg md:text-xl"></i></div>
                     </div>
-                    <h3 class="text-lg sm:text-xl font-semibold text-primary mb-3">Precios Competitivos</h3>
-                    <p class="text-ink mb-4">
-                        Mantenemos precios accesibles para que puedas disfrutar de productos de primer nivel sin comprometer tu presupuesto.
-                    </p>
-                    <a href="#" class="text-secondary hover:text-primary font-medium">Ver ofertas</a>
+                    <div>
+                        <h3 class="text-lg md:text-xl font-semibold text-primary mb-1 md:mb-2">Presencia
+                            internacional</h3>
+                        <p class="text-ink text-sm md:text-base">Contamos con 8 años de investigación en sistemas de
+                            mercadeo en red
+                            desarrollados en India, Estados Unidos y países latinos.</p>
+                    </div>
                 </div>
-            </div>
-
-        </div>
-
-    </div>
-</section>
-
-<!-- Programa de Afiliados -->
-<section class="py-6 sm:py-16 bg-white">
-    <div class="container mx-auto px-4">
-        <div class="flex flex-col lg:flex-row-reverse items-center gap-6 sm:gap-12">
-            <div class="w-full lg:w-1/2">
-                <img src="https://www.kupakia.com/wp-content/uploads/2024/07/nuevas-oportunidades-de-negocios.jpg"
-                    alt="Programa de afiliados Fornuvi"
-                    class="rounded-lg shadow-md w-full h-auto max-w-md mx-auto lg:max-w-none" />
-            </div>
-            <div class="w-full lg:w-1/2 text-center lg:text-left max-w-2xl">
-                <h2 class="text-3xl font-bold mb-6 text-primary">Únete como Afiliado y Genera Ingresos</h2>
-                <p class="text-lg mb-5 text-ink leading-relaxed">
-                    Fornuvi no solo es una tienda online, es una oportunidad de crecimiento y desarrollo financiero.
-                    Si buscas una manera de generar ingresos de forma innovadora y rentable, nuestro sistema de
-                    afiliados es para ti.
-                </p>
-                <p class="text-lg mb-5 text-ink leading-relaxed">
-                    Al ser parte de nuestra red de afiliados, podrás acceder a múltiples beneficios diseñados para
-                    impulsar tu éxito dentro de la empresa.
-                </p>
-                <div class="bg-primary/5 border-l-4 border-primary p-4 rounded-r mb-6">
-                    <p class="italic text-primary">
-                        "Nuestro programa te brinda la posibilidad de generar ingresos de manera escalonada y
-                        sostenible, dependiendo de tu crecimiento y desempeño."
-                    </p>
-                </div>
-                <a href="#"
-                    class="inline-block bg-primary hover:bg-secondary text-white font-semibold py-3 px-6 rounded-lg shadow transition transform hover:translate-y-1">
-                    Conoce el Programa de Afiliados
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Bolsa Global -->
-<section class="py-6 sm:py-16 bg-gradient-to-r from-secondary via-primary to-ink text-white mt-6 sm:mt-0">
-    <div class="container mx-auto px-4">
-        <div class="max-w-3xl mx-auto text-center mb-8 sm:mb-12">
-            <h2 class="text-3xl font-bold mb-4 sm:mb-6">Bolsa Global de Crecimiento</h2>
-            <p class="text-lg sm:text-xl leading-relaxed">
-                Un aspecto único de nuestro modelo de negocio que recompensa el esfuerzo y el crecimiento.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            <div class="bg-white/10 rounded-xl p-6 sm:p-8 backdrop-blur-sm border border-white/20">
-                <div class="text-4xl mb-4">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <h3 class="text-xl font-semibold mb-3 sm:mb-4">Distribución Mensual</h3>
-                <p class="text-white/90 text-sm sm:text-base">
-                    Cada mes, un porcentaje de todos los ingresos generados por la compañía se acumula en esta bolsa y se distribuye entre nuestros afiliados activos.
-                </p>
-            </div>
-
-            <div class="bg-white/10 rounded-xl p-6 sm:p-8 backdrop-blur-sm border border-white/20">
-                <div class="text-4xl mb-4">
-                    <i class="fas fa-award"></i>
-                </div>
-                <h3 class="text-xl font-semibold mb-3 sm:mb-4">Recompensa al Esfuerzo</h3>
-                <p class="text-white/90 text-sm sm:text-base">
-                    La asignación de estos fondos se realiza en función del crecimiento individual de cada afiliado, asegurando que quienes más se esfuerzan reciban mayores recompensas.
-                </p>
-            </div>
-        </div>
-
-        <div class="mt-8 sm:mt-12 text-center">
-            <a href="#"
-                class="inline-block bg-white text-primary hover:text-secondary font-semibold py-3 px-6 sm:px-8 rounded-full shadow-lg transition transform hover:scale-105">
-                Descubre cómo funciona
-            </a>
-        </div>
-    </div>
-</section>
-
-
-
-
-    <!-- Crecimiento y Rentabilidad -->
-    <section class=" py-8 sm:py-16 sm:bg-neutral-50">
-        <div class="container mx-auto sm:px-4">
-            <div class="max-w-3xl mx-auto">
-                <h2 class="text-3xl font-bold mb-3 sm:mb-8 text-primary text-center">Crecimiento y Rentabilidad para Todos
-                </h2>
-
-                <div class="sm:bg-white rounded-xl sm:shadow-md sm:p-8 sm:mb-8">
-                    <p class="text-lg text-ink leading-relaxed mb-6">
-                        Sabemos que cada persona tiene diferentes aspiraciones y objetivos, por lo que hemos diseñado un
-                        sistema accesible y escalable que se adapta a las necesidades de cada afiliado. Nuestra
-                        estructura permite que cualquier persona con determinación y compromiso pueda avanzar y obtener
-                        ingresos significativos dentro de Fornuvi.
-                    </p>
-
-                    <div class="flex items-center gap-4 mb-8">
-                        <div
-                            class="w-12 h-12 bg-premium/10 text-premium rounded-full flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-users"></i>
+                <div class="flex items-start">
+                    <div class="bg-primary rounded-full text-white mr-3 flex-shrink-0">
+                        <div class="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
+                            <i class="fas fa-lightbulb text-lg md:text-xl"></i>
                         </div>
-                        <p class="text-neutral-700">
-                            <span class="font-semibold">Comunidad en crecimiento</span> - Forma parte de un ecosistema
-                            de oportunidades financieras donde todos crecen juntos.
-                        </p>
                     </div>
-
-                    <div class="flex items-center gap-4">
-                        <div
-                            class="w-12 h-12 bg-premium/10 text-premium rounded-full flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-handshake"></i>
-                        </div>
-                        <p class="text-ink">
-                            <span class="font-semibold">Respaldo sólido</span> - Cuenta con un equipo comprometido en
-                            ayudarte a alcanzar tus metas financieras.
-                        </p>
+                    <div>
+                        <h3 class="text-lg md:text-xl font-semibold text-primary mb-1 md:mb-2">Propuesta innovadora
+                        </h3>
+                        <p class="text-ink text-sm md:text-base">ActivosNetwork es una propuesta especialmente
+                            adaptada para el mercado
+                            latinoamericano, enfocada en apalancamiento, inversiones tangibles, sinergia y un nivel
+                            comercial competitivo.</p>
                     </div>
                 </div>
-
-                <div class="text-center">
-                    <p class="text-xl font-semibold text-primary mt-6 sm:mt-0 mb-6">Fornuvi es más que una empresa: es tu
-                        oportunidad para un futuro mejor.</p>
-                    <a href="#"
-                        class="inline-block bg-primary hover:bg-secondary text-white font-bold py-4 px-8 rounded-lg shadow-lg transition transform hover:translate-y-1">
-                        Únete hoy y empieza a construir tu camino al éxito
-                    </a>
+                <div class="mt-6 md:mt-8">
+                    <h3 class="text-lg md:text-xl font-bold text-primary mb-3 md:mb-4">Nuestros objetivos</h3>
+                    <ul class="space-y-2 md:space-y-3">
+                        <li class="flex items-start">
+                            <svg class="h-5 w-5 text-secondary mr-2 mt-0.5 flex-shrink-0" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="text-primary text-sm md:text-base">Entregar un sistema que permita el
+                                desarrollo de redes
+                                sólidas, altamente eficientes, rápidas y seguras.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-5 w-5 text-secondary mr-2 mt-0.5 flex-shrink-0" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="text-primary text-sm md:text-base">Reunir inversionistas para establecer
+                                unidades productivas
+                                de bajo riesgo y alta rentabilidad.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-5 w-5 text-secondary mr-2 mt-0.5 flex-shrink-0" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="text-primary text-sm md:text-base">Llevar a sus asociados a alcanzar
+                                grandes metas con poca
+                                inversión.</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Vehículos Financieros (Franquicias) -->
+    <section id="franquicias" class="pt-4 sm:pb-8 md:px-10 sm:bg-neutral-50 rounded-b-lg">
+        <div class="text-center mb-6 md:mb-10">
+            <h2 class="text-2xl md:text-4xl font-bold text-primary">Nuestros Vehículos Financieros</h2>
+            <p class="mt-3 md:mt-4 text-lg md:text-xl text-secondary">Franquicias que impactan en el ámbito
+                deportivo, recreativo y
+                saludable</p>
+            <div class="h-1 w-24 bg-premium mx-auto mt-4"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <!-- ActivosNetwork Coffee -->
+            <div
+                class="bg-white rounded-xl shadow-md shadow-ink overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-2">
+                <div class="relative">
+                    <img src="https://thefoodtech.com/wp-content/uploads/2024/08/bebidas-con-cafeina-1.webp"
+                        alt="ActivosNetwork Coffee" class="w-full h-48 md:h-64 object-cover">
+                    <div class="absolute top-0 left-0 bg-primary text-white py-1 md:py-2 px-3 md:px-4 rounded-br-xl">
+                        <i class="fas fa-coffee mr-1 md:mr-2"></i> <span class="text-sm md:text-base">Cafetería</span>
+                    </div>
+                </div>
+                <div class="p-4 md:p-6">
+                    <h3 class="text-xl md:text-2xl font-bold text-primary mb-2 md:mb-3">ActivosNetwork Coffee</h3>
+                    <p class="text-ink text-sm md:text-base mb-3 md:mb-4">Una cafetería especializada en bebidas
+                        que combinan sabor y
+                        bienestar. Aquí, cada taza de café está diseñada para revitalizar cuerpo y mente,
+                        convirtiéndose en un punto de encuentro ideal.</p>
+                    <a href="#contacto"
+                        class="inline-block mt-1 md:mt-2 text-secondary text-sm md:text-base font-medium hover:text-primary">
+                        Conoce más <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Chelas -->
+            <div
+                class="bg-white rounded-xl shadow-md shadow-ink overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-2">
+                <div class="relative">
+                    <img src="https://i.pinimg.com/474x/74/e4/d9/74e4d91ad64ae9276bdcbcc7fa7657cd.jpg" alt="Chelas"
+                        class="w-full h-48 md:h-64 object-cover">
+                    <div class="absolute top-0 left-0 bg-primary text-white py-1 md:py-2 px-3 md:px-4 rounded-br-xl">
+                        <i class="fas fa-cocktail mr-1 md:mr-2"></i> <span class="text-sm md:text-base">Bar</span>
+                    </div>
+                </div>
+                <div class="p-4 md:p-6">
+                    <h3 class="text-xl md:text-2xl font-bold text-primary mb-2 md:mb-3">Chelas</h3>
+                    <p class="text-ink text-sm md:text-base mb-3 md:mb-4">Un lugar innovador donde las micheladas y
+                        las bebidas especiales
+                        se mezclan con un concepto de experiencia surrealista y recreativa. Este bar busca
+                        convertirse en un referente para el entretenimiento.</p>
+                    <a href="#contacto"
+                        class="inline-block mt-1 md:mt-2 text-secondary text-sm md:text-base font-medium hover:text-primary">
+                        Conoce más <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ActivosNetwork -->
+            <div
+                class="bg-white rounded-xl shadow-md shadow-ink overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-2">
+                <div class="relative">
+                    <img src="{{ asset('storage/images/tienda_naturista.jpeg') }}" alt="ActivosNetwork"
+                        class="w-full h-48 md:h-64 object-cover">
+                    <div class="absolute top-0 left-0 bg-primary text-white py-1 md:py-2 px-3 md:px-4 rounded-br-xl">
+                        <i class="fas fa-leaf mr-1 md:mr-2"></i> <span class="text-sm md:text-base">Tienda
+                            Naturista</span>
+                    </div>
+                </div>
+                <div class="p-4 md:p-6">
+                    <h3 class="text-xl md:text-2xl font-bold text-primary mb-2 md:mb-3">ActivosNetwork</h3>
+                    <p class="text-ink text-sm md:text-base mb-3 md:mb-4">Un espacio dedicado a la salud natural,
+                        ofreciendo suplementos,
+                        productos orgánicos y alimentos funcionales. ActivosNetwork fomenta un enfoque integral de
+                        bienestar físico y mental.</p>
+                    <a href="#contacto"
+                        class="inline-block mt-1 md:mt-2 text-secondary text-sm md:text-base font-medium hover:text-primary">
+                        Conoce más <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Maspro -->
+            <div
+                class="bg-white rounded-xl shadow-md shadow-ink overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-2">
+                <div class="relative">
+                    <img src="{{ asset('storage/images/mas_pro.jpeg') }}" alt="Maspro"
+                        class="w-full h-48 md:h-64 object-cover">
+                    <div class="absolute top-0 left-0 bg-primary text-white py-1 md:py-2 px-3 md:px-4 rounded-br-xl">
+                        <i class="fas fa-dumbbell mr-1 md:mr-2"></i> <span class="text-sm md:text-base">Tienda
+                            Deportiva</span>
+                    </div>
+                </div>
+                <div class="p-4 md:p-6">
+                    <h3 class="text-xl md:text-2xl font-bold text-primary mb-2 md:mb-3">Maspro</h3>
+                    <p class="text-ink text-sm md:text-base mb-3 md:mb-4">Una tienda enfocada en ofrecer
+                        suplementos, ropa, accesorios y
+                        asesoría de alta calidad para el desempeño óptimo de deportistas de todos los niveles.</p>
+                    <a href="#contacto"
+                        class="inline-block mt-1 md:mt-2 text-secondary text-sm md:text-base font-medium hover:text-premium">
+                        Conoce más <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Net Inmobiliario -->
+            <div
+                class="bg-white rounded-xl shadow-md shadow-ink overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-2 md:col-span-2 lg:col-span-1">
+                <div class="relative">
+                    <img src="https://arriendosyventasibague.com/public/img/temas/negocio-inmobiliario.jpg"
+                        alt="Net Inmobiliario" class="w-full h-48 md:h-64 object-cover">
+                    <div class="absolute top-0 left-0 bg-primary text-white py-1 md:py-2 px-3 md:px-4 rounded-br-xl">
+                        <i class="fas fa-home mr-1 md:mr-2"></i> <span
+                            class="text-sm md:text-base">Inmobiliaria</span>
+                    </div>
+                </div>
+                <div class="p-4 md:p-6">
+                    <h3 class="text-xl md:text-2xl font-bold text-primary mb-2 md:mb-3">Net Inmobiliario</h3>
+                    <p class="text-ink text-sm md:text-base mb-3 md:mb-4">Conjuga todas las modalidades
+                        inmobiliarias, brindando token
+                        inmobiliarios, tiempos compartidos, compra y venta de propiedad raíz y construcción y
+                        remodelación de vivienda nueva y usada.</p>
+                    <a href="#contacto"
+                        class="inline-block mt-1 md:mt-2 text-secondary text-sm md:text-base font-medium hover:text-primary">
+                        Conoce más <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Modelos de Inversión -->
+    <section id="inversion" class="mt-12 sm:mt-16 sm:px-10 bg-white">
+        <div class="text-center mb-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary">Modelos de Inversión</h2>
+            <p class="mt-4 text-xl text-secondary">Alternativas adaptadas a tus objetivos financieros</p>
+            <div class="h-1 w-24 bg-premium mx-auto mt-4"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10 mb-6 sm:mb-10">
+            <div
+                class="bg-white p-4 sm:p-8 rounded-xl border border-neutral-200 shadow-md shadow-ink hover:shadow-lg transition-shadow duration-300">
+                <div class="flex items-center mb-6">
+                    <div class="bg-premium p-3 rounded-lg text-white mr-4">
+                        <i class="fas fa-chart-pie text-2xl"></i>
+                    </div>
+                    <h3 class=" text-xl sm:text-2xl font-bold text-primary">Franquicia API</h3>
+                </div>
+                <p class="text-ink mb-6">La modalidad API permite al inversionista adquirir una fracción de la
+                    franquicia en porcentaje de utilidades, ideal para quienes buscan iniciar con una inversión
+                    menor.</p>
+                <ul class="space-y-3 mb-6">
+                    <li class="flex items-start">
+                        <svg class="h-5 w-5 text-primary mt-1 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-primary">Inversión inicial más accesible</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="h-5 w-5 text-primary mt-1 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-primary">Participación en porcentaje de utilidades</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="h-5 w-5 text-primary mt-1 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-primary">Menor riesgo y responsabilidad operativa</span>
+                    </li>
+                </ul>
+                <a href="#contacto"
+                    class="inline-flex items-center justify-center w-full px-6 py-3 mt-2 bg-primary text-white rounded-md hover:bg-secondary transition duration-300">
+                    Más información
+                </a>
+            </div>
+
+            <div
+                class="bg-white p-4 sm:p-8 rounded-xl border border-gray-200 shadow-md shadow-ink hover:shadow-lg transition-shadow duration-300">
+                <div class="flex items-center mb-6">
+                    <div class="bg-premium p-3 rounded-lg text-white mr-4">
+                        <i class="fas fa-store text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-bold text-primary">Franquicia de Operación</h3>
+                </div>
+                <p class="text-ink mb-6">Esta modalidad permite al inversionista adquirir la franquicia como
+                    persona natural o bajo el marco de cualquier tipo de sociedad, con control total sobre la
+                    operación.</p>
+                <ul class="space-y-3 mb-6">
+                    <li class="flex items-start">
+                        <svg class="h-5 w-5 text-primary mt-1 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-primary">Control total de la operación</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="h-5 w-5 text-primary mt-1 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-primary">Mayor potencial de rentabilidad</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="h-5 w-5 text-primary mt-1 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-primary">Respaldo completo de la marca</span>
+                    </li>
+                </ul>
+                <a href="#contacto"
+                    class="inline-flex items-center justify-center w-full px-6 py-3 mt-2 bg-primary text-white rounded-md hover:bg-secondary transition duration-300">
+                    Más información
+                </a>
+            </div>
+        </div>
+
+        <div class="bg-neutral-50 rounded-2xl p-4 sm:p-6 md:p-10 shadow-md shadow-ink border border-neutral-200">
+            <h3 class="text-xl sm:text-2xl font-bold text-primary text-center mb-4 sm:mb-6">Otras formas de inversión
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+                <div class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left">
+                    <div class="bg-premium p-3 rounded-full text-white mb-3 sm:mb-0 sm:mr-4 flex-shrink-0">
+                        <i class="fas fa-project-diagram text-lg sm:text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg sm:text-xl font-medium text-primary mb-2">Inversión en proyectos avalados
+                        </h4>
+                        <p class="text-ink text-sm sm:text-base">Participa en proyectos específicos respaldados por la
+                            compañía,
+                            con diferentes niveles de inversión y retorno.</p>
+                    </div>
+                </div>
+                <div
+                    class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left mt-4 sm:mt-0">
+                    <div class="bg-premium p-3 rounded-full text-white mb-3 sm:mb-0 sm:mr-4 flex-shrink-0">
+                        <i class="fas fa-box-open text-lg sm:text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg sm:text-xl font-medium text-primary mb-2">Distribución de productos</h4>
+                        <p class="text-ink text-sm sm:text-base">Conviértete en distribuidor de productos de las
+                            distintas marcas
+                            afiliadas y propias de la compañía.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6 sm:mt-8 text-center">
+                <a href="#contacto"
+                    class="inline-block w-full sm:w-auto px-6 sm:px-8 py-3 bg-primary text-white text-sm sm:text-base rounded-md hover:bg-secondary transition duration-300">
+                    Descubre más oportunidades
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Por qué ActivosNetwork -->
+    <section id="diferencias"
+        class="p-4 sm:p-10 mt-10 sm:mt-16 rounded-xl bg-gradient-to-r from-primary to-secondary text-white">
+        <div class="text-center mb-8">
+            <h2 class="text-2xl md:text-4xl font-bold">¿Por qué elegir ActivosNetwork?</h2>
+            <p class="mt-4 text-lg  sm:text-xl">Diferencias con respecto al mercadeo en red tradicional</p>
+            <div class="h-1 w-24 bg-white mx-auto mt-4"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div
+                class="bg-white/20 rounded-xl p-6 backdrop-blur-sm hover:bg-opacity-20 transition duration-300 shadow-lg">
+                <div
+                    class="rounded-full bg-white text-secondary w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-box-open text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-center mb-4">Amplia gama de productos</h3>
+                <p class="text-center">Ofrecemos una variedad de productos con precios competitivos que se adaptan
+                    a las necesidades del mercado actual.</p>
+            </div>
+
+            <div
+                class="bg-white/20 rounded-xl p-6 backdrop-blur-sm hover:bg-opacity-20 transition duration-300 shadow-lg">
+                <div
+                    class="rounded-full bg-white text-secondary w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-store-alt text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-center mb-4">Puntos físicos de apoyo</h3>
+                <p class="text-center">Contamos con establecimientos físicos que apalancarán tus ingresos y te
+                    brindarán una ventaja competitiva real.</p>
+            </div>
+
+            <div
+                class="bg-white/20 rounded-xl p-6 backdrop-blur-sm hover:bg-opacity-20 transition duration-300 shadow-lg">
+                <div
+                    class="rounded-full bg-white text-secondary w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-users text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-center mb-4">Mercado más amplio</h3>
+                <p class="text-center">No te limites a tu lista de contactos. ActivosNetwork te abre las puertas a
+                    un
+                    mercado mucho más amplio y diversificado.</p>
+            </div>
+
+            <div
+                class="bg-white/20 rounded-xl p-6 backdrop-blur-sm hover:bg-opacity-20 transition duration-300 shadow-lg">
+                <div
+                    class="rounded-full bg-white text-secondary w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-hand-holding-usd text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-center mb-4">Respeto a tu inversión</h3>
+                <p class="text-center">ActivosNetwork respeta la inversión individual, de esta manera tus ingresos
+                    no solo
+                    dependen de la red de distribución.</p>
+            </div>
+        </div>
+
+        <div class="mt-8 text-center">
+            <a href="#contacto"
+                class="inline-block px-8 py-4 bg-white text-primary rounded-md font-medium text-lg hover:bg-neutral-200 transition duration-300">
+                Únete a ActivosNetwork hoy
+            </a>
+        </div>
+
+    </section>
+
+    <!-- Testimonios -->
+    {{-- <section class=" py-10 sm:py-16 bg-white">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary">Lo que dicen nuestros asociados</h2>
+                <div class="h-1 w-24 bg-premium mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-neutral-50 p-8 rounded-xl shadow-md shadow-ink">
+                    <div class="flex items-center mb-4">
+                        <img src="https://st2.depositphotos.com/1518767/6556/i/450/depositphotos_65561731-stock-photo-smiling-businessman-well-dressed.jpg"
+                            alt="Testimonio 1" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="text-lg font-bold text-primary">Carlos Rodríguez</h4>
+                            <p class="text-secondary">Franquiciado ActivosNetwork Coffee</p>
+                        </div>
+                    </div>
+                    <p class="text-ink italic">"Desde que me uní a ActivosNetwork, mi vida financiera cambió
+                        completamente. La franquicia de ActivosNetwork Coffee no solo me ha dado estabilidad económica,
+                        sino
+                        también la oportunidad de crear un espacio donde las personas disfrutan de momentos especiales."
+                    </p>
+                    <div class="mt-4 flex text-premium">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+                <div class="bg-neutral-50 p-8 rounded-xl shadow-md shadow-ink">
+                    <div class="flex items-center mb-4">
+                        <img src="https://b2472105.smushcdn.com/2472105/wp-content/uploads/2024/02/Fotografia-de-Retrato-29-1170x1170.jpg?lossy=1&strip=1&webp=1"
+                            alt="Testimonio 2" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="text-lg font-bold text-primary">María Gómez</h4>
+                            <p class="text-secondary">Inversora en ActivosNetwork</p>
+                        </div>
+                    </div>
+                    <p class="text-ink italic">"Lo que más me gusta de ActivosNetwork es su enfoque en el bienestar. Mi
+                        inversión en ActivosNetwork no solo ha sido rentable, sino que me ha permitido contribuir a la
+                        salud de muchas personas. El sistema de acompañamiento es excepcional."</p>
+                    <div class="mt-4 flex text-premium">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+
+                <div class="bg-neutral-50 p-8 rounded-xl shadow-md shadow-ink">
+                    <div class="flex items-center mb-4">
+                        <img src="https://img.freepik.com/fotos-premium/selfie-facial-sonrisa-hombre-negocios-persona-que-toma-foto-memoria-feliz-carrera-redes-sociales-foto-perfil-retrato-empresario-profesional-o-asiatico-singapur-cargo_590464-183436.jpg"
+                            alt="Testimonio 3" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="text-lg font-bold text-primary">Jorge Méndez</h4>
+                            <p class="text-secondary">Distribuidor independiente</p>
+                        </div>
+                    </div>
+                    <p class="text-ink italic">"Empecé como distribuidor de productos y ahora tengo mi propia
+                        franquicia API. La diferencia con otros sistemas de mercadeo es notable. Aquí realmente valoran
+                        tu inversión y te dan herramientas reales para crecer."</p>
+                    <div class="mt-4 flex text-premium">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> --}}
 
     <!-- Contacto -->
-    <section id="contacto" class=" mt-4  sm:mt-10 ">
+    <section id="contacto" class=" mt-10 ">
         <div class="text-center sm:p-8">
-            <h2 class="text-2xl md:text-4xl font-bold text-primary">¿Tienes alguna pregunta? Contáctanos</h2>
-            <p class="mt-4 text-secondary">Estamos listos para responder todas tus preguntas</p>
+            <h2 class="text-2xl md:text-4xl font-bold text-primary">Comienza tu camino con ActivosNetwork</h2>
+            <p class="mt-4 text-xl text-secondary">Estamos listos para responder todas tus preguntas</p>
             <div class="h-1 w-24 bg-premium mx-auto mt-4"></div>
         </div>
 
@@ -314,7 +575,7 @@
                         </ul>
                     </div>
                 @endif
-                <form action="{{ route('contacto.store') }}" method="POST">
+                <form id="demo-form" action="{{ route('contacto.store') }}" method="POST">
                     @csrf
                     <div class="grid grid-cols-2 gap-x-3">
                         <div class="col-span-2 sm:col-span-1">
@@ -342,21 +603,34 @@
                                         class="block w-full bg-neutral-50/50 appearance-none border border-gray-300 text-primary text-sm rounded-lg focus:outline-1 focus:outline-primary focus:bg-white p-2.5 cursor-pointer">
                                         <option value="" {{ old('interes') ? '' : 'selected' }}>Seleccionar
                                             opción</option>
-                                        <option value="Información"
-                                            {{ old('interes') == 'Información' ? 'selected' : '' }}>
-                                            Información general</option>
-                                        <option value="programa_afiliados" {{ old('interes') == 'programa_afiliados' ? 'selected' : '' }}>
-                                            Programa de afiliados
+                                        <option value="ActivosNetwork_coffee"
+                                            {{ old('interes') == 'ActivosNetwork_coffee' ? 'selected' : '' }}>
+                                            ActivosNetwork
+                                            Coffee</option>
+                                        <option value="chelas" {{ old('interes') == 'chelas' ? 'selected' : '' }}>
+                                            Chelas
                                         </option>
-                                        <option value="Información_producto"
-                                            {{ old('interes') == 'Información_producto' ? 'selected' : '' }}>Información producto
+                                        <option value="ActivosNetwork"
+                                            {{ old('interes') == 'ActivosNetwork' ? 'selected' : '' }}>ActivosNetwork
                                         </option>
-                                        <option value="otros" {{ old('interes') == 'otros' ? 'selected' : '' }}>
-                                            Otros
+                                        <option value="maspro" {{ old('interes') == 'maspro' ? 'selected' : '' }}>
+                                            Maspro
+                                        </option>
+                                        <option value="net_inmobiliario"
+                                            {{ old('interes') == 'net_inmobiliario' ? 'selected' : '' }}>Net
+                                            Inmobiliario
+                                        </option>
+                                        <option value="distribucion"
+                                            {{ old('interes') == 'distribucion' ? 'selected' : '' }}>
+                                            Distribución de
+                                            productos</option>
+                                        <option value="informacion"
+                                            {{ old('interes') == 'informacion' ? 'selected' : '' }}>
+                                            Información general
                                         </option>
                                     </select>
                                     <div class="absolute inset-y-0 right-5 flex items-center pointer-events-none">
-                                        <svg class="w-4 h-4 text-neutral-500" xmlns="http://www.w3.org/2000/svg"
+                                        <svg class="w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd"
                                                 d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
@@ -382,7 +656,9 @@
                             </div>
                         </div>
                     </div>
-                    <flux:button type="submit" variant="primary" class="w-full">
+                    <flux:button type="submit" variant="primary" class="g-recaptcha w-full"
+                        data-sitekey="{{ config('services.recaptcha.key') }}" data-callback='onSubmit'
+                        data-action='submit'>
                         Enviar mensaje
                     </flux:button>
                 </form>
@@ -412,7 +688,7 @@
                             </div>
                             <div>
                                 <h4 class="text-base sm:text-lg font-medium mb-1">Teléfono</h4>
-                                <p class="text-sm sm:text-base">+57 (314) 520-78-14</p>
+                                <p class="text-sm sm:text-base">+57 (318) 813-2381</p>
                             </div>
                         </div>
                         <div class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left">
@@ -423,7 +699,7 @@
                             </div>
                             <div>
                                 <h4 class="text-base sm:text-lg font-medium mb-1">Correo electrónico</h4>
-                                <p class="text-sm sm:text-base">info@fornuvi.com</p>
+                                <p class="text-sm sm:text-base">info@activosnetwork.com</p>
                             </div>
                         </div>
                         <div class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left">
@@ -473,30 +749,55 @@
                 </div>
             </div>
         </div>
+
     </section>
 
-     <!-- Back to top button -->
-     <button id="backToTop"
-     class="fixed cursor-pointer bottom-6 right-6 bg-secondary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-md shadow-ink  hover:bg-primary transition duration-300"
-     onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-     <i class="fas fa-arrow-up"></i>
- </button>
+    <!-- CTA -->
+    <section class="mt-6 sm:mt-10 p-4 sm:p-10 bg-primary text-white rounded-xl">
+        <div class="text-center">
+            <h2 class="text-2xl md:text-4xl font-bold mb-4">¿Listo para transformar tu futuro financiero?</h2>
+            <p class="text-lg md:text-xl mb-8">Únete a ActivosNetwork y descubre un nuevo camino hacia la libertad
+                financiera
+                y el
+                bienestar.</p>
+            <a href="#contacto"
+                class="inline-block px-8 py-4 bg-white text-primary rounded-md font-medium text-lg hover:bg-neutral-200 transition duration-300">
+                Comienza hoy mismo
+            </a>
+        </div>
+    </section>
 
- <script>
-     // Mostrar/ocultar botón de volver arriba
-     window.addEventListener('scroll', function() {
-         var backToTopButton = document.getElementById('backToTop');
-         if (window.pageYOffset > 300) {
-             backToTopButton.style.display = 'flex';
-         } else {
-             backToTopButton.style.display = 'none';
-         }
-     });
+    <!-- Back to top button -->
+    <button id="backToTop"
+        class="fixed cursor-pointer bottom-6 right-6 bg-secondary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-md shadow-ink  hover:bg-primary transition duration-300"
+        onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
-     // Iniciar con el botón oculto
-     document.addEventListener('DOMContentLoaded', function() {
-         document.getElementById('backToTop').style.display = 'none';
-     });
- </script>
+    @push('js')
+        <script src="https://www.google.com/recaptcha/api.js"></script>
 
+        <script>
+            function onSubmit(token) {
+                document.getElementById("demo-form").submit();
+            }
+        </script>
+    @endpush 
+
+    <script>
+        // Mostrar/ocultar botón de volver arriba
+        window.addEventListener('scroll', function() {
+            var backToTopButton = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'flex';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+
+        // Iniciar con el botón oculto
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('backToTop').style.display = 'none';
+        });
+    </script>
 </x-layouts.app>

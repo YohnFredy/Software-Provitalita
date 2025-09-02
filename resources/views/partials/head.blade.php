@@ -1,7 +1,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>{{ $title ?? 'fornuvi' }}</title>
+<title>{{ $title ?? 'ActivosNetwork' }}</title>
 
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
@@ -52,7 +52,7 @@
 
                 // Forzamos el recálculo del layout del navegador pidiendo una propiedad.
                 // Es un pequeño truco para obtener la altura más actualizada.
-                treeContent.getBoundingClientRect(); 
+                treeContent.getBoundingClientRect();
 
                 const height = treeContent.scrollHeight;
 

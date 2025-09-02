@@ -14,10 +14,15 @@ return [
     |
     */
 
+    'recaptcha' => [
+        'key' => env('RECAPTCHA_KEY'),
+        'secret' => env('RECAPTCHA_SECRET'),
+    ],
+
     'bold' => [
         'api_key' => env('BOLD_API_KEY'),
         'secret_key' => env('BOLD_SECRET_KEY'),
-        'redirect_url' => env('BOLD_REDIRECT_URL', 'https://fornuvi.com/pagos/respuesta/bold'),
+        'redirect_url' => env('BOLD_REDIRECT_URL', 'https://activosNetwork.com/pagos/respuesta/bold'),
     ],
 
     'wompi' => [
@@ -25,7 +30,7 @@ return [
         'private_key' => env('WOMPI_PRIVATE_KEY'),
         'webhook_secret' => env('WOMPI_WEBHOOK_SECRET'),
         'integrity_key' => env('WOMPI_INTEGRITY_KEY'),
-        'redirect_url' => env('WOMPI_REDIRECT_URL', 'https://fornuvi.com/pagos/respuesta'),
+        'redirect_url' => env('WOMPI_REDIRECT_URL', 'https://activosNetwork.com/pagos/respuesta'),
     ],
 
     'postmark' => [

@@ -7,15 +7,9 @@
                     <div class="w-6 h-6 sm:w-8 sm:h-8 bg-primary/10 rounded-full flex items-center justify-center mr-2">
                         <i class="fas fa-user text-primary"></i>
                     </div>
-                    @if ($node['username'] == 'master')
-                        <h4 class=" text-base sm:text-xl font-bold capitalize text-primary">
-                            Alejandra
-                        </h4>
-                    @else
-                        <h4 class=" text-base sm:text-xl font-bold capitalize text-primary">
-                            {{ $node['username'] }}
-                        </h4>
-                    @endif
+                    <h4 class=" text-base sm:text-xl font-bold capitalize text-primary">
+                        {{ $node['username'] }}
+                    </h4>
                 </div>
 
                 <h5 class="text-danger font-bold text-xs sm:text-sm text-center">

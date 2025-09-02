@@ -32,7 +32,7 @@ Route::post('/track-event', [LandingPageController::class, 'trackEvent'])->name(
 
 Route::get('/productos', ProductListing::class)->name('products.index');
 Route::get('producto/{product}', ProductShow::class)->name('products.show');
-Route::get('carrito', Cart::class)->name('products.cart');
+
 
 Route::post('/contacto', [ContactController::class, 'store'])->name('contacto.store');
 
@@ -51,7 +51,7 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 
-
+    Route::get('carrito', Cart::class)->name('products.cart');
     Route::get('order/create', OrderCreate::class)->name('orders.create');
     Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('orders/{order}/show', [OrderController::class, 'show'])->name('orders.show');

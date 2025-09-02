@@ -418,7 +418,7 @@
 
                 <div class="relative bg-neutral-50 rounded-lg p-2 border border-dashed border-neutral-200 mb-4">
                     <p id="p2" class="text-xs sm:text-sm text-neutral-600 truncate select-all">
-                        https://fornuvi.com/register/{{ $user->username }}/left</p>
+                        https://activosnetwork.com/register/{{ $user->username }}/left</p>
                     <button
                         class="absolute right-1 top-1/2 transform -translate-y-1/2 text-neutral-400 hover:text-primary transition-colors"
                         onclick="copiarAlPortapapeles('p2')">
@@ -456,7 +456,7 @@
 
                 <div class="relative bg-neutral-50 rounded-lg p-2 border border-dashed border-neutral-200 mb-4">
                     <p id="p1" class="text-xs sm:text-sm text-neutral-600 truncate select-all">
-                        https://fornuvi.com/register/{{ $user->username }}/right</p>
+                        https://activosnetwork.com/register/{{ $user->username }}/right</p>
                     <button
                         class="absolute right-1 top-1/2 transform -translate-y-1/2 text-neutral-400 hover:text-primary transition-colors"
                         onclick="copiarAlPortapapeles('p1')">

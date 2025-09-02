@@ -16,13 +16,13 @@
             'route' => 'products.index',
             'routeIs' => 'products*',
         ],
-         [
+        /* [
             'type' => 'route',
             'name' => 'Compañias',
             'icon' => 'building-storefront',
             'route' => 'companies.index',
             'routeIs' => 'companies.index',
-        ],
+        ], */
         [
             'type' => 'anchor',
             'name' => 'Contáctanos',
@@ -49,10 +49,11 @@
 
 <body class="min-h-screen bg-white dark:bg-white text-ink">
     <flux:header container class="border-b border-zinc-200 shadow-md shadow-primary/50">
-        <flux:sidebar.toggle class="lg:hidden bg-danger/3!  text-danger! hover:bg-secondary/5! hover:text-primary" icon="bars-3" inset="left" />
-     
+        <flux:sidebar.toggle class="lg:hidden bg-danger/3!  text-danger! hover:bg-secondary/5! hover:text-primary"
+            icon="bars-3" inset="left" />
 
-        <a href="{{ route('home') }}" class="ml-2 sm:ml-3 mr-5 lg:ml-0" wire:navigate>
+
+        <a href="{{ route('home') }}" class="ml-2 sm:ml-5 lg:ml-0 mr-2 lg:mr-5" wire:navigate>
             <x-app-logo />
         </a>
 
@@ -71,6 +72,9 @@
                     </a>
                 @endif
             @endforeach
+            @can('admin.index')
+                <flux:navbar.item icon="inbox" href="{{ route('admin.index') }}">Admin</flux:navbar.item>
+            @endcan
         </flux:navbar>
         <flux:spacer />
 
@@ -152,7 +156,11 @@
                         </a>
                     @endif
                 @endforeach
+                @can('admin.index')
+                    <flux:navlist.item icon="inbox" href="{{ route('admin.index') }}">Admin</flux:navlist.item>
+                @endcan
             </flux:navlist.group>
+
         </flux:navlist>
 
         <flux:spacer />
@@ -165,8 +173,8 @@
         <footer class="bg-ink text-white rounded-md p-4 sm:p-10">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                 <div>
-                    {{-- <img class="h-12 w-auto mb-6" src="/api/placeholder/200/80" alt="fornuvi Logo"> --}}
-                    <p class=" text-xl text-white  font-bold w-auto mb-6">fornuvi</p>
+                    {{-- <img class="h-12 w-auto mb-6" src="/api/placeholder/200/80" alt="ActivosNetwork Logo"> --}}
+                    <p class=" text-xl text-white  font-bold w-auto mb-6">ActivosNetwork</p>
                     <p class="text-neutral-200 mb-6">Una compañía en el sector de salud y bienestar que ofrece
                         múltiples
                         oportunidades financieras a través de un sistema global de asociación.</p>
@@ -186,34 +194,44 @@
                     </div>
                 </div>
                 <div>
-                    <h3 class="text-lg font-semibold mb-6">Enlaces rápidos</h3>
+                    <h3 class="text-lg font-bold mb-6">Vehículos Financieros</h3>
                     <ul class="space-y-3">
-                        <li><a href="{{ route('home') }}" class="text-neutral-200 hover:text-white transition">Inicio</a></li>
-                        <li><a href="{{ route('products.index') }}" class="text-neutral-200 hover:text-white transition">Tienda</a></li>
-                        <li><a href="{{ route('dashboard') }}" class="text-neutral-200 hover:text-white transition">Oficina</a></li>
-                       
-                        <li><a href="{{ route('home') }}#contacto" class="text-neutral-200 hover:text-white transition">Contacto</a></li>
-                    </ul>
-                </div>
-
-
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-6">Soporte</h3>
-                    <ul class="space-y-3">
-                        <li><a href="#" class="text-neutral-400 hover:text-white transition">Preguntas
-                                frecuentes</a></li>
-                        <li><a href="#" class="text-neutral-400 hover:text-white transition">Términos y
-                                condiciones</a></li>
-                        <li><a href="#" class="text-neutral-400 hover:text-white transition">Política de
-                                privacidad</a></li>
-                        <li><a href="#" class="text-neutral-400 hover:text-white transition">Envíos y
-                                devoluciones</a></li>
-                        <li><a href="#" class="text-neutral-400 hover:text-white transition">Centro de ayuda</a>
+                        <li><a href="{{ route('home') }}#franquicias"
+                                class="text-neutral-200 hover:text-white transition duration-300">ActivosNetwork
+                                Coffee</a></li>
+                        <li><a href="{{ route('home') }}#franquicias"
+                                class="text-neutral-200 hover:text-white transition duration-300">Chelas</a></li>
+                        <li><a href="{{ route('home') }}#franquicias"
+                                class="text-neutral-200 hover:text-white transition duration-300">ActivosNetowork</a>
                         </li>
+                        <li><a href="{{ route('home') }}#franquicias"
+                                class="text-neutral-200 hover:text-white transition duration-300">Maspro</a></li>
+                        <li><a href="{{ route('home') }}#franquicias"
+                                class="text-neutral-200 hover:text-white transition duration-300">Net
+                                Inmobiliario</a></li>
                     </ul>
                 </div>
-               
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Enlaces rápidos</h3>
+                    <ul class="space-y-3">
+                        <li><a href="{{ route('home') }}"
+                                class="text-neutral-200 hover:text-white transition duration-300">Inicio</a></li>
+                        <li><a href="{{ route('home') }}#nosotros"
+                                class="text-neutral-200 hover:text-white transition duration-300">Nosotros</a></li>
+                        <li><a href="{{ route('home') }}#franquicias"
+                                class="text-neutral-200 hover:text-white transition duration-300">Vehículos
+                                Financieros</a></li>
+                        <li><a href="{{ route('home') }}#inversion"
+                                class="text-neutral-200 hover:text-white transition duration-300">Modelos de
+                                Inversión</a>
+                        </li>
+                        <li><a href="{{ route('home') }}#diferencias"
+                                class="text-neutral-200 hover:text-white transition duration-300">¿Por
+                                qué ActivosNetwork?</a></li>
+                        <li><a href="{{ route('home') }}#contacto"
+                                class="text-neutral-200 hover:text-white transition duration-300">Contacto</a></li>
+                    </ul>
+                </div>
                 <div>
                     <h3 class="text-lg font-bold mb-6">Contacto</h3>
                     <ul class="space-y-3 text-neutral-200">
@@ -223,18 +241,18 @@
                             </li> --}}
                         <li class="flex items-start">
                             <i class="fas fa-phone-alt mt-1 mr-3"></i>
-                            <span>+57 (314) 520-78-14</span>
+                            <span>+57 (318) 813-2381</span>
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-envelope mt-1 mr-3"></i>
-                            <span>info@fornuvi.com</span>
+                            <span>info@activosnetwork.com</span>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="border-t border-gray-800 pt-8">
                 <div class="flex flex-col md:flex-row justify-between items-center">
-                    <p class="text-gray-400 text-sm mb-4 md:mb-0">&copy; 2025 fornuvi. Todos los derechos
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0">&copy; 2025 ActivosNetwork. Todos los derechos
                         reservados.
                     </p>
                     <div class="flex space-x-6">
