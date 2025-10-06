@@ -15,15 +15,15 @@
                 </div>
 
                 <div class=" col-span-6 md:col-span-1">
-                    <x-input type="number" label="Precio publico:" for="final_price" wire:model.blur="final_price" step="0.01"
-                        min="0" required />
+                    <x-input type="number" label="Precio publico:" for="final_price" wire:model.blur="final_price"
+                        step="0.01" min="0" required />
                 </div>
                 <div class=" col-span-6 md:col-span-1">
-                    <x-input type="number" label="iva %:" for="tax_percent" wire:model.blur="tax_percent" step="0.01"
-                        min="0" required />
+                    <x-input type="number" label="iva %:" for="tax_percent" wire:model.blur="tax_percent"
+                        step="0.01" min="0" required />
                 </div>
                 <div class=" col-span-6 md:col-span-1">
-                    <x-input type="number" label="Precio sin iva" for="price"  wire:model.blur="price" step="0.01"
+                    <x-input type="number" label="Precio sin iva" for="price" wire:model.blur="price" step="0.01"
                         min="0" required />
                 </div>
 
@@ -183,7 +183,9 @@
 
     <script>
         ClassicEditor
-            .create(document.querySelector('#editor'))
+            .create(document.querySelector('#editor'), {
+                removePlugins: ['Bold']
+            })
             .then(function(editor) {
                 editor.model.document.on('change:data', () => {
                     @this.set('description', editor.getData());

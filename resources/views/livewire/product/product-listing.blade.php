@@ -294,17 +294,17 @@
                                                 {{ $product->brand->name }}
                                             </span>
                                         @endif
-                                        <h3 class="font-bold text-primary text-base sm:text-lg truncate">
+                                        <h3 class="font-bold text-primary text-base sm:text-lg {{-- truncate --}}">
                                             <a href="{{ route('products.show', $product->slug) }}">
-                                                {{ Str::limit($product->name, 40) }}
+                                                {{ Str::limit($product->name, 100) }}
                                             </a>
                                         </h3>
                                     </div>
 
                                     <!-- Descripción -->
-                                    <p class="text-ink text-xs sm:text-sm mb-4 line-clamp-2 leading-relaxed">
+                                    <div class="text-ink text-xs sm:text-sm mb-4 line-clamp-2 leading-relaxed">
                                         {!! Str::limit($product->description, 100) !!}
-                                    </p>
+                                    </div>
 
                                     <!-- Categoría, precio y botón -->
                                     <div class="mt-auto flex justify-between items-center">

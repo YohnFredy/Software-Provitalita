@@ -29,12 +29,6 @@
                     'route' => 'admin.products.index',
                     'routeIs' => 'admin.products.*',
                 ],
-                [
-                    'name' => 'Generar',
-                    'icon' => 'calculator',
-                    'route' => 'admin.products.index',
-                    'routeIs' => 'admin.products.*',
-                ],
             ],
         ],
         /* [

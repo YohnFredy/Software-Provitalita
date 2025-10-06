@@ -140,14 +140,24 @@ class OrdersManagement extends Component
         }
 
         $activation = $user->activation;
+        $mesNumero = $order->updated_at->month;
 
-        if (!$activation && $order->total_pts >= $activationPt->min_pts_first) {
+        /* total de puntos durante el mes actual que ya están aprobados */
+        $monthlyPoints =  Order::where('user_id', $user->id)
+            ->whereBetween('status', [2, 5]) // status >= 2 y status <= 5
+            ->whereMonth('created_at', $mesNumero)
+            ->whereYear('created_at', now()->year)
+            ->sum('total_pts');
+
+        $total_pts =  $monthlyPoints;
+
+        if (!$activation &&  $total_pts >= $activationPt->min_pts_first) {
             UserActivation::create([
                 'user_id'      => $user->id,
                 'is_active'    => true,
                 'activated_at' => $order->updated_at,
             ]);
-        } elseif ($activation && !$activation->is_active && $order->total_pts >= $activationPt->min_pts_monthly) {
+        } elseif ($activation && !$activation->is_active &&  $total_pts  >= $activationPt->min_pts_monthly) {
             $activation->update([
                 'is_active'    => true,
                 'activated_at' => $order->updated_at,
